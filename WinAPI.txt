@@ -87,3 +87,25 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 용도: 화면의 일부(RECT) 또는 전체(NULL, 0)를 다시 출력할 때 / WM_PAINT 메시지 발생
 			- 무효화 영역 또는 업그레이드 영역 <- 다시 그리고자 하는 영역 지정
 			- 함수의 원형: BOOL InvalidateRECT( HWND hWnd, const RECT *lpRect, BOOL bErase)
+
+	5강. 그래픽 오브젝트
+		1) 개요
+			- GDI 오브젝트: Pen, Brush, DC, Memory DC, Bitmap, Palette 등
+			- GDI 오브젝트 사용방법: 운영체제에서 제공한 틀을 바탕으로 사용자가 설정
+		2) 스톡오브젝트
+			- HGDIOBJ GetStockObject( int fnObject): OS의 GDI오브젝트를 핸들을 가져오는 함수
+			- fnObject: 브러쉬, 펜, 폰트, 팔레트
+			- HGDIOBJ SelectObject( HDC hdc, HGDIOBJ hgdiobj): 오브젝트 설정
+			- BOOL DeleteObject( HGDIOBJ hObject): GDI 오브젝트 해제
+		3) 펜
+			- 선 색상, 선 굵기, 스타일 지정
+			- HPEN CreatePen( int fnPenStyle, int nWidth, COLORREF crColor)
+			- 펜을 이용한 선 그리기: BOOL MoveToEx( HDC hdc, int X, int Y, LPPOINT lpPoint), LineTo( HDC hdc, int nXEnd, int nYEnd)
+			- 펜 사용 방법: 1. 펜 생성/ 2. 펜 선택 / 3. 선 그리기 / 4. 펜 제거 및 이전 펜 설정 (스톡 오브젝트는 delete 안해도 됨)
+			- 펜을 이용한 도형 출력: 
+				1. 사각형: BOOL Rectangle( HDC hdc, int nLeftRect, int ,TopRect, int nRightRect, int nBottomRect)
+				2. 원: BOOL Ellipse( HDC hdc, int nLeftRect, int nTopRect, int nRightRect, int nBottomRect)
+		4) 브러쉬
+			- 역할: 도형 내부를 색상과 패턴으로 채우는 역할
+			- 브러쉬 생성 함수: CreateSolidBrush(), CreateHatchBrush(), CreatePatternBrush() 등
+			- 브러쉬 사용 방법: 1. 브러쉬 생성 / 2. 브러쉬 선택 / 3. 도형 출력 / 4. 브러쉬 제거 및 이전 브러쉬 복구

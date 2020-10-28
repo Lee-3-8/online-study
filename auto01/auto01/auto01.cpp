@@ -151,7 +151,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 MessageBox(hWnd, "종료", "연습", MB_OK);
                 break;
             default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
+                return DefWindowProcW(hWnd, message, wParam, lParam);
             }
         }
         break;
@@ -195,6 +195,47 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_RBUTTONDOWN:
         InvalidateRect(hWnd, &rect, FALSE);
         break;
+    case WM_KEYDOWN:
+    {
+        switch (wParam)
+        {
+        case VK_UP:
+        {
+            HDC hdc = GetDC(hWnd);
+            HPEN hPen = CreatePen(PS_SOLID, 5, RGB(0, 0, 0));
+            HPEN hOldPen = (HPEN)SelectObject(hdc, hPen);
+            MoveToEx(hdc, 300, 30, NULL);
+            LineTo(hdc, 400, 30);
+            DeleteObject(hPen);
+
+            hPen = (HPEN)GetStockObject(BLACK_PEN);
+            SelectObject(hdc, hPen);
+            MoveToEx(hdc, 300, 60, NULL);
+            LineTo(hdc, 400, 60);
+
+            hPen = CreatePen(PS_DOT, 1, RGB(0, 0, 0));
+            SelectObject(hdc, hPen);
+            HBRUSH hBrush = (HBRUSH)GetStockObject(GRAY_BRUSH);
+            HBRUSH hOldBrush = (HBRUSH)SelectObject(hdc, hBrush);
+            Rectangle(hdc, 5, 405, 100, 500);
+            DeleteObject(hPen);
+            DeleteObject(hBrush);
+            SelectObject(hdc, hOldBrush);
+
+            hPen = CreatePen(PS_DASHDOT, 1, RGB(0, 0, 0));
+            SelectObject(hdc, hPen);
+            Ellipse(hdc, 5, 405, 100, 500);
+            DeleteObject(hPen);
+
+            SelectObject(hdc, hOldPen);
+            ReleaseDC(hWnd, hdc);
+            break;
+        }
+        default:
+            DefWindowProcW(hWnd, message, wParam, lParam);
+        }
+        break;
+    }
     default:
         return DefWindowProcW(hWnd, message, wParam, lParam);
     }
