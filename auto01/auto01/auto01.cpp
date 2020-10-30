@@ -126,9 +126,19 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    RECT rect = { 0, 0, 150, 150 };
+    static char str[100] = {0, };
+    static int nIndex;
+    RECT rect1 = { 0, 0, 150, 150 };
+    RECT rect2 = { 600, 0, 1500, 600 };
+
     switch (message)
     {
+    case WM_CHAR:
+        {
+            str[nIndex++] = (char)wParam;
+            InvalidateRect(hWnd, &rect2, FALSE);
+            break;
+        }
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -175,6 +185,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             for (int i = 0; i < 10000; i++) {
                 SetPixel(hdc, (rand() % 300), (rand() % 300), RGB(127, 127, 127));
             }
+
+            TextOut(hdc, 600, 0, str, strlen(str));
             
             EndPaint(hWnd, &ps);
         }
@@ -193,7 +205,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         Test(hWnd);
         break;
     case WM_RBUTTONDOWN:
-        InvalidateRect(hWnd, &rect, FALSE);
+        InvalidateRect(hWnd, &rect1, FALSE);
         break;
     case WM_KEYDOWN:
     {
@@ -241,7 +253,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             // 메모리 DC 핸들 가져오기
             HDC hFileMemDC = CreateCompatibleDC(hdc);
             // 메모리 DC에 비트맵 적용
-            SelectObject (hFileMemDC, hFileLoadBitmap);
+            SelectObject(hFileMemDC, hFileLoadBitmap);
             // 비트맵 구조체가져와서 저장
             GetObject(hFileLoadBitmap, sizeof(BITMAP), &FileBitmap);
             // 화면에 출력
