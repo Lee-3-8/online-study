@@ -12,13 +12,17 @@
 HINSTANCE hInst;                                // 현재 인스턴스입니다.
 WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입니다.
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
+char g_string[100];
+int g_nOneSecond, g_nTenSecond;
+RECT g_rect;
 
 // 이 코드 모듈에 포함된 함수의 선언을 전달합니다:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-void Test(HWND);
+void                Test(HWND);
+VOID    CALLBACK    TimerProc(HWND, UINT, UINT_PTR, DWORD);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -126,17 +130,27 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    static char str[100] = {0, };
+    static char str[100] = { 0, };
     static int nIndex;
 
-    static char position_str[100] = {0, };
+    static char position_str[100] = { 0, };
     static int nxPos, nyPos;
+
+    static char timer_str[100] = { 0, };
+    static int nTenSecond, nOneSecond;
 
     RECT rect1 = { 0, 0, 150, 150 };
     RECT rect2 = { 600, 0, 1500, 600 };
+    g_rect = rect2;
 
     switch (message)
     {
+    case WM_CREATE:
+        SetTimer(hWnd, 1, 1000, TimerProc);
+        SetTimer(hWnd, 2, 10000, TimerProc);
+        SetTimer(hWnd, 3, 1000, NULL);
+        SetTimer(hWnd, 4, 10000, NULL);
+        break;
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -186,13 +200,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 
             TextOut(hdc, 600, 0, str, strlen(str));
 
-            //sprintf(position_str, "x: %d, y: %d", nxPos, nyPos);
             TextOut(hdc, 600, 20, position_str, strlen(position_str));
+
+            TextOut(hdc, 600, 40, timer_str, strlen(timer_str));
+
+            TextOut(hdc, 600, 60, g_string, strlen(g_string));
             
             EndPaint(hWnd, &ps);
         }
         break;
     case WM_DESTROY:
+        KillTimer(hWnd, 1);
+        KillTimer(hWnd, 2);
+        KillTimer(hWnd, 3);
+        KillTimer(hWnd, 4);
         PostQuitMessage(0);
         break;
     case WM_SETCURSOR:
@@ -299,6 +320,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     }
+    case WM_TIMER:
+    {
+        switch (wParam) {
+        case 3:
+            nOneSecond++;
+            break;
+        case 4:
+            nTenSecond++;
+            break;
+        }
+        sprintf(timer_str, "1초 단위: %d, 10초 단위: %d ", nOneSecond, nTenSecond);
+        InvalidateRect(hWnd, &rect2, FALSE);
+        break;
+    }
     default:
         return DefWindowProcW(hWnd, message, wParam, lParam);
     }
@@ -336,4 +371,18 @@ void Test(HWND hWnd)
     SetBkColor(hdc, RGB(0, 0, 255));
     TextOut(hdc, 0, 20, string, strlen(string));
     ReleaseDC(hWnd, hdc);
+}
+
+VOID CALLBACK TimerProc(HWND hWnd, UINT Msg, UINT_PTR idEvent, DWORD dwTime)
+{
+    if (idEvent == 1) 
+    {
+        g_nOneSecond++;
+    }
+    else
+    {
+        g_nTenSecond++;
+    }
+    sprintf(g_string, "1초 단위: %d, 10초 단위: %d ", g_nOneSecond, g_nTenSecond);
+    InvalidateRect(hWnd, &g_rect, FALSE);
 }

@@ -131,3 +131,9 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 그 외 메시지: WM_LBUTTONDOWN, WM_LBUTTONUP 등
 			- wParam으로 전달되는 코드: MK_LBUTTON, MK_RBUTTON, MK_MBUTTON, MK_SHIFT 등 (클릭된 상태)
 			- 드래그: WM_MOUSEMOVE + MK_LBUTTON
+		3) 타이머
+			- 일정한 시간 간격으로 함수 호출 또는 WM_TIMER 메시지 발생 / 일정한 시간 간격으로 코드 실행하기 위함
+			- 생성: UINT_PTR SetTimer( HWND hWnd, UINT_PTR nIDEvent, UINT uElapse, TIMERPROC lpTimerFunc) <- lpTimerFunc를 주면 WM_TIMER발생 안함
+			- 해제: BOOL KillTimer( HWND hWnd, UINT_PTR uIDEvent)
+			- 메시지 처리: WM_TIMER + wParam(아이디)
+			- 콜백 함수 처리: VOID CALLBACK TimerProc( HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
