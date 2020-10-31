@@ -128,17 +128,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     static char str[100] = {0, };
     static int nIndex;
+
+    static char position_str[100] = {0, };
+    static int nxPos, nyPos;
+
     RECT rect1 = { 0, 0, 150, 150 };
     RECT rect2 = { 600, 0, 1500, 600 };
 
     switch (message)
     {
-    case WM_CHAR:
-        {
-            str[nIndex++] = (char)wParam;
-            InvalidateRect(hWnd, &rect2, FALSE);
-            break;
-        }
     case WM_COMMAND:
         {
             int wmId = LOWORD(wParam);
@@ -187,6 +185,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
 
             TextOut(hdc, 600, 0, str, strlen(str));
+
+            //sprintf(position_str, "x: %d, y: %d", nxPos, nyPos);
+            TextOut(hdc, 600, 20, position_str, strlen(position_str));
             
             EndPaint(hWnd, &ps);
         }
@@ -201,12 +202,40 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         SetCursor(hCursor);
         break;
     }
+    case WM_MOUSEMOVE:
+    {
+        if (wParam == MK_LBUTTON) 
+        {
+            nxPos = LOWORD(lParam);
+            nyPos = HIWORD(lParam);
+            sprintf(position_str, "dragging at (%d, %d)", nxPos, nyPos);
+            InvalidateRect(hWnd, &rect2, FALSE);
+        }
+        else 
+        {
+            nxPos = LOWORD(lParam);
+            nyPos = HIWORD(lParam);
+            sprintf(position_str, "x: %d, y: %d", nxPos, nyPos);
+            InvalidateRect(hWnd, &rect2, FALSE);
+        }
+        break;
+    }
+    case WM_LBUTTONUP:
+        sprintf(position_str, "");
+        InvalidateRect(hWnd, &rect2, TRUE);
+        break;
     case WM_LBUTTONDOWN:
         Test(hWnd);
         break;
     case WM_RBUTTONDOWN:
         InvalidateRect(hWnd, &rect1, FALSE);
         break;
+    case WM_CHAR:
+    {
+        str[nIndex++] = (char)wParam;
+        InvalidateRect(hWnd, &rect2, FALSE);
+        break;
+    }
     case WM_KEYDOWN:
     {
         switch (wParam)

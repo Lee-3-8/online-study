@@ -126,3 +126,8 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 발생 메시지: WM_CHAR / 대소문자 구분 방법: wParam (아스키 코드 값)
 			- 모든 키에 대해 발생하는 메시지: WM_KEYDOWN / 구분 방법: wParam / 가상 키 코드: VK_LEFT, VK_HOME, '1', 'A' 등
 			- GetAsyncKeyState(): 실시간으로 키 입력을 체크, 메시지 큐에 저장되는 키 메시지의 단점 보완, 키 눌림이 잇으면 음수값 리턴
+		2) 마우스
+			- 마우스 메시지: 마우스 이동시 발생(WM_MOUSEMOVE) / 위치정보는 lParam에 저장됨 (LOWORD <- x, HIWORD <- y)
+			- 그 외 메시지: WM_LBUTTONDOWN, WM_LBUTTONUP 등
+			- wParam으로 전달되는 코드: MK_LBUTTON, MK_RBUTTON, MK_MBUTTON, MK_SHIFT 등 (클릭된 상태)
+			- 드래그: WM_MOUSEMOVE + MK_LBUTTON
