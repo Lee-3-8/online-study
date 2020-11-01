@@ -139,4 +139,10 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 콜백 함수 처리: VOID CALLBACK TimerProc( HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 
 	7강. 다이얼로그
-		1) 
+		1) 모달형 다이얼로그
+			- 다이얼로그가 최우선 순위 / 대표적인 다이얼로그 MessageBox()
+			- 생성 함수: INT_PTR DialogBox( HINSTANCE hInstance, LPCTSTR lpTemplate, HWND hWndParent, DLGPROC lpDialogFunc)
+			- lpTemplate에는 "폼"을 만들어 MAKEINTRESOURCE로 지정
+			- 콜백 함수 형식: INT_PTR CALLBACK DialogProc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM, lParam)
+				-> 메시지 처리시 TRUE, 처리 못할 시 FALSE
+			- 다이얼로그 해제: BOOL WINAPI EndDialog( HWND hDlg, INT_PTR nResult) <- nResult는 부모 윈도우에게 전달되는 값
