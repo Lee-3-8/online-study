@@ -7,11 +7,11 @@ from api_v1 import api as api_v1
 app = Flask(__name__)
 app.register_blueprint(api_v1,url_prefix='/api/v1') #앞에 계속 붙 어있는
 
-@app.route('/register', methods = ['GET','POST'])
+@app.route('/register')
 def register():
     return render_template('register.html')
 
-@app.route('/', methods = ['GET','POST'])
+@app.route('/')
 def hello():
     return 'hello'
 
@@ -22,7 +22,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + dbfile #사용하는 sql,
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True # teardown은 사용자 요청의 전달완료를 commit을 하겠다는 뜻
 #commit은 내가 변경한사항이 데이터베이스에 반영되게함
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'qewoijoaisdjfoi'
+app.config['SECRET_KEY'] = 'qewoijoaisdjfddffffoi'
 
 db.init_app(app)
 db.app = app
