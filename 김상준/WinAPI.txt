@@ -140,9 +140,15 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 
 	7강. 다이얼로그
 		1) 모달형 다이얼로그
-			- 다이얼로그가 최우선 순위 / 대표적인 다이얼로그 MessageBox()
+			- 다이얼로그가 최우선 순위 (모든 제어권을 가져감) / 대표적인 다이얼로그: MessageBox()
 			- 생성 함수: INT_PTR DialogBox( HINSTANCE hInstance, LPCTSTR lpTemplate, HWND hWndParent, DLGPROC lpDialogFunc)
 			- lpTemplate에는 "폼"을 만들어 MAKEINTRESOURCE로 지정
 			- 콜백 함수 형식: INT_PTR CALLBACK DialogProc( HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM, lParam)
 				-> 메시지 처리시 TRUE, 처리 못할 시 FALSE
 			- 다이얼로그 해제: BOOL WINAPI EndDialog( HWND hDlg, INT_PTR nResult) <- nResult는 부모 윈도우에게 전달되는 값
+		2) 모델리스형 다이얼로그
+			- 최우선 순위를 가지지 않음 / 폼은 모달형과 동일하게 만들면 됨 (그 대신 폼 속성 중 Visible을 True설정)
+			- 생성 함수: HWND CreateDialog( HINSTANCE, LPCTSTR, HWND, DLGPROC)
+			- 해제 함수: BOOL DestroyWindow( HWND)
+		3) 다이얼로그 메시지
+			- WM_INITDIALOG: 다이얼로그 생성시 발생 -> 초기화 용도

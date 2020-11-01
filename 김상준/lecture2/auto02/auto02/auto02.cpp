@@ -1,8 +1,10 @@
 ﻿// auto02.cpp : 애플리케이션에 대한 진입점을 정의합니다.
 //
+#define _CRT_SECURE_NO_WARNINGS
 
 #include "framework.h"
 #include "auto02.h"
+#include <stdio.h>
 
 #define MAX_LOADSTRING 100
 
@@ -16,7 +18,8 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-INT_PTR CALLBACK    DlgProc(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    DlgProc1(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    DlgProc2(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -133,8 +136,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             switch (wmId)
             {
             case ID_32773:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DlgProc);
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DlgProc1);
                 //MessageBox(hWnd, "모달형", "다이얼로그 형태", MB_OK);
+                break;
+            case ID_32774:
+                CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DlgProc2);
                 break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
@@ -184,18 +190,43 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
-INT_PTR CALLBACK DlgProc(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+int g_nVal;
+INT_PTR CALLBACK DlgProc1(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
 {
+    char string[10];
     UNREFERENCED_PARAMETER(lParam);
     switch (uMsg)
     {
+    case WM_INITDIALOG:
+        g_nVal = 12;
+        return (INT_PTR)TRUE;
     case WM_CLOSE:
         EndDialog(hwndDlg, 0);
         return (INT_PTR)TRUE;
     case WM_PAINT:
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwndDlg, &ps);
+        sprintf(string, "%d", g_nVal);
         TextOut(hdc, 10, 10, "모달형 다이얼로그", strlen("모달형 다이얼로그"));
+        TextOut(hdc, 10, 30, string, strlen(string));
+        EndPaint(hwndDlg, &ps);
+        return (INT_PTR)TRUE;
+    }
+    return (INT_PTR)FALSE;
+}
+
+INT_PTR CALLBACK DlgProc2(HWND hwndDlg, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+    switch (uMsg)
+    {
+    case WM_CLOSE:
+         DestroyWindow(hwndDlg);
+        return (INT_PTR)TRUE;
+    case WM_PAINT:
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hwndDlg, &ps);
+        TextOut(hdc, 10, 10, "모델리스형 다이얼로그", strlen("모델리스형 다이얼로그"));
         EndPaint(hwndDlg, &ps);
         return (INT_PTR)TRUE;
     }
