@@ -163,3 +163,5 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- #include <commdlg.h> 추가
 			- 파일저장 다이얼로그 생성 함수: BOOL GetSaveFileName( LPOPENFILENAME)
 			- lpstrFilter 역할: 저장할 파일의 형식을 구분 / 확장자의 유무를 파악하여 확장자 추가 결정
+		7) 이미지 뷰어 프로그램 만들기
+			- 잘 만들어보자. 
