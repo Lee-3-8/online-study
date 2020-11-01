@@ -1,0 +1,20 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-auto02",
+      "appliesTo": "김상준/lecture2/auto02/auto02/auto02.cpp",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "task-auto02",
+      "appliesTo": "김상준/lecture2/auto02/auto02/auto02.cpp",
+      "type": "launch"
+    },
+    {
+      "taskLabel": "task-auto02",
+      "appliesTo": "김상준/lecture2/auto02/auto02.sln",
+      "type": "launch"
+    }
+  ]
+}

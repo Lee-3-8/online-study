@@ -152,3 +152,14 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 해제 함수: BOOL DestroyWindow( HWND)
 		3) 다이얼로그 메시지
 			- WM_INITDIALOG: 다이얼로그 생성시 발생 -> 초기화 용도
+		4) 폼 기반의 윈도우 프로그래밍
+			- WinMain()에서 DialogBox() 호출 / DialogBox( 인스턴스, 다이얼로그 아이디, 0, 콜백함수)
+			- 타이틀 변경: 1. 리소스 속성의 Caption / 2. SetWindowText()
+		5) 파일열기 모달형 다이얼로그
+			- #include <commdlg.h> 추가
+			- 파일열기 다이얼로그 생성 함수: BOOL GetOpenFileName( LPOPENFILENAME)
+			- OPENFILENAME 구조체의 멤버변수: lStructSize, hwndOwner, lpstrFilter, nFilterIndex, lpstrFileTitle, lpstrFile, lpstrTitle 등
+		6) 파일저장 모달형 다이얼로그
+			- #include <commdlg.h> 추가
+			- 파일저장 다이얼로그 생성 함수: BOOL GetSaveFileName( LPOPENFILENAME)
+			- lpstrFilter 역할: 저장할 파일의 형식을 구분 / 확장자의 유무를 파악하여 확장자 추가 결정
