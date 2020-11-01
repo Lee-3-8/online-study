@@ -11,16 +11,9 @@ from models import Fcuser
 
 app = Flask(__name__)
 
-@app.route('/login', methods = ['GET','POST'])
-def login():
-    if request.method == 'POST':
-        userid = request.form.get(userid)
-    return render_template('login.html')
-
 
 @app.route('/register', methods = ['GET','POST'])
 def register():
-    form = RegisterForm()
     if request.method == 'POST':
         userid = request.form.get('userid')
         username = request.form.get('username')
@@ -37,12 +30,8 @@ def register():
             db.session.commit() #자동으로 하게 설정해놧지만 습관들이자
 
             return redirect('/')
-    return render_template('register.html',form=form)
+    return render_template('register.html')
 
-
-@app.route('/')
-def hello():
-    return render_template('hello.html')
 
 if __name__ == "__main__":
     basedir = os.path.abspath(os.path.dirname(__file__)) #현재있는 파일의 디렉토리
