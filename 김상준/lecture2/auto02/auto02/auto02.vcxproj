@@ -145,14 +145,14 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="auto02.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ResourceCompile Include="auto02.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="auto02.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="auto02.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

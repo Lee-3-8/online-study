@@ -5,6 +5,7 @@
 #include "framework.h"
 #include "auto02.h"
 #include <stdio.h>
+#include <commdlg.h>
 
 #define MAX_LOADSTRING 100
 
@@ -127,6 +128,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    OPENFILENAME ofn;
+    static char strFileTitle[MAX_PATH];
+    static char strFile[100];
+    static char strFileExtension[100];
+    char string[100];
+
     switch (message)
     {
     case WM_COMMAND:
@@ -141,6 +148,28 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
             case ID_32774:
                 CreateDialog(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, DlgProc2);
+                break;
+            case ID_32775:
+                memset(&ofn, 0, sizeof(OPENFILENAME));
+                ofn.lStructSize = sizeof(OPENFILENAME);
+                ofn.hwndOwner = hWnd;
+                ofn.lpstrTitle = "파일을 선택해 주세요.";
+                ofn.lpstrFileTitle = strFileTitle;
+                ofn.lpstrFile = strFile;
+                ofn.lpstrFilter = "비트맵(*.bmp)\0*.bmp\0jpg 파일\0*.jpg\0";
+                ofn.nMaxFile = MAX_PATH;
+                ofn.nMaxFileTitle = MAX_PATH;
+                if (GetOpenFileName(&ofn) != 0)
+                {
+                    switch (ofn.nFilterIndex)
+                    {
+                    case 1: sprintf(strFileExtension, "%s", "bmp");
+                        break;
+                    case 2: sprintf(strFileExtension, "%s", "jpg");
+                        break;
+                    }
+                    InvalidateRect(hWnd, NULL, TRUE);
+                }
                 break;
             case IDM_ABOUT:
                 DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
@@ -158,6 +187,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hWnd, &ps);
             // TODO: 여기에 hdc를 사용하는 그리기 코드를 추가합니다...
+            sprintf(string, "전체 경로 : %s", strFile);
+            TextOut(hdc, 10, 10, string, strlen(string));
+            sprintf(string, "파일명 : %s", strFileTitle);
+            TextOut(hdc, 10, 25, string, strlen(string));
+            sprintf(string, "확장자 : %s", strFileExtension);
+            TextOut(hdc, 10, 40, string, strlen(string));
             EndPaint(hWnd, &ps);
         }
         break;
