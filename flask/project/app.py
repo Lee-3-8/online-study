@@ -30,12 +30,12 @@ def register():
             db.session.commit() #자동으로 하게 설정해놧지만 습관들이자
 
             return redirect('/')
-    return render_template('register.html',form=form)
+    return render_template('/static/templates/register.html',form=form)
 
 
 @app.route('/')
 def hello():
-    return render_template('hello.html')
+    return render_template('/static/templates/hello.html')
 
 if __name__ == "__main__":
     basedir = os.path.abspath(os.path.dirname(__file__)) #현재있는 파일의 디렉토리
