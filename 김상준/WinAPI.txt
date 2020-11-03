@@ -176,4 +176,13 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 기본 속성: Caption, ID, Visible
 		2) Static Text
 			- 역할: 문자열 출력 (따로 코드가 필요없음 / 추가만 하면 됨)
-		3) 버튼 컨트롤
+		3) 푸시 버튼
+			- 생성 및 메시지 처리는 위의 컨트롤 기초와 동일
+		4) 라디오 버튼
+			- 역할: 여러 항목 중에서 하나 선택
+			- 생성 및 메시지 처리는 위의 컨트롤 기초와 동일
+			- 라디오 버튼 상태 조사 함수: UINT IsDlgButtonChecked( HWND, int) -> BST_CHECKED, BST_UNCHECKED return
+			- 그룹 나누기: Group 속성 -> True로 설정
+			- 상태 변경 (선택 vs 비선택) 함수: 1. BOOL CheckDlgButton() / 2. BOOL CheckRadioButton()
+				-> CheckDlgButton( HWND, int, UINT): 개별 선택 및 비선택
+				-> CheckRadioButton( HWND, int, int, int): 그룹 안에 있는 라디오 버튼 하나만 선택
