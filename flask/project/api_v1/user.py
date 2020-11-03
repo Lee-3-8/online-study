@@ -5,11 +5,13 @@ from . import api
 
 @api.route('/users', methods=['GET','POST']) #모든사용자 get
 def users():
+	print('dddddd')
 	if request.method == 'POST':
-		userid = request.form.get('userid')
-		username = request.form.get('username')
-		password = request.form.get('password')
-		re_password = request.form.get('re_password')
+		data =request.get_json()
+		userid =  data.get('userid')
+		username =  data.get('username')
+		password =  data.get('password')
+		re_password =  data.get('re_password')
 
 		if not (userid and username and password and re_password):
 			return jsonify({'error' : 'No arguments'}), 400
