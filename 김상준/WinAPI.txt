@@ -165,3 +165,15 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- lpstrFilter 역할: 저장할 파일의 형식을 구분 / 확장자의 유무를 파악하여 확장자 추가 결정
 		7) 이미지 뷰어 프로그램 만들기
 			- 잘 만들어보자. 
+
+	8강. 컨트롤
+		1) 컨트롤 기초
+			- 생성 방법: CreateWindow() / 폼 + 도구상자
+			- 개념: 중복되지 않는 양의 정수값 / 할당: VS에서 자동으로 할당 + IDC_xxxx로 시작
+			- 컨트롤의 윈도우 핸들: HWND GetDlgItem( HWND, int)
+			- 컨트롤 메시지 처리: WM_COMMAND로 전달 -> LOWORD(wParam)에 아이디, HIWORD(wParam)에 컨트롤 상태/통지 코드
+			- 통지 코드: BN_CLICKED, BN_DBCLICK, BN_SETFOCUS, BN_HILITE 등
+			- 기본 속성: Caption, ID, Visible
+		2) Static Text
+			- 역할: 문자열 출력 (따로 코드가 필요없음 / 추가만 하면 됨)
+		3) 버튼 컨트롤
