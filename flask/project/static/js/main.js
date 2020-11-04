@@ -1,25 +1,32 @@
 
-async function resgist(data){
+async function regist(data){
 	const url = '/api/v1/users';
 	const response = await fetch(url,{
-		method : 'GET',
-		headers : {
+		method: 'POST',
+		headers: {
 			'Accept' : 'application/json',
 			'Content-Type': 'application/json',
 		},
-		body : JSon.stringfy(data)
+		body: JSON.stringify(data)
 	});
 	if (response.ok) {
 		console.log(response);
 		return response;
 	}
 	else{
-		console.log('no');
+		console.log(response);
 	}
 }
 
 document.querySelector('.btn-primary').addEventListener('click',function(){
 
- regist();
- window.location('/');
+ const data = {
+		userid : document.querySelector('#userid').value,
+		username : document.querySelector('#username').value,
+		password : document.querySelector('#password').value,
+		re_password : document.querySelector('#re_password').value,
+	};
+	console.log(data);
+	regist(data);
+ // windows.location('/');
 });

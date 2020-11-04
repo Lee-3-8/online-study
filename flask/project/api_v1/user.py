@@ -8,6 +8,7 @@ def users():
 	print('dddddd')
 	if request.method == 'POST':
 		data =request.get_json()
+
 		userid =  data.get('userid')
 		username =  data.get('username')
 		password =  data.get('password')
