@@ -186,3 +186,7 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- 상태 변경 (선택 vs 비선택) 함수: 1. BOOL CheckDlgButton() / 2. BOOL CheckRadioButton()
 				-> CheckDlgButton( HWND, int, UINT): 개별 선택 및 비선택
 				-> CheckRadioButton( HWND, int, int, int): 그룹 안에 있는 라디오 버튼 하나만 선택
+		5) 체크 버튼
+			- 역할: 다수의 컨트롤 선택, 다수의 선택 사항 파악
+			- 생성 및 메시지 처리는 위의 컨트롤 기초와 동일
+			- 상태 조사 함수(IsDlgButtonChecked)와 상태 변경 함수(CheckDlgButton)는 라디오 버튼과 동일

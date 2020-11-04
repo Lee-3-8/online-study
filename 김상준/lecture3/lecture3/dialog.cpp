@@ -23,10 +23,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);
+
     int nRadio[3] = { IDC_RADIO1, IDC_RADIO2, IDC_RADIO3 };
     char radio_string[100] = { 0, };
     char radio_index[5] = { 0, };
     static std::map<int, bool> radio_checked = { {IDC_RADIO1, FALSE}, {IDC_RADIO2, FALSE}, {IDC_RADIO3, FALSE} };
+    
+    int nCheckID[3] = { IDC_CHECK1, IDC_CHECK2, IDC_CHECK3 };
+    static std::map<int, bool> check_state = { {IDC_CHECK1, FALSE}, {IDC_CHECK2, FALSE}, {IDC_CHECK3, FALSE} };
+    char check_string[100];
+
     switch (message)
     {
     case WM_COMMAND:
@@ -47,13 +53,28 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
                     strcat(radio_string, radio_index);
                 }
             }
-            strcat(radio_string, "번째 라디오 버튼 클릭");
-            MessageBox(hDlg, radio_string, "체크", MB_OK);
+            if (radio_string[0] != '\0')
+            {
+                strcat(radio_string, "번째 라디오 버튼 클릭");
+                MessageBox(hDlg, radio_string, "체크", MB_OK);
+            }
+            else
+            {
+                MessageBox(hDlg, "선택되지 않음", "체크", MB_OK);
+            }
             return (INT_PTR)TRUE;
+        case IDC_BUTTON3:
+            for (int i = 0; i < 3; i++) {
+                CheckDlgButton(hDlg, nCheckID[i], BST_UNCHECKED);
+                check_state[nCheckID[i]] = FALSE;
+            }
+            InvalidateRect(hDlg, NULL, TRUE);
+            return (INT_PTR)TRUE;
+       
         case IDC_RADIO1:
         case IDC_RADIO2:
         case IDC_RADIO3:
-            if (radio_checked[wmId] == FALSE)
+            if (!radio_checked[wmId])
             {
                 radio_checked[wmId] = TRUE;
             }
@@ -63,6 +84,20 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
                 CheckDlgButton(hDlg, wmId, BST_UNCHECKED);
             }
             return (INT_PTR)TRUE;
+       
+        case IDC_CHECK1:
+        case IDC_CHECK2:
+        case IDC_CHECK3:
+            if (!check_state[wmId]) {
+                check_state[wmId] = TRUE;
+            }
+            else 
+            {
+                check_state[wmId] = FALSE;
+            }
+            InvalidateRect(hDlg, NULL, TRUE);
+            return (INT_PTR)TRUE;
+        
         case IDOK:
         case IDCANCEL:
             EndDialog(hDlg, 0);
@@ -70,6 +105,26 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         }
         return (INT_PTR)TRUE;
     }
+
+
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hDlg, &ps);
+        int index = 0;
+
+        for (int i : nCheckID)
+        {
+            if (check_state[i]) sprintf(check_string, "%s", "ON");
+            else sprintf(check_string, "%s", "OFF");
+            TextOut(hdc, 35 + 65 * index++, 135, check_string, strlen(check_string));
+        }
+
+        EndPaint(hDlg, &ps);
+        return (INT_PTR)TRUE;
+    }
+
+
     case WM_CLOSE:
         EndDialog(hDlg, 0);
         return (INT_PTR)TRUE;
