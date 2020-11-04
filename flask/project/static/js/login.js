@@ -1,6 +1,6 @@
 
-async function regist(data){
-	const url = '/api/v1/users';
+async function login(data){
+	const url = '/auth';
 	const response = await fetch(url,{
 		method: 'POST',
 		headers: {
@@ -10,8 +10,9 @@ async function regist(data){
 		body: JSON.stringify(data)
 	});
 	if (response.ok) {
-		console.log(response);
-		return response;
+		let json = await response.json();
+		console.log(json);
+		sessionStorage.setItem('access_token',json.access_token);
 	}
 	else{
 		console.log(response);
@@ -21,12 +22,10 @@ async function regist(data){
 document.querySelector('.btn-primary').addEventListener('click',function(){
 
  const data = {
-		userid : document.querySelector('#userid').value,
-		username : document.querySelector('#username').value,
+		username : document.querySelector('#userid').value,
 		password : document.querySelector('#password').value,
-		re_password : document.querySelector('#re_password').value,
 	};
 	console.log(data);
-	regist(data);
+	login(data);
  // windows.location('/');
 });
