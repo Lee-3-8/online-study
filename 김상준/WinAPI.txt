@@ -194,4 +194,6 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 	9강. 컨트롤(2)
 		1) 에디트 컨트롤
 			- 사용자로부터 데이터 입력 / 데이터 입력, 수정, 삭제(데이터 편집)를 위한 컨트롤 / 다양한 속성 제공
-			- 
+			- ID, Password, Visible, Read only, Border, Number 등의 속성이 존재
+			- 내용 읽기 함수: UINT GetDlgItemText( HWND, int, LPCTSTR, int), UINT GetDlgItemInt( HWND, int, BOOL, BOOL)
+			- 데이터 설정 함수: BOOL SetDlgItemText( HWND, int, LPCTSTR), BOOL SetDlgItemInt( HWND, int, UINT, BOOL)
