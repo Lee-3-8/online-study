@@ -225,3 +225,11 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- int ListView_InsertItem( HWND, const LPLVITEM pitem) 
 			- LVITEM 구조체: UINT mask (LVIF_TEXT로 설정), int iItem, int iSubItem, LPTSTR pszText 등
 			- VOID ListView_SetItemText( HWND, int, int, LPCTSTR) -> 서브 아이템에 데이터 저장
+		4) 서브 아이템 데이터 가져오기
+			- void ListView_GetItemText( HWND hwnd, int iItem, int iSubItem, LPSTR pszText, int cchTextMax)
+			- 1 단계: 아이템 선택에 대한 메시지 알아내기 / WM_NOTIFY 메시지 발생, lParam <- 통지 코드, 컨트롤 핸들, 아이디가 저장된 메모리 주소
+				-> lParam은 NMHDR 구조체 사용: HWND hwndFrom, UINT_PTR idFrom, UINT code
+			- 2 단계: 아이템 인덱스 알아내기 / 매크로 함수 -> int ListView_GetNextItem( HWND, int, UINT)
+			- 가져온 Index를 활용해 아이템 수정, 아이템 삽입 및 정렬 가능
+		5) 아이템 삭제
+			- ListView_DeleteItem( HWND, int) & ListView_DeleteAllItem( HWND)

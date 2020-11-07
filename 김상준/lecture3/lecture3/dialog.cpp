@@ -57,7 +57,8 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     static char* lc_menu[] = { "순번", "C", "C++", "Win32" };
     LVCOLUMN lvColumn;
     LVITEM lvItem;
-    char item_string[100];
+    char item_string[100] = { 0, };
+    static int nListIndex = -1;
 
     switch (message)
     {
@@ -72,11 +73,12 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         
         // 리스트 컨트롤 컬럼 생성
         hList = GetDlgItem(hDlg, IDC_LIST2);
+        ListView_SetExtendedListViewStyle(hList, LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
         lvColumn.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
         lvColumn.fmt = LVCFMT_CENTER;
         for (int i = 0; i < 4; i++)
         {
-            lvColumn.cx = 4 * 10;
+            lvColumn.cx = 40;
             lvColumn.pszText = lc_menu[i];
             ListView_InsertColumn(hList, i, &lvColumn);
         }
@@ -171,6 +173,77 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             SetDlgItemText(hDlg, IDC_EDIT5, NULL);
             SetDlgItemText(hDlg, IDC_EDIT6, NULL);
             return (INT_PTR)TRUE;
+
+        // 리스트 컨트롤 아이템 수정
+        case IDC_BUTTON10:
+            if (nListIndex != -1)
+            {
+                GetDlgItemText(hDlg, IDC_EDIT4, item_string, 10);
+                ListView_SetItemText(hList, nListIndex, 1, item_string);
+                GetDlgItemText(hDlg, IDC_EDIT5, item_string, 10);
+                ListView_SetItemText(hList, nListIndex, 2, item_string);
+                GetDlgItemText(hDlg, IDC_EDIT6, item_string, 10);
+                ListView_SetItemText(hList, nListIndex, 3, item_string);
+
+                SetDlgItemText(hDlg, IDC_EDIT4, NULL);
+                SetDlgItemText(hDlg, IDC_EDIT5, NULL);
+                SetDlgItemText(hDlg, IDC_EDIT6, NULL);
+            }
+            return (INT_PTR)TRUE;
+
+        // 리스트 컨트롤 아이템 삽입
+        case IDC_BUTTON11:
+            if (nListIndex != -1)
+            {
+                lvItem.iItem = nListIndex;
+                lvItem.iSubItem = 0;
+                lvItem.mask = LVIF_TEXT;
+                sprintf(item_string, "%d", lvItem.iItem);
+                lvItem.pszText = item_string;
+                ListView_InsertItem(hList, &lvItem);
+
+                GetDlgItemText(hDlg, IDC_EDIT4, item_string, 10);
+                ListView_SetItemText(hList, lvItem.iItem, 1, item_string);
+                GetDlgItemText(hDlg, IDC_EDIT5, item_string, 10);
+                ListView_SetItemText(hList, lvItem.iItem, 2, item_string);
+                GetDlgItemText(hDlg, IDC_EDIT6, item_string, 10);
+                ListView_SetItemText(hList, lvItem.iItem, 3, item_string);
+
+                SetDlgItemText(hDlg, IDC_EDIT4, NULL);
+                SetDlgItemText(hDlg, IDC_EDIT5, NULL);
+                SetDlgItemText(hDlg, IDC_EDIT6, NULL);
+
+                int nCount = ListView_GetItemCount(hList);
+                for (int i = nListIndex + 1; i < nCount; i++)
+                {
+                    sprintf(item_string, "%d", i);
+                    ListView_SetItemText(hList, i, 0, item_string);
+                }
+            }
+            return (INT_PTR)TRUE;
+
+        // 리스트 컨트롤 아이템 삭제
+        case IDC_BUTTON12:
+            if (nListIndex != -1)
+            {
+                ListView_DeleteItem(hList, nIndex);
+                int nCount = ListView_GetItemCount(hList);
+                for (int i = 0; i < nCount; i++)
+                {
+                    sprintf(item_string, "%d", i);
+                    ListView_SetItemText(hList, i, 0, item_string);
+                }
+
+                SetDlgItemText(hDlg, IDC_EDIT4, NULL);
+                SetDlgItemText(hDlg, IDC_EDIT5, NULL);
+                SetDlgItemText(hDlg, IDC_EDIT6, NULL);
+            }
+            return (INT_PTR)TRUE;
+
+        // 리스트 컨트롤 모두 삭제
+        case IDC_BUTTON13:
+            ListView_DeleteAllItems(hList);
+            return (INT_PTR)TRUE;
        
         // ******************************** 라디오 버튼 ******************************** //
         case IDC_RADIO1:
@@ -205,6 +278,25 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         case IDOK:
         case IDCANCEL:
             EndDialog(hDlg, 0);
+            return (INT_PTR)TRUE;
+        }
+        return (INT_PTR)TRUE;
+    }
+
+
+    // 리스트 컨트롤 클릭 처리
+    case WM_NOTIFY:
+    {
+        switch (((LPNMHDR)lParam)->code)
+        {
+        case NM_CLICK: 
+            nListIndex = ListView_GetNextItem(hList, -1, LVNI_SELECTED);
+            ListView_GetItemText(hList, nListIndex, 1, item_string, 10);
+            SetDlgItemText(hDlg, IDC_EDIT4, item_string);
+            ListView_GetItemText(hList, nListIndex, 2, item_string, 10);
+            SetDlgItemText(hDlg, IDC_EDIT5, item_string);
+            ListView_GetItemText(hList, nListIndex, 3, item_string, 10);
+            SetDlgItemText(hDlg, IDC_EDIT6, item_string);
             return (INT_PTR)TRUE;
         }
         return (INT_PTR)TRUE;
