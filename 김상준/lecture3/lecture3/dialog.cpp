@@ -8,6 +8,7 @@
 #include <commdlg.h>
 #include <map>
 #include <windowsx.h>
+#include <CommCtrl.h>
 
 INT_PTR CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -52,6 +53,11 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     char list_string[100];
     static int ListIndex = 1;
 
+    // 리스트 컨트롤 변수
+    static HWND hList;
+    static char* lc_menu[] = { "항목1", "항목2", "항목3", "항목4" };
+    LVCOLUMN lvColumn;
+
     switch (message)
     {
     case WM_INITDIALOG:
@@ -62,6 +68,17 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             ComboBox_AddString(hComboBox, strMenu[i]);
             ListBox_AddString(hListBox, strMenu[i]);
         }
+    
+        hList = GetDlgItem(hDlg, IDC_LIST2);
+        lvColumn.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
+        lvColumn.fmt = LVCFMT_CENTER;
+        for (int i = 0; i < 4; i++)
+        {
+            lvColumn.cx = strlen(lc_menu[i]) * 10;
+            lvColumn.pszText = lc_menu[i];
+            ListView_InsertColumn(hList, i, &lvColumn);
+        }
+
         return (INT_PTR)TRUE;
     
 

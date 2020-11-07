@@ -208,3 +208,15 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 		3) 리스트 박스
 			- 리스트 출력 영역 안에서 항목 선택
 			- 매크로함수(windowsx.h 포함): ListBox_AddString(), ListBox_GetCurSel()
+
+	10강. 리스트 컨트롤
+		1) 개요
+			- 다양한 뷰 스타일 / 기능, 코드 up / 다양한 매크로 함수 제공
+			- 리스트 컨트롤 구조: 컬럼(column), 아이템, 서브 아이템 -> 시작 인덱스는 0
+			- 포함 헤더: Commctrl.h, Windowsx.h
+		2) 컬럼 생성과 문자열 등록
+			- 매크로 함수: int ListView_InsertColumn( HWND, int, const LPLVCOLUMN)
+			- LVCOLUMN 구조체: UINT mask, int fmt, int cx, LPTSTR pszText, int cchTextMax, int iSubItem 등
+				-> mask: 컬럼에 적용할 속성을 결정 (일반적인 형태: LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM)
+				-> fmt: 컬럼과 서브 아이템의 데이터 정렬 형식 지정 (LVCFMT_LEFT, LVCFMT_RIGHT, LVCFMT_CENTER)
+				-> cx: 가로 길이, pszText: 문자열 지정, iSubItem: 서브 아이템 인덱스
