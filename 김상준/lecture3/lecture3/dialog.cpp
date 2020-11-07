@@ -46,13 +46,21 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     static int nIndex = 2;
     char combo_string[100];
     
+
+    // 리스트 박스 변수
+    static HWND hListBox;
+    char list_string[100];
+    static int ListIndex = 1;
+
     switch (message)
     {
     case WM_INITDIALOG:
         hComboBox = GetDlgItem(hDlg, IDC_COMBO1);
+        hListBox = GetDlgItem(hDlg, IDC_LIST1);
         for (int i = 0; i < 3; i++)
         {
             ComboBox_AddString(hComboBox, strMenu[i]);
+            ListBox_AddString(hListBox, strMenu[i]);
         }
         return (INT_PTR)TRUE;
     

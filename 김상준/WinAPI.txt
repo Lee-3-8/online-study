@@ -206,3 +206,5 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- ComboBox_InsertString( HWND, int, LPCTSTR) -> 항목 삽입
 			- ComboBox_GetCurSel( HWND) -> 인덱스 조사 / 선택이 안됐을 땐 CB_ERR(-1)을 리턴
 		3) 리스트 박스
+			- 리스트 출력 영역 안에서 항목 선택
+			- 매크로함수(windowsx.h 포함): ListBox_AddString(), ListBox_GetCurSel()
