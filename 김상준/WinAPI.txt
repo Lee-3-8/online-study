@@ -197,3 +197,12 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 			- ID, Password, Visible, Read only, Border, Number 등의 속성이 존재
 			- 내용 읽기 함수: UINT GetDlgItemText( HWND, int, LPCTSTR, int), UINT GetDlgItemInt( HWND, int, BOOL, BOOL)
 			- 데이터 설정 함수: BOOL SetDlgItemText( HWND, int, LPCTSTR), BOOL SetDlgItemInt( HWND, int, UINT, BOOL)
+		2) 콤보 박스
+			- 여러 항목을 리스트 형태로 출력 및 선택 / Simple, Drop Down, Drop List 형태 제공 / 항목이 펼쳐지는 영역 설정
+			- 매크로 함수(Windowsx.h 포함): ComboBox_AddString(), ComboBox_DeleteString(), ComboBox_InsertString(), ComboBox_GetCurSel() 등
+			- GetDlgItem() 사용
+			- ComboBox_AddString( HWND, LPCTSTR) -> 메뉴 입력
+			- ComboBox_DeleteString( HWND, int) -> 항목 삭제
+			- ComboBox_InsertString( HWND, int, LPCTSTR) -> 항목 삽입
+			- ComboBox_GetCurSel( HWND) -> 인덱스 조사 / 선택이 안됐을 땐 CB_ERR(-1)을 리턴
+		3) 리스트 박스

@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <commdlg.h>
 #include <map>
+#include <windowsx.h>
 
 INT_PTR CALLBACK DlgProc(HWND, UINT, WPARAM, LPARAM);
 
@@ -38,8 +39,24 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     // 에디트 컨트롤 변수
     char edit_string[100];
     int nVal;
+
+    // 콤보 박스 변수
+    static HWND hComboBox;
+    static char* strMenu[] = { "메뉴1", "메뉴2", "메뉴3" };
+    static int nIndex = 2;
+    char combo_string[100];
+    
     switch (message)
     {
+    case WM_INITDIALOG:
+        hComboBox = GetDlgItem(hDlg, IDC_COMBO1);
+        for (int i = 0; i < 3; i++)
+        {
+            ComboBox_AddString(hComboBox, strMenu[i]);
+        }
+        return (INT_PTR)TRUE;
+    
+
     case WM_COMMAND:
     {
         int wmId = LOWORD(wParam);
@@ -88,6 +105,23 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             nVal = GetDlgItemInt(hDlg, IDC_EDIT1, NULL, FALSE);
             sprintf(edit_string, "%d", nVal);
             MessageBox(hDlg, edit_string, "확인", MB_OK);
+            return (INT_PTR)TRUE;
+
+        case IDC_BUTTON6:
+            if (nIndex >= 0) ComboBox_DeleteString(hComboBox, nIndex--);
+            else MessageBox(hDlg, "삭제할 항목이 없습니다.", "에러", MB_OK);
+            return (INT_PTR)TRUE;
+
+        case IDC_BUTTON7:
+            nVal = GetDlgItemInt(hDlg, IDC_EDIT2, NULL, TRUE);
+            GetDlgItemText(hDlg, IDC_EDIT3, combo_string, 99);
+            ComboBox_InsertString(hComboBox, nVal, combo_string);
+            nIndex++;
+            return (INT_PTR)TRUE;
+
+        case IDC_BUTTON8:
+            nVal = ComboBox_GetCurSel(hComboBox);
+            if (nVal != CB_ERR) MessageBox(hDlg, strMenu[nVal], "체크", MB_OK);
             return (INT_PTR)TRUE;
        
         // ******************************** 라디오 버튼 ******************************** //
