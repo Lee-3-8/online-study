@@ -220,3 +220,8 @@ Title이 짤리는 현상은 DefWindowProcW를 사용하여 해결 가능
 				-> mask: 컬럼에 적용할 속성을 결정 (일반적인 형태: LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM)
 				-> fmt: 컬럼과 서브 아이템의 데이터 정렬 형식 지정 (LVCFMT_LEFT, LVCFMT_RIGHT, LVCFMT_CENTER)
 				-> cx: 가로 길이, pszText: 문자열 지정, iSubItem: 서브 아이템 인덱스
+		3) 아이템 관련 매크로 함수
+			- int ListView_GetItemCount( HWND) -> 아이템 개수 조사, 아이템 생성 및 추가 등
+			- int ListView_InsertItem( HWND, const LPLVITEM pitem) 
+			- LVITEM 구조체: UINT mask (LVIF_TEXT로 설정), int iItem, int iSubItem, LPTSTR pszText 등
+			- VOID ListView_SetItemText( HWND, int, int, LPCTSTR) -> 서브 아이템에 데이터 저장

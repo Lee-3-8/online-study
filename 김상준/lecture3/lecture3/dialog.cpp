@@ -50,13 +50,14 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
     // 리스트 박스 변수
     static HWND hListBox;
-    char list_string[100];
     static int ListIndex = 1;
 
     // 리스트 컨트롤 변수
     static HWND hList;
-    static char* lc_menu[] = { "항목1", "항목2", "항목3", "항목4" };
+    static char* lc_menu[] = { "순번", "C", "C++", "Win32" };
     LVCOLUMN lvColumn;
+    LVITEM lvItem;
+    char item_string[100];
 
     switch (message)
     {
@@ -68,13 +69,14 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             ComboBox_AddString(hComboBox, strMenu[i]);
             ListBox_AddString(hListBox, strMenu[i]);
         }
-    
+        
+        // 리스트 컨트롤 컬럼 생성
         hList = GetDlgItem(hDlg, IDC_LIST2);
         lvColumn.mask = LVCF_FMT | LVCF_WIDTH | LVCF_TEXT | LVCF_SUBITEM;
         lvColumn.fmt = LVCFMT_CENTER;
         for (int i = 0; i < 4; i++)
         {
-            lvColumn.cx = strlen(lc_menu[i]) * 10;
+            lvColumn.cx = 4 * 10;
             lvColumn.pszText = lc_menu[i];
             ListView_InsertColumn(hList, i, &lvColumn);
         }
@@ -147,6 +149,27 @@ INT_PTR CALLBACK DlgProc(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         case IDC_BUTTON8:
             nVal = ComboBox_GetCurSel(hComboBox);
             if (nVal != CB_ERR) MessageBox(hDlg, strMenu[nVal], "체크", MB_OK);
+            return (INT_PTR)TRUE;
+
+        // 리스트 컨트롤 아이템과 서브 아이템 추가
+        case IDC_BUTTON9:
+            lvItem.iItem = ListView_GetItemCount(hList);
+            lvItem.iSubItem = 0;
+            lvItem.mask = LVIF_TEXT;
+            sprintf(item_string, "%d", lvItem.iItem);
+            lvItem.pszText = item_string;
+            ListView_InsertItem(hList, &lvItem);
+
+            GetDlgItemText(hDlg, IDC_EDIT4, item_string, 10);
+            ListView_SetItemText(hList, lvItem.iItem, 1, item_string);
+            GetDlgItemText(hDlg, IDC_EDIT5, item_string, 10);
+            ListView_SetItemText(hList, lvItem.iItem, 2, item_string);
+            GetDlgItemText(hDlg, IDC_EDIT6, item_string, 10);
+            ListView_SetItemText(hList, lvItem.iItem, 3, item_string);
+
+            SetDlgItemText(hDlg, IDC_EDIT4, NULL);
+            SetDlgItemText(hDlg, IDC_EDIT5, NULL);
+            SetDlgItemText(hDlg, IDC_EDIT6, NULL);
             return (INT_PTR)TRUE;
        
         // ******************************** 라디오 버튼 ******************************** //
