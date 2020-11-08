@@ -1,2 +1,5 @@
 02.01 slack 챗봇의 원리
 02.02 slack의 생성 
+02.03 slack webhook, slash command 활성화
+
+curl -X POST -H "Content-type: application/json" --data "{'text':'Hello, World!'}" https://hooks.slack.com/services/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
