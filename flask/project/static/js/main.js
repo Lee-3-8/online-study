@@ -1,11 +1,13 @@
 
 async function regist(data){
 	const url = '/api/v1/users';
+	const token = sessionStorage.getItem('access_token');
 	const response = await fetch(url,{
 		method: 'POST',
 		headers: {
 			'Accept' : 'application/json',
 			'Content-Type': 'application/json',
+			'Authorization': token
 		},
 		body: JSON.stringify(data)
 	});
