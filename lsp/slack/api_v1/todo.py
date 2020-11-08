@@ -40,6 +40,8 @@ def slack_todos():
 		ret_msg = 'todo가 생성되었습니다.'
 
 	elif cmd == 'list':
-		pass
+		todos = Todo.query.all()
+		for idx, todo in enumerate(todos):
+			ret_msg += '%d. %s (~%s)\n'%(idx+1, todo.title, str(todo.tstamp))
 
-	return jsonify(res)
+	return jsonify(ret_msg)
