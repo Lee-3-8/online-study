@@ -14,7 +14,7 @@ def todos():
             headers={"Content-Type": "application/json"},
         )
     elif request.method == "GET":
-        pass
+
 
     data = request.get_json()
     return jsonify(data)
