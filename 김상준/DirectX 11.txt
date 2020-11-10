@@ -8,3 +8,8 @@ DirectX 11 Engine Tutorial
 - 이후 프로젝트 속성 -> VC++ 디렉터리 -> 구성, 플랫폼 모두 All로 바꿔줌 -> 포함 디렉터리에 Includes 폴더 넣기
 - 구성, 플랫폼을 바꿔가면서 라이브러리 폴더를 넣어줌
 - #pragma comment(lib, "d3d11.lib"), #pragma comment(lib, "DirectXTK.lib")를 해주고 작동하는지 확인
+
+파일 세팅:
+- StringConverter 헤더와 cpp 파일 생성 (string을 wstring으로 변환)
+- ErrorLogger 헤더와 cpp 파일 생성 (에러 체킹)
+	-> HRESULT는 함수가 성공했는지 여부를 리턴, _com_error(comdef.h 에 포함됨) 변수로 받을 수 있고 ErrorMessage()를 사용하면 wstring으로 에러메시지를 받는다.
