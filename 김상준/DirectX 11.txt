@@ -1,0 +1,10 @@
+DirectX 11 Engine Tutorial
+기초 세팅:
+- Windows Desktop Wizard로 프로젝트 생성 -> Windows Application(.exe)로 생성 (빈 프로젝트)
+- DirectXTK를 깃허브에서 다운 -> 알맞은 버젼을 열기 -> Debug, Release 각각 x64, x86으로 한번 씩 빌드 -> Inc, Bin 폴더 생성
+- Inc 폴더를 복사해 DirectX 11 프로젝트 폴더에 붙여넣기
+- Libs 폴더를 만들어 내부에 x64, x86 폴더 생성. 후에 각 폴더에 Debug, Release 폴더 생성
+- Bin 폴더에서 폴더에 맞게 DirectXTK.lib 파일을 복사 붙여넣기
+- 이후 프로젝트 속성 -> VC++ 디렉터리 -> 구성, 플랫폼 모두 All로 바꿔줌 -> 포함 디렉터리에 Includes 폴더 넣기
+- 구성, 플랫폼을 바꿔가면서 라이브러리 폴더를 넣어줌
+- #pragma comment(lib, "d3d11.lib"), #pragma comment(lib, "DirectXTK.lib")를 해주고 작동하는지 확인
