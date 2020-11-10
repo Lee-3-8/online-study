@@ -13,3 +13,4 @@ DirectX 11 Engine Tutorial
 - StringConverter 헤더와 cpp 파일 생성 (string을 wstring으로 변환)
 - ErrorLogger 헤더와 cpp 파일 생성 (에러 체킹)
 	-> HRESULT는 함수가 성공했는지 여부를 리턴, _com_error(comdef.h 에 포함됨) 변수로 받을 수 있고 ErrorMessage()를 사용하면 wstring으로 에러메시지를 받는다.
+- RenderWindow 헤더와 cpp파일 생성 (윈도우 창을 만드는 클래스 생성 -> WinAPI와 거의 동일)
