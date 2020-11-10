@@ -14,3 +14,6 @@ DirectX 11 Engine Tutorial
 - ErrorLogger 헤더와 cpp 파일 생성 (에러 체킹)
 	-> HRESULT는 함수가 성공했는지 여부를 리턴, _com_error(comdef.h 에 포함됨) 변수로 받을 수 있고 ErrorMessage()를 사용하면 wstring으로 에러메시지를 받는다.
 - RenderWindow 헤더와 cpp파일 생성 (윈도우 창을 만드는 클래스 생성 -> WinAPI와 거의 동일)
+- WindowContainer와 Engine 헤더, cpp 파일 생성
+	-> Engine은 "윈도우 창 셋업"과 "그래픽(DirectX) 셋업"을 같이하기 위해 만드는 클래스
+	-> WindowContainer는 여러 윈도우 기능들을 넣어놓기 위함 (Mouse, Keyboard, WndProc 등)
