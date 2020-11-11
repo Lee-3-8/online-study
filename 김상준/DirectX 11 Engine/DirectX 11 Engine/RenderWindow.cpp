@@ -75,7 +75,9 @@ LRESULT CALLBACK HandleMsgRedirect(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM l
 		return 0;
 
 	default:
+		// 먼저 엔진의 포인터를 유저 데이터 필드에서 꺼내옴
 		WindowContainer* const pWindow = reinterpret_cast<WindowContainer*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
+		// 그리고 그 엔진의 윈도우 프로시져를 사용
 		return pWindow->WindowProc(hWnd, uMsg, wParam, lParam);
 	}
 
@@ -95,8 +97,8 @@ LRESULT CALLBACK HandleMessageSetup(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM 
 			ErrorLogger::Log("Critical Error: Pointer to window container is null during WM_NCCREATE.");
 			exit(-1);
 		}
-		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWindow));
-		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(HandleMsgRedirect));
+		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWindow)); // 유저 데이터 필드에 엔진 포인터를 세팅
+		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(HandleMsgRedirect)); // WindowProc을 리다이렉트
 		return pWindow->WindowProc(hWnd, uMsg, wParam, lParam);
 	}
 	default:

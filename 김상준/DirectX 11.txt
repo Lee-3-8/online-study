@@ -17,3 +17,5 @@ DirectX 11 Engine Tutorial
 - WindowContainer와 Engine 헤더, cpp 파일 생성
 	-> Engine은 "윈도우 창 셋업"과 "그래픽(DirectX) 셋업"을 같이하기 위해 만드는 클래스
 	-> WindowContainer는 여러 윈도우 기능들을 넣어놓기 위함 (Mouse, Keyboard, WndProc 등)
+	-> 이 강의에선 WindowContainer를 상속하는 객체(즉 Engine)의 포인터를 CreateWindowEx함수에 넣어주고 싶음
+	-> 그리고 그 포인터를 WM_NCCREATE에서 찾고자 함 (그것을 HandleMessageSetup에서 함) -> lParam에 저장되어 있는 CreateWindow정보를 불러옴
