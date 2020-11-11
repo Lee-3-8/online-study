@@ -1,9 +1,10 @@
 import os
 from flask import Flask
-from flask import request, redirect, render_template
+from flask import request, redirect, render_template, session
 from models import db
 from models import Fcuser
 from forms import RegisterForm
+from forms import LoginForm
 from api_v1 import api as api_v1
 
 app = Flask(__name__)
@@ -11,10 +12,14 @@ app.register_blueprint(api_v1, url_prefix="/api/v1")
 
 @app.route('/', methods=['GET'])
 def home():
-	return render_template('home.html')
+	userid = session.get('userid',None)
+	return render_template('home.html', userid = userid)
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		session['userid'] = form.data.get('userid')
 	return render_template('login.html')
 
 @app.route('/logout', methods=['GET'])
