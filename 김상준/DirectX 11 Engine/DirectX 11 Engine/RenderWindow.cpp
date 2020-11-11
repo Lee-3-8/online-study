@@ -9,7 +9,7 @@ bool RenderWindow::Initialize(WindowContainer* pWindowContainer, HINSTANCE hInst
 	this->window_title_wide = StringConverter::StringToWide(this->window_title);
 	this->window_class = window_class;
 	this->window_class_wide = StringConverter::StringToWide(this->window_class);
-
+	
 	this->RegisterWindowClass();
 
 	this->handle = CreateWindowEx(0,
