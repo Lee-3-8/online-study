@@ -9,7 +9,7 @@ DirectX 11 Engine Tutorial
 - 구성, 플랫폼을 바꿔가면서 라이브러리 폴더를 넣어줌
 - #pragma comment(lib, "d3d11.lib"), #pragma comment(lib, "DirectXTK.lib")를 해주고 작동하는지 확인
 
-파일 세팅:
+윈도우 세팅:
 - StringConverter 헤더와 cpp 파일 생성 (string을 wstring으로 변환)
 - ErrorLogger 헤더와 cpp 파일 생성 (에러 체킹)
 	-> HRESULT는 함수가 성공했는지 여부를 리턴, _com_error(comdef.h 에 포함됨) 변수로 받을 수 있고 ErrorMessage()를 사용하면 wstring으로 에러메시지를 받는다.
@@ -20,3 +20,6 @@ DirectX 11 Engine Tutorial
 	-> 이 강의에선 WindowContainer를 상속하는 객체(즉 Engine)의 포인터를 CreateWindowEx함수에 넣어주고 싶음
 	-> 그리고 그 포인터를 WM_NCCREATE에서 찾고자 함 (그것을 HandleMessageSetup에서 함) -> lParam에 저장되어 있는 CreateWindow정보를 불러옴
 - KeyboardEvent 와 KeyboardClass 헤더, cpp 파일 생성
+- MouseEvent 와 MouseClass 헤더, cpp 파일 생성
+	-> 키보드와 마우스 객체를 만들어 메시지가 발생하면 해당 정보를 그 객체에 저장하는 것. 그리고 queue에 객체를 저장
+	-> 저장된 메시지는 엔진을 Update할 때 queue에서 객체를 pop하고, 해당 객체의 정보를 가져와 실행
