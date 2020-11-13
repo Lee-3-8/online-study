@@ -23,3 +23,7 @@ DirectX 11 Engine Tutorial
 - MouseEvent 와 MouseClass 헤더, cpp 파일 생성
 	-> 키보드와 마우스 객체를 만들어 메시지가 발생하면 해당 정보를 그 객체에 저장하는 것. 그리고 queue에 객체를 저장
 	-> 저장된 메시지는 엔진을 Update할 때 queue에서 객체를 pop하고, 해당 객체의 정보를 가져와 실행
+	-> WM_INPUT은 직전 인풋과의 "상대적 차이"를 구할 수 있음
+		-> 이것을 하기 위해선 WindowContainer 생성자에서 RegisterRawInputDevice를 먼저 해주어야함
+
+DirectX 11 세팅:
