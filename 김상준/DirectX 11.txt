@@ -21,9 +21,15 @@ DirectX 11 Engine Tutorial
 	-> 그리고 그 포인터를 WM_NCCREATE에서 찾고자 함 (그것을 HandleMessageSetup에서 함) -> lParam에 저장되어 있는 CreateWindow정보를 불러옴
 - KeyboardEvent 와 KeyboardClass 헤더, cpp 파일 생성
 - MouseEvent 와 MouseClass 헤더, cpp 파일 생성
+	-> 세팅 이후엔, WindowContainer에 Mouse와 Keyboard의 객체를 저장
 	-> 키보드와 마우스 객체를 만들어 메시지가 발생하면 해당 정보를 그 객체에 저장하는 것. 그리고 queue에 객체를 저장
 	-> 저장된 메시지는 엔진을 Update할 때 queue에서 객체를 pop하고, 해당 객체의 정보를 가져와 실행
 	-> WM_INPUT은 직전 인풋과의 "상대적 차이"를 구할 수 있음
 		-> 이것을 하기 위해선 WindowContainer 생성자에서 RegisterRawInputDevice를 먼저 해주어야함
 
 DirectX 11 세팅:
+- Graphics 헤더, cpp 파일 생성
+	-> ID3D11Device: Buffer 생성을 위해, ID3D11DeviceContext: 다른 텍스쳐간 리소스 변경을 위해, IDXGISwapChain: 프레임 스왑 방식, ID3D11RenderTargetView: 렌더링 타겟
+- AdapterReader 헤더, cpp 파일 생성
+	-> DirectX 초기화를 위해, 먼저 비디오 어답터(그래픽 카드)를 가져오기 위한 클래스
+	-> 모두 세팅 이후엔 WindowContainer에 Graphics 객체를 담고, Engine의 Initialize에서 Graphics를 초기화 해주어야 함
