@@ -33,4 +33,5 @@ DirectX 11 세팅:
 - AdapterReader 헤더, cpp 파일 생성
 	-> DirectX 초기화를 위해, 먼저 비디오 어답터(그래픽 카드)를 가져오기 위한 클래스
 	-> 모두 세팅 이후엔 WindowContainer에 Graphics 객체를 담고, Engine의 Initialize에서 Graphics를 초기화 해주어야 함
-- D3D11CreateDeviceAndSwapChain(), SwapChain 셋업
+- D3D11CreateDeviceAndSwapChain(), SwapChain 셋업 -> RenderFrame 함수를 생성해 WinMain에서 Update후 렌더링
+- Direct X PipeLine: Input Assembler -> Vertex Shader -> Tessellation -> Geometry Shader -> Rasterizer -> Pixel Shader -> Output Merger -> Render Target
