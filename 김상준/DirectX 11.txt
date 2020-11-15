@@ -27,6 +27,15 @@ DirectX 11 Engine Tutorial
 	-> WM_INPUT은 직전 인풋과의 "상대적 차이"를 구할 수 있음
 		-> 이것을 하기 위해선 WindowContainer 생성자에서 RegisterRawInputDevice를 먼저 해주어야함
 
+DirectX 개요:
+- Component Object Model (COM)
+	- Binary Compatibility: Run the same software without requiring that the application be recompiled
+		-> 컴파일러의 binary 작동방식이 다르다면 (ex. MSVC vs GCC), 한 컴파일러가 다른 컴파일러의 .dll을 불러왔을 때 제대로 구동이 안될 것
+	- COM의 목표: Binary Compatibility 구현을 위해 ("재사용가능한" 바이너리 소프트웨어 객체를 만들어 recompile이 필요하지 않도록)
+	- 특정 프로그래밍 언어에 국한되지 않음, 자원(메모리) 할당에 사용가능, 객체 생성에도 사용가능 ("Interface"로 제공)
+	- Factory 함수를 불러 COM 객체를 만들고, COM은 우리에게 Interface를 제공하여 해당 객체를 사용할수 있음
+	- 기본적 기능들: IUnknown Interface -> AddRef, Release, QueryInterface / UUID를 이용해 COM interface를 구분
+
 DirectX 11 세팅:
 - Graphics 헤더, cpp 파일 생성
 	-> ID3D11Device: Buffer 생성을 위해, ID3D11DeviceContext: 다른 텍스쳐간 리소스 변경을 위해, IDXGISwapChain: 프레임 스왑 방식, ID3D11RenderTargetView: 렌더링 타겟
