@@ -77,7 +77,7 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 	hr = this->device->CreateRenderTargetView(backBuffer.Get(), NULL, this->renderTargetView.GetAddressOf());
 	if (FAILED(hr))
 	{
-		ErrorLogger::Log(hr, "Faile to create render target view.");
+		ErrorLogger::Log(hr, "Failed to create render target view.");
 		return false;
 	}
 

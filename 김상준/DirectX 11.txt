@@ -35,6 +35,12 @@ DirectX 개요:
 	- 특정 프로그래밍 언어에 국한되지 않음, 자원(메모리) 할당에 사용가능, 객체 생성에도 사용가능 ("Interface"로 제공)
 	- Factory 함수를 불러 COM 객체를 만들고, COM은 우리에게 Interface를 제공하여 해당 객체를 사용할수 있음
 	- 기본적 기능들: IUnknown Interface -> AddRef, Release, QueryInterface / UUID를 이용해 COM interface를 구분
+- D3D Architecture
+	- Device: 그래픽 어답터 (그래픽 카드)를 칭함 / 셋업을 위해 사용됨
+	- Swap Chain: Double Buffer를 사용
+		-> Front에는 완료된 작업만을 두고 모니터는 여기를 읽음, Back에서 유저가 렌더링을 하고 완료될 때 까지 보여지지 않음
+	- Device Context: 실제 그리기를 위해 사용됨 (Issue rendering commands, configuring rendering pipeline
+	- Render Target View: Swap Chain의 어떤 버퍼에 렌더링 할지 결정
 
 DirectX 11 세팅:
 - Graphics 헤더, cpp 파일 생성
