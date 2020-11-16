@@ -17,7 +17,7 @@ html = """
 		<p class="story"> 어아무말 마마아아아루아ㅏ
 			<a href="http://example.com/elsie" class="sister" id="link1">elsie</a>
 			<a href="http://example.com/lacie" class="sister" id="link2">lacie</a>
-			<a data-io="link3" href = "http://example.com/little" class="brother" id="link3">Title</a>
+			<a data-io="link3" href = "http://example.com/little" class="sister" id="link3">Title</a>
 		</p>
 		<p class="story">story...</p>
 	</body>
@@ -76,9 +76,39 @@ link2 = soup.find_all('a', class_= 'sister')
 for t in link2:
 	print(t)
 
+# 처음 발견한 a 태그 선택
+link3 = soup.find("a")
 
+print()
+print(link3)
+print(link3.string)
+print(link3.text)
 
+#다중 조건
+link4 = soup.find("a",{"class": "sister","data-io":"link3"})
 
+print()
+print(link4)
+print(link4.text)
+print(link4.string)
+
+# css 선택자 : select
+# 태그로 접근 : find , find_all
+# 예제3 (Select, select_one)
+# 태그 + 클래스 + 자식선택자
+
+# find 쓰는사람도 많지만 select가 더 전문적 느낌 ,강사님도 이거씀
+link5 = soup.select_one('p.title > b')
+print()
+print(link5)
+print(link5.text)
+print(link5.string)
+
+link6 = soup.select_one('a#link1')
+print()
+print(link6)
+print(link6.text)
+print(link6.string)
 
 
 
