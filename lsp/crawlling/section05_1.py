@@ -17,7 +17,7 @@ html = """
 		<p class="story"> 어아무말 마마아아아루아ㅏ
 			<a href="http://example.com/elsie" class="sister" id="link1">elsie</a>
 			<a href="http://example.com/lacie" class="sister" id="link2">lacie</a>
-			<a data-io="link3" href = "http://example.com/little" class="sister" id="link3">Title</a>
+			<a data-io="link3" href = "http://example.com/little" class="brother" id="link3">Title</a>
 		</p>
 		<p class="story">story...</p>
 	</body>
@@ -52,4 +52,53 @@ p2 = p1.next_sibling.next_sibling
 # print(dir(p2))
 
 #다음 엘리먼트 확인 / 잘사용안하고 string으로함
-print(p2.next_element) # print(list(p2.next_element)
+# print(p2.next_element) # print(list(p2.next_element)
+
+for v in p2.next_element:
+	pass
+	# print(v)
+
+
+# 예제2 (find, findall)
+
+soup2 = BeautifulSoup(html, 'html.parser')
+
+#a 태그 모두선택 / 보통은 태그명보단 클래스나 id 로 가져옴 or img도 가능
+link1 = soup.find_all('a', limit=1) # 리미티옵션은 순서대로 상위 몇개만가져옴
+# print('links' , link1)
+
+
+###########중요#############
+link2 = soup.find_all('a', class_= 'sister')
+ # id = 'link2' 나 string = "title"  string = ["Elsie","Title"] 도 가능
+# print(link2)
+
+for t in link2:
+	print(t)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
