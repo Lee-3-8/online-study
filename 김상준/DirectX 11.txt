@@ -1,5 +1,5 @@
 DirectX 11 Engine Tutorial
-기초 세팅:
+Visual Studio 세팅:
 - Windows Desktop Wizard로 프로젝트 생성 -> Windows Application(.exe)로 생성 (빈 프로젝트)
 - DirectXTK를 깃허브에서 다운 -> 알맞은 버젼을 열기 -> Debug, Release 각각 x64, x86으로 한번 씩 빌드 -> Inc, Bin 폴더 생성
 - Inc 폴더를 복사해 DirectX 11 프로젝트 폴더에 붙여넣기
@@ -40,11 +40,10 @@ DirectX 개요:
 	- Swap Chain: Double Buffer를 사용
 		-> Front에는 완료된 작업만을 두고 모니터는 여기를 읽음, Back에서 유저가 렌더링을 하고 완료될 때 까지 보여지지 않음
 	- Device Context: 실제 그리기를 위해 사용됨 (Issue rendering commands, configuring rendering pipeline
-	- Render Target View: Swap Chain의 어떤 버퍼에 렌더링 할지 결정
+	- Render Target View: Swap Chain의 어떤 버퍼에 렌더링 할지 결정 (보통 Back에 함)
 
 DirectX 11 세팅:
 - Graphics 헤더, cpp 파일 생성
-	-> ID3D11Device: Buffer 생성을 위해, ID3D11DeviceContext: 다른 텍스쳐간 리소스 변경을 위해, IDXGISwapChain: 프레임 스왑 방식, ID3D11RenderTargetView: 렌더링 타겟
 - AdapterReader 헤더, cpp 파일 생성
 	-> DirectX 초기화를 위해, 먼저 비디오 어답터(그래픽 카드)를 가져오기 위한 클래스
 	-> 모두 세팅 이후엔 WindowContainer에 Graphics 객체를 담고, Engine의 Initialize에서 Graphics를 초기화 해주어야 함
