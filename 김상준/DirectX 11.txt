@@ -58,3 +58,8 @@ DirectX 11 세팅:
 - D3D11CreateDeviceAndSwapChain(), SwapChain, RenderTargetView 셋업 -> RenderFrame 함수를 생성해 WinMain에서 Update후 렌더링
 - Input Assembler Stage:
 	-> D3D11_INPUT_ELEMENT_DESC 설정, device->CreateInputLayout() 으로 생성
+- Vertex Shdaer Stage:
+	-> 리소스 파일에 vertexshader.hlsl파일 생성
+	-> HLSL Tools for VS 다운받기, hlsl파일 속성에서 셰이더 형식 = vs / 모델은 5.0으로 설정
+	-> Shaders 헤더, cpp 파일 생성
+	-> Graphics 클래스에 VertexShader 클래스 추가하고 vertexshader 초기화
