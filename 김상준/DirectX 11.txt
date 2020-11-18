@@ -41,14 +41,6 @@ DirectX 개요:
 		-> Front에는 완료된 작업만을 두고 모니터는 여기를 읽음, Back에서 유저가 렌더링을 하고 완료될 때 까지 보여지지 않음
 	- Device Context: 실제 그리기를 위해 사용됨 (Issue rendering commands, configuring rendering pipeline
 	- Render Target View: Swap Chain의 어떤 버퍼에 렌더링 할지 결정 (보통 Back에 함)
-- DirectX 11 Graphics Pipeline
-	- 1) Input Assembler Stage: 유저가 채운 버퍼에서 원시 데이터들을 읽어오고, 다른 스테이지에서 쓰일 Primitive type(line list, triangle strip 등)으로 assemble하는 단계
-	- 2) Vertex Shader Stage: Input Assembly에서 온 데이터들을 처리하는 과정 (Transformation, skinning, morphing 등), single input vertex에 대해서만 작용 됨.
-	- 3) Tessellation Stages: low detail 모델을 high detail로 렌더링하는 단계,  Hull-Shader / Tessellator / Domain-Shader의 총 세 단계로 이루어짐
-	- 4) Geometry Shader Stage: Vertex Shader 단계와는 다르게 full primitive에 대한 계산을 진행
-	- 5) Rasterizer Stage: 벡터 정보들을 raster image (셀마다 특정값을 일정한 수치로 표시하는 격자 형식의 자료 구조)로 변환하는 단계
-	- 6) Pixel Shader Stage: 고급 픽셀 쉐이딩 단계 (per-pixel lighting, postprocessing 등)
-	- 7) Output-Merger Stage: 모든 픽셀정보를 종합하여 최종 렌더 이미지를 생성하는 단계
 
 DirectX 11 세팅:
 - Graphics 헤더, cpp 파일 생성
@@ -56,3 +48,4 @@ DirectX 11 세팅:
 	-> DirectX 초기화를 위해, 먼저 비디오 어답터(그래픽 카드)를 가져오기 위한 클래스
 	-> 모두 세팅 이후엔 WindowContainer에 Graphics 객체를 담고, Engine의 Initialize에서 Graphics를 초기화 해주어야 함
 - D3D11CreateDeviceAndSwapChain(), SwapChain 셋업 -> RenderFrame 함수를 생성해 WinMain에서 Update후 렌더링
+- Direct X PipeLine: Input Assembler -> Vertex Shader -> Tessellation -> Geometry Shader -> Rasterizer -> Pixel Shader -> Output Merger -> Render Target
