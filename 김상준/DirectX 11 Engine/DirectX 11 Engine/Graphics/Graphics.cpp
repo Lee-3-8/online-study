@@ -25,6 +25,7 @@ void Graphics::RenderFrame()
 	// 그리기 전 세팅
 	this->deviceContext->IASetInputLayout(this->vertexshader.GetInputLayout());
 	this->deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	this->deviceContext->RSSetState(this->rasterizerState.Get());
 
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
@@ -85,6 +86,7 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 		return false;
 	}
 
+	// RanderTargetView + Output-Merger Setting
 	Microsoft::WRL::ComPtr<ID3D11Texture2D> backBuffer;
 	hr = this->swapchain->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(backBuffer.GetAddressOf()));
 	if (FAILED(hr))
@@ -102,6 +104,7 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 
 	this->deviceContext->OMSetRenderTargets(1, this->renderTargetView.GetAddressOf(), NULL);
 
+	// Rasterizer Setting
 	D3D11_VIEWPORT viewport;
 	ZeroMemory(&viewport, sizeof(D3D11_VIEWPORT));
 
@@ -111,6 +114,19 @@ bool Graphics::InitializeDirectX(HWND hWnd, int width, int height)
 	viewport.Height = height;
 
 	this->deviceContext->RSSetViewports(1, &viewport);
+
+	// Creating Rasterizer State
+	D3D11_RASTERIZER_DESC rasterizerDesc;
+	ZeroMemory(&rasterizerDesc, sizeof(D3D11_RASTERIZER_DESC));
+
+	rasterizerDesc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+	rasterizerDesc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+	hr = this->device->CreateRasterizerState(&rasterizerDesc, this->rasterizerState.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to Create rasterizer state.");
+		return false;
+	}
 
 	return true;
 }

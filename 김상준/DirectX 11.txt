@@ -96,3 +96,7 @@ Shader에 컬러 추가하기
 	-> vertexshader.hlsl에 적힌 코드에 따라 분류된 정보들이 가공되고 pixelshader로 전송
 	-> vertexshader로부터 받은 정보들이 마지막으로 pixelshader.hlsl의 코드에 따라 가공되고 최종 출력
 
+Rasterizer State
+- Graphics 클래스에 rasterizerState 생성
+- InitializeDirectX에서 viewport 설정 이후 rasterizer state 생성 / 그리고 RenderFrame()에서 deviceContext->RSSetState
+- FillMode, CullMode 다양하게 설정 가능
