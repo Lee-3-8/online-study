@@ -70,7 +70,7 @@ DirectX 11 세팅:
 	-> Graphics 클래스에 PixelShader 클래스 추가하고 초기화
 - Output-Merger Stage: InitializeDirectX에서 이미 OMSetRenderTargets를 통해 완료.
 
-실제로 그리기
+실제로 그리기:
 - VertexShader Coordinate System
 	-> 정중앙이 (0,0)이고 x의 범위는 왼쪽에서 오른쪽으로 -1 ~ 1, y의 범위는 아래에서 위로 -1 ~ 1
 - Vertex Buffer 생성 후 다양한 topology로 그리기
@@ -82,7 +82,7 @@ DirectX 11 세팅:
 		-> pixelshader.hlsl 파일에서 색 수정 가능
 		-> IASetPrimitiveTopology에서 다른 topology 설정 가능
 
-Shader에 컬러 추가하기
+Shader에 컬러 추가하기:
 - Vertex 클래스에 색 정보 추가
 - vertexshader.hlsl, pixelshader.hlsl 파일 수정
 - D3D11INPUT_LAYOUT_DESC 수정, 또한 InitializeScene에서 Vertex를 넣을 때 시계방향으로 넣어주어야 함
@@ -96,7 +96,12 @@ Shader에 컬러 추가하기
 	-> vertexshader.hlsl에 적힌 코드에 따라 분류된 정보들이 가공되고 pixelshader로 전송
 	-> vertexshader로부터 받은 정보들이 마지막으로 pixelshader.hlsl의 코드에 따라 가공되고 최종 출력
 
-Rasterizer State
+Rasterizer State:
 - Graphics 클래스에 rasterizerState 생성
 - InitializeDirectX에서 viewport 설정 이후 rasterizer state 생성 / 그리고 RenderFrame()에서 deviceContext->RSSetState
 - FillMode, CullMode 다양하게 설정 가능
+
+Z-Depth 개요:
+- 렌더링 된 물체의 각 픽셀에서 카메라까지의 거리를 z-depth로 표현 (0 ~ 1 사이의 숫자)
+- 숫자가 작을수록 카메라와 가까운 것
+- 여러가지 물체가 겹쳐서 렌더링 되어 있을 때, 어떤 물체가 앞에서 뒤의 물체를 가리는지 파악 가능
