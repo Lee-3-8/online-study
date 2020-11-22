@@ -13,6 +13,6 @@ int APIENTRY wWinMain(_In_	   HINSTANCE hInstance,
 			engine.Update();
 			engine.RenderFrame();
 		}
-		return 0;
 	}
+	return 0;
 }

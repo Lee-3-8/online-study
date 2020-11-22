@@ -69,3 +69,16 @@ DirectX 11 세팅:
 	-> Shaders 파일에 PixelShader 클래스를 추가하고 VertexShader와 유사하게 셋업
 	-> Graphics 클래스에 PixelShader 클래스 추가하고 초기화
 - Output-Merger Stage: InitializeDirectX에서 이미 OMSetRenderTargets를 통해 완료.
+
+실제로 그리기
+- VertexShader Coordinate System
+	-> 정중앙이 (0,0)이고 x의 범위는 왼쪽에서 오른쪽으로 -1 ~ 1, y의 범위는 아래에서 위로 -1 ~ 1
+- Vertex Buffer 생성 후 다양한 topology로 그리기
+	-> Graphics 클래스에 vertexBuffer 생성 / InitializeScene() 함수 생성
+		-> InitializeScene에서 점 위치 지정
+	-> RenderFrame()에서 그리기
+		-> deviceContext inputlayout, vertexshader, pixelshader, vertexbuffer 우선 세팅
+		-> deviceContext->Draw에서 점 개수 지정 후 그리기
+		-> pixelshader.hlsl 파일에서 색 수정 가능
+		-> IASetPrimitiveTopology에서 다른 topology 설정 가능
+

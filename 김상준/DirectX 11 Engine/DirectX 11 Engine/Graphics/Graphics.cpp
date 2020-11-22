@@ -10,6 +10,10 @@ bool Graphics::Initialize(HWND hWnd, int width, int height)
 	{
 		return false;
 	}
+	if (!InitializeScene())
+	{
+		return false;
+	}
 	return true;
 }
 
@@ -17,6 +21,21 @@ void Graphics::RenderFrame()
 {
 	float bgcolor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
+
+	// 弊府扁 傈 技泼
+	this->deviceContext->IASetInputLayout(this->vertexshader.GetInputLayout());
+	this->deviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
+	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
+
+	UINT stride = sizeof(Vertex);
+	UINT offset = 0;
+	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
+
+	// 弊府扁
+	this->deviceContext->Draw(3, 0);
+
 	this->swapchain->Present(1, NULL);
 }
 
@@ -132,6 +151,43 @@ bool Graphics::InitializeShaders()
 
 	if (!pixelshader.Initilize(this->device, shaderfolder + L"pixelshader.cso"))
 	{
+		return false;
+	}
+
+	return true;
+}
+
+bool Graphics::InitializeScene()
+{
+	// 刚历 vertex狼 array甫 积己
+	Vertex v[] =
+	{
+		Vertex(0.0f, -0.1f),
+		Vertex(-0.1f, 0.0f),
+		Vertex(0.1f, 0.0f),
+		Vertex(0.0f, 0.1f),
+	};
+
+	// Buffer description 积己
+	D3D11_BUFFER_DESC vertexBufferDesc;
+	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
+
+	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	vertexBufferDesc.ByteWidth = sizeof(Vertex) * ARRAYSIZE(v);
+	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	vertexBufferDesc.CPUAccessFlags = 0;
+	vertexBufferDesc.MiscFlags = 0;
+
+	// Subresource data 积己
+	D3D11_SUBRESOURCE_DATA vertexBufferData;
+	ZeroMemory(&vertexBufferData, sizeof(D3D11_SUBRESOURCE_DATA));
+	vertexBufferData.pSysMem = v;
+
+	// Buffer 积己
+	HRESULT hr = this->device->CreateBuffer(&vertexBufferDesc, &vertexBufferData, this->vertexBuffer.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create vertex buffer.");
 		return false;
 	}
 
