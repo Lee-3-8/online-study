@@ -85,7 +85,7 @@ DirectX 11 세팅:
 Shader에 컬러 추가하기:
 - Vertex 클래스에 색 정보 추가
 - vertexshader.hlsl, pixelshader.hlsl 파일 수정
-- D3D11INPUT_LAYOUT_DESC 수정, 또한 InitializeScene에서 Vertex를 넣을 때 시계방향으로 넣어주어야 함
+- D3D11INPUT_LAYOUT_DESC 수정, 또한 InitializeScene에서 Vertex를 넣을 때 시계방향으로 넣어주어야 함 (Default Rasterizer 특성)
 
 *************** 대충 이해해본 DirectX가 돌아가는 방식 ***************
 - 맨 처음에 InitializeShader는 말 그대로 Initialize 해주는 것 (내 입력이 들어가는 것은 아니다.)
@@ -105,3 +105,15 @@ Z-Depth 개요:
 - 렌더링 된 물체의 각 픽셀에서 카메라까지의 거리를 z-depth로 표현 (0 ~ 1 사이의 숫자)
 - 숫자가 작을수록 카메라와 가까운 것
 - 여러가지 물체가 겹쳐서 렌더링 되어 있을 때, 어떤 물체가 앞에서 뒤의 물체를 가리는지 파악 가능
+
+Depth Stencil View:
+- 먼저 Graphics 클래스에 depthStencilView & Buffer 생성
+- InitializeDirectX에서 viewport 추가 설정 (MinDepth, MaxDepth 추가)
+- D3D11_TEXTURE2D_DESC 설정 / depthStencilView & Buffer 설정 / OMSetRendertargets에서 depthStencilView 연결
+- RenderFrame()에서 ClearDepthStencilView로 초기화
+- Graphics 클래스에 depthStencilState 추가
+- InitializeDirectX에서 D3D11_DEPTH_STENCIL_DESC로 depthStencilState 설정
+- RenderFrame()에서 OMSetDepthStencilState로 설정
+- Vertex 클래스에 z값 추가 / vertex array 수정
+- Input layout Format을 R32G32B32로 수정
+- vertexshader.hlsl 수정
