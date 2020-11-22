@@ -58,7 +58,7 @@ DirectX 11 세팅:
 - D3D11CreateDeviceAndSwapChain(), SwapChain, RenderTargetView 셋업 -> RenderFrame 함수를 생성해 WinMain에서 Update후 렌더링
 - Input Assembler Stage:
 	-> D3D11_INPUT_ELEMENT_DESC 설정, device->CreateInputLayout() 으로 생성
-- Vertex Shdaer Stage:
+- Vertex Shader Stage:
 	-> 리소스 파일에 vertexshader.hlsl파일 생성
 	-> HLSL Tools for VS 다운받기, hlsl파일 속성에서 셰이더 형식 = vs / 모델은 5.0으로 설정
 	-> Shaders 헤더, cpp 파일 생성
@@ -81,4 +81,18 @@ DirectX 11 세팅:
 		-> deviceContext->Draw에서 점 개수 지정 후 그리기
 		-> pixelshader.hlsl 파일에서 색 수정 가능
 		-> IASetPrimitiveTopology에서 다른 topology 설정 가능
+
+Shader에 컬러 추가하기
+- Vertex 클래스에 색 정보 추가
+- vertexshader.hlsl, pixelshader.hlsl 파일 수정
+- D3D11INPUT_LAYOUT_DESC 수정, 또한 InitializeScene에서 Vertex를 넣을 때 시계방향으로 넣어주어야 함
+
+*************** 대충 이해해본 DirectX가 돌아가는 방식 ***************
+- 맨 처음에 InitializeShader는 말 그대로 Initialize 해주는 것 (내 입력이 들어가는 것은 아니다.)
+	-> 이 과정에서 hlsl 파일들을 각 shader들과 연결시키고, input layout을 어떤 식으로 구성할지 description을 넣는 것
+- 이후 입력 정보를 넣을 구조체를 만들고 (여기선 Vertex.h에 있는 Vertex Class에 해당) 데이터를 넣어준 뒤 vertex buffer를 생성
+- 그 다음 RenderFrame()에서 deviceContext와 input layout, shader들을 연결시켜 주고 Draw()해주면
+	-> 입력해놓은 input layout에 따라 vertex의 정보들이 분류되고
+	-> vertexshader.hlsl에 적힌 코드에 따라 분류된 정보들이 가공되고 pixelshader로 전송
+	-> vertexshader로부터 받은 정보들이 마지막으로 pixelshader.hlsl의 코드에 따라 가공되고 최종 출력
 

@@ -19,7 +19,7 @@ bool Graphics::Initialize(HWND hWnd, int width, int height)
 
 void Graphics::RenderFrame()
 {
-	float bgcolor[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+	float bgcolor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
 	this->deviceContext->ClearRenderTargetView(this->renderTargetView.Get(), bgcolor);
 
 	// 弊府扁 傈 技泼
@@ -139,7 +139,8 @@ bool Graphics::InitializeShaders()
 
 	D3D11_INPUT_ELEMENT_DESC layout[] =
 	{
-		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0}
+		{"POSITION", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32_FLOAT, 0, 0, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0},
+		{"COLOR", 0, DXGI_FORMAT::DXGI_FORMAT_R32G32B32_FLOAT, 0, D3D11_APPEND_ALIGNED_ELEMENT, D3D11_INPUT_CLASSIFICATION::D3D11_INPUT_PER_VERTEX_DATA, 0},
 	};
 
 	UINT numElements = ARRAYSIZE(layout);
@@ -149,7 +150,7 @@ bool Graphics::InitializeShaders()
 		return false;
 	}
 
-	if (!pixelshader.Initilize(this->device, shaderfolder + L"pixelshader.cso"))
+	if (!pixelshader.Initialize(this->device, shaderfolder + L"pixelshader.cso"))
 	{
 		return false;
 	}
@@ -162,10 +163,9 @@ bool Graphics::InitializeScene()
 	// 刚历 vertex狼 array甫 积己
 	Vertex v[] =
 	{
-		Vertex(0.0f, -0.1f),
-		Vertex(-0.1f, 0.0f),
-		Vertex(0.1f, 0.0f),
-		Vertex(0.0f, 0.1f),
+		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 0.0f),
+		Vertex(0.0f, 0.5f, 0.0f, 1.0f, 0.0f),
+		Vertex(0.5f, -0.5f, 0.0f, 0.0f, 1.0f),
 	};
 
 	// Buffer description 积己

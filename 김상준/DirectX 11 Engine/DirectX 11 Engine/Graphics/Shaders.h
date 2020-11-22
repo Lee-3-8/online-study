@@ -22,7 +22,7 @@ private:
 class PixelShader
 {
 public:
-	bool Initilize(Microsoft::WRL::ComPtr<ID3D11Device>& device, std::wstring shaderpath);
+	bool Initialize(Microsoft::WRL::ComPtr<ID3D11Device>& device, std::wstring shaderpath);
 	ID3D11PixelShader* GetShader();
 	ID3D10Blob* GetBuffer();
 	
