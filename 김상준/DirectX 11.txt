@@ -63,3 +63,9 @@ DirectX 11 세팅:
 	-> HLSL Tools for VS 다운받기, hlsl파일 속성에서 셰이더 형식 = vs / 모델은 5.0으로 설정
 	-> Shaders 헤더, cpp 파일 생성
 	-> Graphics 클래스에 VertexShader 클래스 추가하고 vertexshader 초기화
+- Rasterizer Stage: InitializeDirectX에서 Viewport설정하고 deviceContext에서 Viewport 세팅
+- Pixel Shader Stage:
+	-> 리소스 파일에 pixelshader.hlsl 파일 생성 / 속성에서 셰이더 형식 = ps, 모델은 5.0 설정
+	-> Shaders 파일에 PixelShader 클래스를 추가하고 VertexShader와 유사하게 셋업
+	-> Graphics 클래스에 PixelShader 클래스 추가하고 초기화
+- Output-Merger Stage: InitializeDirectX에서 이미 OMSetRenderTargets를 통해 완료.

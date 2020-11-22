@@ -1,9 +1,2 @@
-﻿  Engine.cpp
-  Graphics.cpp
-  Shaders.cpp
-  RenderWindow.cpp
-  Source.cpp
-  WindowContainer.cpp
-  코드를 생성하고 있습니다...
-C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\DirectX 11 Engine\Source.cpp(18): warning C4715: 'wWinMain': 모든 제어 경로에서 값을 반환하지는 않습니다.
+﻿  Shaders.cpp
   DirectX 11 Engine.vcxproj -> C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\Debug\DirectX 11 Engine.exe
