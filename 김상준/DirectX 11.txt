@@ -117,3 +117,9 @@ Depth Stencil View:
 - Vertex 클래스에 z값 추가 / vertex array 수정
 - Input layout Format을 R32G32B32로 수정
 - vertexshader.hlsl 수정
+
+Render Font:
+- MakeSpriteFont.exe로 .spritefont 파일 생성 후 프로젝트 디렉터리에 복사
+- Graphics 클래스에 spriteBatch 와 spriteFont 생성
+- InitializeDirectX()에서 spriteBatch 와 Font 설정
+- RenderFrame()에서 둘을 활용해 텍스트 출력 가능
