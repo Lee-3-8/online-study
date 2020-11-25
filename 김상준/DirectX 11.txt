@@ -128,3 +128,22 @@ Fixing Window Dimensions:
 - RenderWindow::Initialize 에서 RECT구조체 설정
 - GetSystemMetrics를 이용해 화면 중앙의 위치 값을 가져올 수 있음
 - AdjustWindowRect()를 이용해 윈도우 크기 설정
+
+Texturing:
+- Texture coordinate layout
+	-> 좌상단: (0, 0), 우하단: (1, 1)
+- Texture 추가 과정
+	-> Graphics 클래스에 samplerState 생성
+	-> InitializeDirectX에서 samplerState 설정
+	-> pixelshader.hlsl과 vertexshader.hlsl에 objTexture, objSamplerState 추가 및 파일 수정
+	-> InitializeShaders()에서 layout 수정
+	-> vertex.h 파일 수정
+	-> 입력 Vertex 정보 수정
+	-> RenderFrame()에서 samplerState 세팅
+- 이후 출력하면 문자들이 나오는데, 이 이유는 우리가 Texture 세팅을 안했기 때문, 그래서 SpriteFont가 로드한 Texture가 그대로 출력되어 나온것
+- 이를 해결하기 위해선
+	-> Graphics 클래스에 WICTextureLoader.h include 후 myTexture 생성
+	-> Data 폴더에 Textures 폴더 생성 후 원하는 사진 추가
+	-> IntializeScene에서 myTexture 설정
+	-> RenderFrame()에서 그림 그리기 전에 myTexture 세팅
+	-> (이후 필요에 따라 WinMain에서 CoInitialize를 하고) 실행해보면 원하는 사진이 출력 됨
