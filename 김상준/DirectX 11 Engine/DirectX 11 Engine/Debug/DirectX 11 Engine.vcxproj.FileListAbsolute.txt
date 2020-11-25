@@ -1,2 +1,4 @@
 C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\Debug\vertexshader.cso
 C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\Debug\pixelshader.cso
+C:\Users\sangj\Desktop\online-study\김상준\DirectX 11 Engine\Debug\pixelshader.cso
+C:\Users\sangj\Desktop\online-study\김상준\DirectX 11 Engine\Debug\vertexshader.cso

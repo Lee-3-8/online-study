@@ -123,3 +123,8 @@ Render Font:
 - Graphics 클래스에 spriteBatch 와 spriteFont 생성
 - InitializeDirectX()에서 spriteBatch 와 Font 설정
 - RenderFrame()에서 둘을 활용해 텍스트 출력 가능
+
+Fixing Window Dimensions:
+- RenderWindow::Initialize 에서 RECT구조체 설정
+- GetSystemMetrics를 이용해 화면 중앙의 위치 값을 가져올 수 있음
+- AdjustWindowRect()를 이용해 윈도우 크기 설정
