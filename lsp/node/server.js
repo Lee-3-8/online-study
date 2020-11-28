@@ -11,8 +11,10 @@ app.use(methodOverride());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 
-const route = require('./route.js');//아까 export했던 router를 연결
-app.use('/',route);
+const mainRouter = require('./route');//아까 export했던 router를 연결
+
+app.use('/',mainRouter);
+
 app.use((req,res,next)=>{
 	res.status(404).send('일치하는 주소가 없습니다.')
 });
