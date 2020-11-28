@@ -147,3 +147,31 @@ Texturing:
 	-> IntializeScene에서 myTexture 설정
 	-> RenderFrame()에서 그림 그리기 전에 myTexture 세팅
 	-> (이후 필요에 따라 WinMain에서 CoInitialize를 하고) 실행해보면 원하는 사진이 출력 됨
+
+Indices:
+- Vertex가 반복되는 것을 막기 위해 index를 저장하는 array를 생성
+- 생성
+	-> Graphics 클래스에 indicesBuffer 생성
+	-> IntializeScene()에 indices array 생성 및 indicesBuffer 설정
+	-> RenderFrame()에서 indicesBuffer 세팅 후 Draw()함수 대신 DrawIndexed() 함수 사용
+
+Buffer Headers:
+- Vertex와 Indices Buffer 생성 간소화하기 위한 작업
+- Vertex Buffer Template
+	-> VertexBuffer 헤더 생성 후 IntializeScene에서 했던 작업을 옮김
+	-> Graphics 클래스에 VertexBuffer 객체 저장
+	-> IntializeScene(), RenderFrame() 수정
+- Index Buffer
+	-> IndexBuffer 헤더 생성 (이 경우에는 template 사용 안함 - 항상 DWORD이기 때문) 후 IntializeScene에서 했던 작업을 옮김
+	-> Graphics 클래스에 IndexBuffer 객체 저장
+	-> IntializeScene(), RenderFrame() 수정
+
+Constant Buffer:
+- CPU와 GPU사이의 데이터 교환이 가능하도록 하는 버퍼
+- 런타임에서 변수의 수정이 가능하다. (즉, 사진을 움직일 수 있다.)
+- 생성
+	-> vertexshader.hlsl 파일에 cbuffer 생성
+	-> Graphics 클래스에 constantBuffer 생성
+	-> ConstantBufferTypes 헤더 생성 후 CB_VS_vertexshader 구조체 생성
+	-> InitializeScene()에서 constantBuffer 설정
+	-> RenderFrame()에서 Constant Buffer를 업데이트

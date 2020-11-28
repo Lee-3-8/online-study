@@ -32,16 +32,27 @@ void Graphics::RenderFrame()
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
 
-	// 弊府扁
-	UINT stride = sizeof(Vertex);
 	UINT offset = 0;
+	
+	// Update Constant Buffer
+	CB_VS_vertexshader data;
+	data.xOffset = 0.0f;
+	data.yoffset = 0.5f;
+	D3D11_MAPPED_SUBRESOURCE mappedResource;
+	HRESULT hr = this->deviceContext->Map(constantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mappedResource); //Gets a pointer to the data contained in a subresource, and denies the GPU access to that subresource.
+	CopyMemory(mappedResource.pData, &data, sizeof(CB_VS_vertexshader));
+	this->deviceContext->Unmap(constantBuffer.Get(), 0);
+	this->deviceContext->VSSetConstantBuffers(0, 1, constantBuffer.GetAddressOf());
+
+	// 弊府扁
 	this->deviceContext->PSSetShaderResources(0, 1, this->myTexture.GetAddressOf());
-	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
-	this->deviceContext->Draw(6, 0);
+	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
+	this->deviceContext->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	this->deviceContext->DrawIndexed(indexBuffer.BufferSize(), 0, 0);
 
 	// Draw Text
 	spriteBatch->Begin();
-	spriteFont->DrawString(spriteBatch.get(), L"HELLO WORLD", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+	spriteFont->DrawString(spriteBatch.get(), L"HELLO WORLD!", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.5f, 0.5f), DirectX::XMFLOAT2(1.0f, 1.0f));
 	spriteBatch->End();
 
 	this->swapchain->Present(1, NULL);
@@ -250,38 +261,35 @@ bool Graphics::InitializeShaders()
 
 bool Graphics::InitializeScene()
 {
-	// 刚历 vertex狼 array甫 积己
-	Vertex v[] =
+	// vertex狼 array甫 积己
+	Vertex vertices[] =
 	{
-		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f),
-		Vertex(-0.5f,  0.5f, 1.0f, 0.0f, 0.0f),
-		Vertex( 0.5f,  0.5f, 1.0f, 1.0f, 0.0f),
-
-		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f),
-		Vertex( 0.5f,  0.5f, 1.0f, 1.0f, 0.0f),
-		Vertex( 0.5f, -0.5f, 1.0f, 1.0f, 1.0f),
+		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f), // Bottom Left   - [0]
+		Vertex(-0.5f,  0.5f, 1.0f, 0.0f, 0.0f), // Top Left      - [1]
+		Vertex( 0.5f,  0.5f, 1.0f, 1.0f, 0.0f), // Top Right     - [2]
+		Vertex( 0.5f, -0.5f, 1.0f, 1.0f, 1.0f), // Bottom Right  - [3]
 	};
 
-	// Buffer description 积己
-	D3D11_BUFFER_DESC vertexBufferDesc;
-	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
+	// Indices
+	DWORD indices[] =
+	{
+		0, 1, 2,
+		0, 2, 3
+	};
 
-	vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	vertexBufferDesc.ByteWidth = sizeof(Vertex) * ARRAYSIZE(v);
-	vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	vertexBufferDesc.CPUAccessFlags = 0;
-	vertexBufferDesc.MiscFlags = 0;
-
-	// Subresource data 积己
-	D3D11_SUBRESOURCE_DATA vertexBufferData;
-	ZeroMemory(&vertexBufferData, sizeof(D3D11_SUBRESOURCE_DATA));
-	vertexBufferData.pSysMem = v;
-
-	// Buffer 积己
-	HRESULT hr = this->device->CreateBuffer(&vertexBufferDesc, &vertexBufferData, this->vertexBuffer.GetAddressOf());
+	// Vertex Buffer 积己
+	HRESULT hr = this->vertexBuffer.Initialize(this->device.Get(), vertices, ARRAYSIZE(vertices));
 	if (FAILED(hr))
 	{
 		ErrorLogger::Log(hr, "Failed to create vertex buffer.");
+		return false;
+	}
+
+	// Index Buffer 积己
+	hr = this->indexBuffer.Initialize(this->device.Get(), indices, ARRAYSIZE(indices));
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create indices buffer.");
 		return false;
 	}
 
@@ -290,6 +298,22 @@ bool Graphics::InitializeScene()
 	if (FAILED(hr))
 	{
 		ErrorLogger::Log(hr, "Failed to create wic texture from file.");
+		return false;
+	}
+
+	// Intialize Constant Buffer
+	D3D11_BUFFER_DESC desc;
+	desc.Usage = D3D11_USAGE_DYNAMIC;
+	desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	desc.MiscFlags = 0;
+	desc.ByteWidth = static_cast<UINT>(sizeof(CB_VS_vertexshader) + (16 - (sizeof(CB_VS_vertexshader) % 16)));
+	desc.StructureByteStride = 0;
+
+	hr = this->device->CreateBuffer(&desc, 0, constantBuffer.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to initialize cosntant buffer.");
 		return false;
 	}
 
