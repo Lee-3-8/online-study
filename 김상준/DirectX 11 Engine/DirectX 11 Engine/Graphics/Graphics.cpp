@@ -37,11 +37,13 @@ void Graphics::RenderFrame()
 	UINT offset = 0;
 	this->deviceContext->PSSetShaderResources(0, 1, this->myTexture.GetAddressOf());
 	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
-	this->deviceContext->Draw(6, 0);
+	this->deviceContext->IASetIndexBuffer(indicesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	
+	this->deviceContext->DrawIndexed(6, 0, 0);
 
 	// Draw Text
 	spriteBatch->Begin();
-	spriteFont->DrawString(spriteBatch.get(), L"HELLO WORLD", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.0f, 0.0f), DirectX::XMFLOAT2(1.0f, 1.0f));
+	spriteFont->DrawString(spriteBatch.get(), L"HELLO WORLD!", DirectX::XMFLOAT2(0, 0), DirectX::Colors::White, 0.0f, DirectX::XMFLOAT2(0.5f, 0.5f), DirectX::XMFLOAT2(1.0f, 1.0f));
 	spriteBatch->End();
 
 	this->swapchain->Present(1, NULL);
@@ -253,16 +255,20 @@ bool Graphics::InitializeScene()
 	// 胡煽 vertex税 array研 持失
 	Vertex v[] =
 	{
-		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f),
-		Vertex(-0.5f,  0.5f, 1.0f, 0.0f, 0.0f),
-		Vertex( 0.5f,  0.5f, 1.0f, 1.0f, 0.0f),
-
-		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f),
-		Vertex( 0.5f,  0.5f, 1.0f, 1.0f, 0.0f),
-		Vertex( 0.5f, -0.5f, 1.0f, 1.0f, 1.0f),
+		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f), // Bottom Left   - [0]
+		Vertex(-0.5f,  0.5f, 1.0f, 0.0f, 0.0f), // Top Left      - [1]
+		Vertex( 0.5f,  0.5f, 1.0f, 1.0f, 0.0f), // Top Right     - [2]
+		Vertex( 0.5f, -0.5f, 1.0f, 1.0f, 1.0f), // Bottom Right  - [3]
 	};
 
-	// Buffer description 持失
+	// Indices
+	DWORD indices[] =
+	{
+		0, 1, 2,
+		0, 2, 3
+	};
+
+	// Vertex Buffer Description 持失
 	D3D11_BUFFER_DESC vertexBufferDesc;
 	ZeroMemory(&vertexBufferDesc, sizeof(D3D11_BUFFER_DESC));
 
@@ -277,11 +283,31 @@ bool Graphics::InitializeScene()
 	ZeroMemory(&vertexBufferData, sizeof(D3D11_SUBRESOURCE_DATA));
 	vertexBufferData.pSysMem = v;
 
-	// Buffer 持失
+	// Vertex Buffer 持失
 	HRESULT hr = this->device->CreateBuffer(&vertexBufferDesc, &vertexBufferData, this->vertexBuffer.GetAddressOf());
 	if (FAILED(hr))
 	{
 		ErrorLogger::Log(hr, "Failed to create vertex buffer.");
+		return false;
+	}
+
+	// Index Buffer 持失
+	D3D11_BUFFER_DESC indicesBufferDesc;
+	ZeroMemory(&indicesBufferDesc, sizeof(D3D11_BUFFER_DESC));
+
+	indicesBufferDesc.Usage = D3D11_USAGE_DEFAULT;
+	indicesBufferDesc.ByteWidth = sizeof(DWORD) * ARRAYSIZE(indices);
+	indicesBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
+	indicesBufferDesc.CPUAccessFlags = 0;
+	indicesBufferDesc.MiscFlags = 0;
+
+	D3D11_SUBRESOURCE_DATA indiciesBufferData;
+	indiciesBufferData.pSysMem = indices;
+	
+	hr = this->device->CreateBuffer(&indicesBufferDesc, &indiciesBufferData, indicesBuffer.GetAddressOf());
+	if (FAILED(hr))
+	{
+		ErrorLogger::Log(hr, "Failed to create indices buffer.");
 		return false;
 	}
 

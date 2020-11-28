@@ -147,3 +147,10 @@ Texturing:
 	-> IntializeScene에서 myTexture 설정
 	-> RenderFrame()에서 그림 그리기 전에 myTexture 세팅
 	-> (이후 필요에 따라 WinMain에서 CoInitialize를 하고) 실행해보면 원하는 사진이 출력 됨
+
+Indices:
+- Vertex가 반복되는 것을 막기 위해 index를 저장하는 array를 생성
+- 생성
+	-> Graphics 클래스에 indicesBuffer 생성
+	-> IntializeScene()에 indices array 생성 및 indicesBuffer 설정
+	-> RenderFrame()에서 indicesBuffer 세팅 후 Draw()함수 대신 DrawIndexed() 함수 사용
