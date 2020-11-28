@@ -7,7 +7,7 @@ template <typename T>
 class VertexBuffer
 {
 private:
-	VertexBuffer(const VertexBuffer<T>& rhs); // restricting copy constructor
+	VertexBuffer(const VertexBuffer<T>& rhs); // Restricting copy constructor
 
 private:
 	Microsoft::WRL::ComPtr<ID3D11Buffer> buffer;

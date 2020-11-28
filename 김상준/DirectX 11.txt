@@ -155,9 +155,13 @@ Indices:
 	-> IntializeScene()에 indices array 생성 및 indicesBuffer 설정
 	-> RenderFrame()에서 indicesBuffer 세팅 후 Draw()함수 대신 DrawIndexed() 함수 사용
 
-Buffer Template:
+Buffer Headers:
 - Vertex와 Indices Buffer 생성 간소화하기 위한 작업
-- Vertex Buffer
+- Vertex Buffer Template
 	-> VertexBuffer 헤더 생성 후 IntializeScene에서 했던 작업을 옮김
 	-> Graphics 클래스에 VertexBuffer 객체 저장
+	-> IntializeScene(), RenderFrame() 수정
+- Index Buffer
+	-> IndexBuffer 헤더 생성 (이 경우에는 template 사용 안함 - 항상 DWORD이기 때문) 후 IntializeScene에서 했던 작업을 옮김
+	-> Graphics 클래스에 IndexBuffer 객체 저장
 	-> IntializeScene(), RenderFrame() 수정

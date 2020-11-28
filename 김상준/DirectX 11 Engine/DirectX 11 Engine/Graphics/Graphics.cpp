@@ -36,9 +36,8 @@ void Graphics::RenderFrame()
 	UINT offset = 0;
 	this->deviceContext->PSSetShaderResources(0, 1, this->myTexture.GetAddressOf());
 	this->deviceContext->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), vertexBuffer.StridePtr(), &offset);
-	this->deviceContext->IASetIndexBuffer(indicesBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
-	
-	this->deviceContext->DrawIndexed(6, 0, 0);
+	this->deviceContext->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	this->deviceContext->DrawIndexed(indexBuffer.BufferSize(), 0, 0);
 
 	// Draw Text
 	spriteBatch->Begin();
@@ -252,7 +251,7 @@ bool Graphics::InitializeShaders()
 bool Graphics::InitializeScene()
 {
 	// 刚历 vertex狼 array甫 积己
-	Vertex v[] =
+	Vertex vertices[] =
 	{
 		Vertex(-0.5f, -0.5f, 1.0f, 0.0f, 1.0f), // Bottom Left   - [0]
 		Vertex(-0.5f,  0.5f, 1.0f, 0.0f, 0.0f), // Top Left      - [1]
@@ -268,7 +267,7 @@ bool Graphics::InitializeScene()
 	};
 
 	// Vertex Buffer 积己
-	HRESULT hr = this->vertexBuffer.Initialize(this->device.Get(), v, ARRAYSIZE(v));
+	HRESULT hr = this->vertexBuffer.Initialize(this->device.Get(), vertices, ARRAYSIZE(vertices));
 	if (FAILED(hr))
 	{
 		ErrorLogger::Log(hr, "Failed to create vertex buffer.");
@@ -276,19 +275,7 @@ bool Graphics::InitializeScene()
 	}
 
 	// Index Buffer 积己
-	D3D11_BUFFER_DESC indicesBufferDesc;
-	ZeroMemory(&indicesBufferDesc, sizeof(D3D11_BUFFER_DESC));
-
-	indicesBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-	indicesBufferDesc.ByteWidth = sizeof(DWORD) * ARRAYSIZE(indices);
-	indicesBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	indicesBufferDesc.CPUAccessFlags = 0;
-	indicesBufferDesc.MiscFlags = 0;
-
-	D3D11_SUBRESOURCE_DATA indiciesBufferData;
-	indiciesBufferData.pSysMem = indices;
-	
-	hr = this->device->CreateBuffer(&indicesBufferDesc, &indiciesBufferData, indicesBuffer.GetAddressOf());
+	hr = this->indexBuffer.Initialize(this->device.Get(), indices, ARRAYSIZE(indices));
 	if (FAILED(hr))
 	{
 		ErrorLogger::Log(hr, "Failed to create indices buffer.");
