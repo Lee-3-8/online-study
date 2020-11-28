@@ -23,3 +23,5 @@
 app.use('/category',route1);
 '''
 카테고리 url의 모든라우팅을 그룹화
+
+

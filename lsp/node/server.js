@@ -3,9 +3,16 @@
 // const compression = require('compression')
 // const cors = require('cors')
 const express = require('express'); //express 모듈 불러오기
+const methodOverride =require('method-override');
+const bodyParser = require('body-parser');
+
 const path = require('path');
 const app = express(); //app객체로 서버일 처리
 
+
+app.use(methodOverride());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended : true }));
 
 app.use((req,res,next)=>{
 //미들웨어를 만들 수 도있다. 라우팅부분 (app.get, app.post) 위에만 넣으면됨
@@ -13,7 +20,8 @@ app.use((req,res,next)=>{
 	next();
 });
 
-app.use(express.static(path.join(__dirname,'templates')));
+
+// app.use(express.static(path.join(__dirname,'templates')));
 //dirname은 node.js 전역변수 : 현재 위치를 가리킴
 //node.js 환경에서는 디렉토리 주소를 다룰때 항상 path모듈을 사용\
 /*
