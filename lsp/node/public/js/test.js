@@ -16,7 +16,7 @@ rendering 한다
 /*tag 생성기 , tage = tag명 A = 속성 ,B = 속성정보 , C= textNode*/
 const getNode = function getNodeHtmlTagObject(tag,A,B,C){
   const object = document.createElement(`${tag}`);
-  for (var i = 0; i <= A.length - 1; i++) {
+  for (let i = 0; i <= A.length - 1; i++) {
     object.setAttribute(`${A[i]}`,`${B[i]}`);
   }
   if(C != undefined){
@@ -46,7 +46,8 @@ const renderItem = function renderTodolistItem(data){
 const render = function renderTodolist(data){
 	const todo_list = document.querySelector('.todo_list');
 	console.log(data)
-	todo_list.appendChild(renderItem(data));
+	todo_list.insertBefore(renderItem(data),todo_list.firstChild)
+	// todo_list.appendChild(renderItem(data));
 
 };
 
@@ -70,19 +71,14 @@ const fetchData = async function fetchData(data){
 
 const renderall = async function renderAllTodolist(data){
 	const todo_list = document.querySelector('.todo_list');
-	for (let i of data){
-		todo_list.appendChild(renderItem(i));
+	for (let i = data.length-1 ; i >= 0; i--){
+		todo_list.appendChild(renderItem(data[i]));
 	}
 }
 
 const fetchAllData = async function fetchAllData(data){
 	try{
-		const res = await fetch('http://127.0.0.1:8081/data',{
-			headers:{
-				'Content-Type' : 'application/json'
-			},
-			body: JSON.stringify(data)
-		});
+		const res = await fetch('http://127.0.0.1:8081/data');
 
 		renderall(await res.json());
 
@@ -95,6 +91,7 @@ const button = document.querySelector('#input_button')
 	.addEventListener('click',()=>{
 		const data = document.querySelector('#input_data');
 		fetchData({text : data.value});
+		data.value = '';
 	});
 
-window.addEventListener('DomcontentLoaded',renderall)
+window.addEventListener('DOMContentLoaded',fetchAllData)

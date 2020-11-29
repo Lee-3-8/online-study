@@ -16,7 +16,13 @@ router.get('/',(req,res)=>{
 router.get('/data',async (req,res)=>{
 	//db에 저장한거 모두 반환
 	const findAll = await Todo.findAll({});
-	res.sendFile(path.join(__dirname,'public','test.html'));
+	let result = [];
+	for (let i of findAll){
+		result.push(i.dataValues);
+	}
+	console.log(result)
+	console.log('__________________________________')
+	res.json(result);
 });
 
 router.post('/data',async (req,res)=>{

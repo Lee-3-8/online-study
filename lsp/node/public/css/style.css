@@ -90,12 +90,16 @@ body{
 	position: relative;
 	align-self: flex-end;
 	margin-right: 10px;
+	font-size: 0.8em;
 }
 .ko_text{
 	padding: 5px;
+	font-size:1em;
 }
 .en_text{
 	padding: 5px;
+	font-size:1em;
+
 }
 .fas{
 	color :#1fda69 ;
