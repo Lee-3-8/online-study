@@ -63,7 +63,7 @@ body{
 	cursor: pointer;
 	font-weight: 800;
 }
-.toto_list{
+.todo_list{
 	position: relative;
 	width: 100%;
 	display: flex;

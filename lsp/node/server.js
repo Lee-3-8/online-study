@@ -2,8 +2,19 @@ const express = require('express'); //express 모듈 불러오기
 const methodOverride =require('method-override');
 const bodyParser = require('body-parser');
 const path = require('path');
+const { sequelize } = require('./models');
 
 const app = express(); //app객체로 서버일 처리
+app.set('port',process.env.PORT||8081);
+
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('데이터베이스 연결 성공');
+  })
+  .catch((err) => {
+    console.error(err);
+  });
+
 
 app.use(express.static(__dirname + '/public'));
 
