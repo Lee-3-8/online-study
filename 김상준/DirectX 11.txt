@@ -175,3 +175,8 @@ Constant Buffer:
 	-> ConstantBufferTypes 헤더 생성 후 CB_VS_vertexshader 구조체 생성
 	-> InitializeScene()에서 constantBuffer 설정
 	-> RenderFrame()에서 Constant Buffer를 업데이트
+
+Constant Buffer Template:
+- ConstantBuffer 헤더 생성 후 InitializeScene()과 RenderFrame()에서 했던 작업을 옮김 (DESC 설정과 Mapping)
+- Graphics 클래스에 ConstantBuffer 객체 저장
+- IntializeScene(), RenderFrame() 수정
