@@ -185,3 +185,7 @@ Constant Buffer Packing Alignment:
 - constant buffer를 만들 때 byte를 고려해야 함
 - 한 덩어리는 16byte가 기본이 되고, 만약 변수가 16byte를 다 채우지 못한다면 일종의 padding이 있다고 생각해야 됨
 - 그래서 byteWidth를 정할 때, 크기를 잘 고려하여 constant buffer 구조체를 작성해야 함
+
+Matrix Demo:
+- Translation Matrix, Scaling Matrix, Rotation Matrix
+- 이 때 적용하는 순서가 중요하다 -> Translation을 가장 나중에 (왜냐하면 Scaling 과 Rotation Matrix가 영향을 주기 때문)
