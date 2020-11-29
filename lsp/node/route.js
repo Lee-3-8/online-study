@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+
 const router = express.Router();//라우터 분리
 const { Todo } = require('./models')
 /*
@@ -21,19 +22,42 @@ router.get('/data',async (req,res)=>{
 		result.push(i.dataValues);
 	}
 	console.log(result)
-	console.log('__________________________________')
 	res.json(result);
 });
 
 router.post('/data',async (req,res)=>{
-	const result = await Todo.create({
-		ko_text : req.body.text,
-		en_text : 'test',
-	})
+	try	{
+		const ID = 'PL0Z6LP0ymYVn6fiE5GC';
+		const PASSWORD = '4GgNzE_cer';
+		const URL = 'https://openapi.naver.com/v1/papago/n2mt'
+		const options = {
+			url : URL,
+			form:{
+				source : 'ko',
+				target : 'en',
+				text : req.body.text
+			},
+			headers:{
+				'X-Naver-Client-Id': ID,
+				'X-Naver-Client-Secret': PASSWORD
+			},
 
-	console.log(result.dataValues);
+		}
+		const request = require('request');
+		const translateResult = await request.post(options);
+		console.log(translateResult.body.enco);
 
-	res.json(result.dataValues);
+		const result = await Todo.create({
+			ko_text : req.body.text,
+			en_text : 'test',
+		})
+
+		console.log(result.dataValues);
+
+		res.json(result.dataValues);
+	}catch(err){
+		console.log(err);
+	}
 })
 
 
