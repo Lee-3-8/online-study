@@ -14,25 +14,31 @@ rendering 한다
 페이지가 로드되면 전체 투두리스트를 랜더링
 */
 
-const render = function renderTodolist(res){
-	const data = res.then(result=>return result);
+
+
+const render = function renderTodolist(data){
+
+	console.log(data)
 };
 
 const fetchData = async function fetchData(data){
-	console.log(data)
-	const res = await fetch('http://127.0.0.1:8081/data',{
-		method : 'POST',
-		headers:{
-			'Content-Type' : 'application/json'
-		},
-		body: JSON.stringify(data)
-	});
-	render(res.json());
+	try{
+		const res = await fetch('http://127.0.0.1:8081/data',{
+			method : 'POST',
+			headers:{
+				'Content-Type' : 'application/json'
+			},
+			body: JSON.stringify(data)
+		});
+		render(await res.json());
+	}catch(err){
+		alert(err);
+	}
 };
 
 
 const button = document.querySelector('#input_button')
 	.addEventListener('click',()=>{
 		const data = document.querySelector('#input_data');
-		fetchData({text : data.value})
+		fetchData({text : data.value});
 	});
