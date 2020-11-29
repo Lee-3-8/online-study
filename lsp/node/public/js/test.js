@@ -28,13 +28,13 @@ const getNode = function getNodeHtmlTagObject(tag,A,B,C){
 
 const renderItem = function renderTodolistItem(data){
 	const divTodoItem = getNode('div',['class','id'],['todo_item',`${data.id}`]);
-	const spanKoText = getNode('span',['class'],['ko_text'],data.koText);
+	const spanKoText = getNode('span',['class'],['ko_text'],data.ko_text);
 	const icon = getNode('i',['class'],['fas fa-arrow-right']);
 	const spanEnText = getNode('span',['class'],['en_text']);
 	const spanTime = getNode('span',['class'],['todo_time'],data.time)
 
 	spanEnText.appendChild(icon);
-	const textNode = document.createTextNode(data.enText);
+	const textNode = document.createTextNode(data.en_text);
   spanEnText.appendChild(textNode);
 
 	divTodoItem.appendChild(spanKoText);

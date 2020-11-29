@@ -3,17 +3,23 @@ const Sequelize = require('sequelize');
 module.exports = class User extends Sequelize.Model {
   static init(sequelize) {
     return super.init({
+      //  id: {
+      //   type: Sequelize.INTEGER,
+      //   primaryKey: true,
+      //   autoIncrement: true,
+      // },
       ko_text: {
-        type: Sequelize.STRING(1000),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       en_text: {
-        type: Sequelize.STRING(1000),
+        type: Sequelize.STRING(100),
         allowNull: false,
       },
       time: {
-        type: Sequelize.NOW,
+        type: Sequelize.DATE,
         allowNull: false,
+        defaultValue: Sequelize.NOW,
       },
     }, {
       sequelize,
