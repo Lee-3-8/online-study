@@ -25,13 +25,18 @@ const getNode = function getNodeHtmlTagObject(tag,A,B,C){
   }
   return object;
 }
+const getTime = function getTime(time) {
 
+	let result = time.split('.')[0];
+	result = result.split('T');
+	return `${result[0]} ${result[1]}`;
+}
 const renderItem = function renderTodolistItem(data){
 	const divTodoItem = getNode('div',['class','id'],['todo_item',`${data.id}`]);
 	const spanKoText = getNode('span',['class'],['ko_text'],data.ko_text);
 	const icon = getNode('i',['class'],['fas fa-arrow-right']);
 	const spanEnText = getNode('span',['class'],['en_text']);
-	const spanTime = getNode('span',['class'],['todo_time'],data.time)
+	const spanTime = getNode('span',['class'],['todo_time'],getTime(data.time));
 
 	spanEnText.appendChild(icon);
 	const textNode = document.createTextNode(data.en_text);
@@ -67,6 +72,7 @@ const fetchData = async function fetchData(data){
 		alert(err);
 	}
 };
+
 
 
 const renderall = async function renderAllTodolist(data){

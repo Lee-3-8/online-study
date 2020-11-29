@@ -1,5 +1,8 @@
 const express = require('express');
 const path = require('path');
+//promise와 await를 사용하려면 이거 써야함
+const request = require('request-promise-native');
+const bodyParser = require('body-parser');
 
 const router = express.Router();//라우터 분리
 const { Todo } = require('./models')
@@ -41,16 +44,18 @@ router.post('/data',async (req,res)=>{
 				'X-Naver-Client-Id': ID,
 				'X-Naver-Client-Secret': PASSWORD
 			},
-
+			json: true
+			//큰 교훈을 얻었다...이거 안넣으면 body에서 받을때 json파싱안됨
 		}
-		const request = require('request');
+
+
 		const translateResult = await request.post(options);
-		console.log(translateResult.body.enco);
+		console.log(translateResult.message.result.translatedText);
 
 		const result = await Todo.create({
 			ko_text : req.body.text,
-			en_text : 'test',
-		})
+			en_text : translateResult.message.result.translatedText
+		});
 
 		console.log(result.dataValues);
 
@@ -58,7 +63,7 @@ router.post('/data',async (req,res)=>{
 	}catch(err){
 		console.log(err);
 	}
-})
+});
 
 
 module.exports = router; //모듈로 만드는 부분
