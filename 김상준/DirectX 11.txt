@@ -189,3 +189,13 @@ Constant Buffer Packing Alignment:
 Matrix Demo:
 - Translation Matrix, Scaling Matrix, Rotation Matrix
 - 이 때 적용하는 순서가 중요하다 -> Translation을 가장 나중에 (왜냐하면 Scaling 과 Rotation Matrix가 영향을 주기 때문)
+
+Matrix Transformation:
+- 구현 순서
+	-> vertexshader.hlsl에서 cbuffer, main함수 수정 - 행렬을 넣어줌
+	-> ConstantBufferTypes.h 파일 수정 - 마찬가지로 행렬을 넣어줌
+	-> RenderFrame()에서 구조체 설정을 수정해줌 - 이 때 DirectX에서 기본으로 제공되는 변환행렬들 사용 가능 ex) XMMatrixTranslation(), XMMatrixIdentity()
+- 이 때, 문제가 발생할 수 있는데 이는 hlsl에서는 default로 column major 방식을 사용하고, DirectX에서는 row major 방식을 사용하기 때문
+- 두가지 해결책
+	-> hlsl 파일에서 행렬을 row_major로 구현
+	-> Transpose를 이용 - DirectX::XMMatrixTranspose()
