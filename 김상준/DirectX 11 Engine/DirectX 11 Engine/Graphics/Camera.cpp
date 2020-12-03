@@ -15,6 +15,37 @@ void Camera::SetProjectionValues(float fovDegrees, float aspectRatio, float near
 	this->projectionMatrix = XMMatrixPerspectiveFovLH(fovRadians, aspectRatio, nearZ, farZ);
 }
 
+void Camera::SetLookAtPos(XMFLOAT3 lookAtPos)
+{
+	if (lookAtPos.x == this->pos.x && lookAtPos.y == this->pos.y && lookAtPos.z == this->pos.z)
+	{
+		return;
+	}
+	// relative position of camera from the position camera is looking at.
+	lookAtPos.x = this->pos.x - lookAtPos.x;
+	lookAtPos.y = this->pos.y - lookAtPos.y;
+	lookAtPos.z = this->pos.z - lookAtPos.z;
+
+	float pitch = 0.0f;
+	const float distance = sqrt(static_cast<double>(lookAtPos.x) * static_cast<double>(lookAtPos.x) + static_cast<double>(lookAtPos.z) * static_cast<double>(lookAtPos.z));
+	if (distance != 0)
+	{
+		pitch = atan(lookAtPos.y / distance);
+	}
+
+	float yaw = 0.0f;
+	if (lookAtPos.z != 0.0f)
+	{
+		yaw = atan(lookAtPos.x / lookAtPos.z);
+	}
+	if (lookAtPos.z > 0)
+	{
+		yaw += XM_PI;
+	}
+
+	this->SetRotation(pitch, yaw, 0.0f);
+}
+
 const XMMATRIX& Camera::GetViewMatrix() const
 {
 	return this->viewMatrix;
