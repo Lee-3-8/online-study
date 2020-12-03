@@ -204,3 +204,15 @@ View/Projection Matrix Demo:
 - View Matrix: 카메라의 Viewing Frustum 방향을 변경할 때 필요한 행렬
 - Projection Matrix: 카메라의 Frustum 내부 3차원 공간의 모든 오브젝트를 2차원 스크린으로 투영시키는 행렬
 	-> Near Z, Far Z, Field of View 등 카메라가 볼 수 있는 공간 조절 가능
+
+View/Projection Matrix:
+- 먼저 width와 height를 Graphics 클래스 변수로 만들어줌
+- 구현 순서
+	-> RenderFrame()에서 DirectX::XMMATRIX world 생성
+	-> viewMatrix, projectionMatrix 셋업
+	-> constant buffer 행렬에 위의 세 행렬의 곱을 대입
+- View가 변하도록 하고 싶다면 (즉 XMVECTOR 정보를 바꿔주고 싶다면)
+	-> XMVECTOR정보 자체를 직접 만지는 것이 아니라 XMFLOAT3 를 이용하여 수정해야 함
+	-> XMFLOAT3 변수에 XMVECTOR 정보를 저장 (XMStoreFloat3() 함수 사용)
+	-> 그리고 XMFLOAT3 변수를 바꿔주고
+	-> 이 정보를 다시 XMVECTOR로 로드
