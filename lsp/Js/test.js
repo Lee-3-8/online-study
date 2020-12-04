@@ -67,3 +67,10 @@ Object.prototype.sum = function(){
 	console.log(this.a + 20);
 }
 a.sum()
+
+
+switch('yello'){
+	case "blue" :
+		console	.log('퍼런색');
+		//....
+}
