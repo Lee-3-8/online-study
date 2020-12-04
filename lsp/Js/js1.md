@@ -46,5 +46,9 @@
 - html 이 동작하고 불러와라 
 - DomContentLoaded => html 로드가 됬을때 
 
-
-
+## 10강
+- jQuery : 요즘에는 생산성이 높지만 , 소스가독성이 떨어짐 요즘 지양하는 추세
+- 그래도 한번 배워나 보자 
+- jQuery Cdn으로 가져와서 사용 / minified 버전은 공백제거한 조금 데이터 짧은버전
+- 여러가지 파생된 라이브러리를 사용할 수 있다 . ex) datepicker , 
+- 파생된 라이브러리들은 prototype을 사용 jquery는 $.fn.~으로 접근가능 

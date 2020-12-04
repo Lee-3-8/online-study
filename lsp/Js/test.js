@@ -99,3 +99,24 @@
 
 // document.addEventListener
 
+$(document).ready(function(){
+		$('#num').html(num); //document.~.innerhtml
+		$('#plus').click(function(){ //이벤트
+			num++;
+			$('#num').html(num);
+		});
+});
+
+//jQeury는 아마 이런식으로 만들어진다.
+function $(selector){
+	const click	= function(callback){
+		callback();
+	}
+	return {
+		click : click
+	}
+}
+
+$('#abc').click(function(){
+	console.log('클릭을 만들어 봤어요!')
+})
