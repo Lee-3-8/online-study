@@ -84,14 +84,18 @@
 // 	console.log('콜백함수가 실행됩니다.')
 // })
 
-function ex_closer(){
-	const num = 0;
-	return function(){
-		num++;
-		console.log(num);
-	}
-}
-//리턴을 익명함수로 했기 때문에 함수안에서 저장된 변수를 추가 , 수정가능함
-const test = ex_closer();
-test(); // 1
-test(); // 2
+// function ex_closer(){
+// 	const num = 0;
+// 	return function(){
+// 		num++;
+// 		console.log(num);
+// 	}
+// }
+// //리턴을 익명함수로 했기 때문에 함수안에서 저장된 변수를 추가 , 수정가능함
+// const test = ex_closer();
+// test(); // 1
+// test(); // 2
+
+
+// document.addEventListener
+
