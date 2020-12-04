@@ -17,21 +17,37 @@
 // }
 
 
-do{
-	console.log("먼저실행하고 조건 비교 ")
-}while(false)
+// do{
+// 	console.log("먼저실행하고 조건 비교 ")
+// }while(false)
 
-const func = function(){
-	console.log("dfdf")
+// const func = function(){
+// 	console.log("dfdf")
+// }
+
+// function Func(a , b , c){
+// 	this.name = a;
+// 	this.color = b;
+// 	console.log("dfdf");
+// }
+
+// Func.prototype.move = function(){
+// 	console.log(this.name + "차이고" + this.color + "색입니다");
+// }
+
+// const inst1 = new Func("현대","빨간");
+// const inst2 = new Func("기아","파란");
+
+// // console.log(inst1.name , inst1.color)
+
+// inst1.move();
+// inst2.move();
+
+///////////원래있는 객체에 나만의 속성 추가가능 /////
+const a = [1,2,3,4,5,6];
+Array.prototype.print = function(){
+	for(var i = 0; i<this.length ; i++)
+		console.log(i)
 }
 
-function Func(a , b , c){
-	this.name = a;
-	this.color = b;
-	console.log("dfdf")
-	const move = c;
-}
-
-const inst = new Func("아","ㄱㅊ","오류날껄 ")
-
-console.log(inst.name , inst.color , a.move) // => 오류
+a.print();
