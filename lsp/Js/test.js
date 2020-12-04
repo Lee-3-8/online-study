@@ -44,10 +44,26 @@
 // inst2.move();
 
 ///////////원래있는 객체에 나만의 속성 추가가능 /////
-const a = [1,2,3,4,5,6];
-Array.prototype.print = function(){
-	for(var i = 0; i<this.length ; i++)
-		console.log(i)
+// const a = [1,2,3,4,5,6];
+// Array.prototype.print = function(){
+// 	for(var i = 0; i<this.length ; i++)
+// 		console.log(i)
+// }
+
+// a.print();
+
+//리터럴 객체 , 그리고 맴버
+const a = {
+	'a' = 110,
+	'b' = 'hello',
+	'c' = function(){
+		console.log('gggg')
+	}
 }
 
-a.print();
+// 동일하다  const a = new Object()
+
+Object.prototype.sum = function(){
+	console.log(this.a + 20);
+}
+a.sum()
