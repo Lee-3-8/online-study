@@ -53,24 +53,45 @@
 // a.print();
 
 //리터럴 객체 , 그리고 맴버
-const a = {
-	'a' = 110,
-	'b' = 'hello',
-	'c' = function(){
-		console.log('gggg')
+// const a = {
+// 	'a' = 110,
+// 	'b' = 'hello',
+// 	'c' = function(){
+// 		console.log('gggg')
+// 	}
+// }
+
+// // 동일하다  const a = new Object()
+
+// Object.prototype.sum = function(){
+// 	console.log(this.a + 20);
+// }
+// a.sum()
+
+
+// switch('yello'){
+// 	case "blue" :
+// 		console	.log('퍼런색');
+// 		//....
+// }
+
+// function test(num,callback){
+// 	callback();
+// 	console.log(num);
+// }
+
+// test(1,function(){
+// 	console.log('콜백함수가 실행됩니다.')
+// })
+
+function ex_closer(){
+	const num = 0;
+	return function(){
+		num++;
+		console.log(num);
 	}
 }
-
-// 동일하다  const a = new Object()
-
-Object.prototype.sum = function(){
-	console.log(this.a + 20);
-}
-a.sum()
-
-
-switch('yello'){
-	case "blue" :
-		console	.log('퍼런색');
-		//....
-}
+//리턴을 익명함수로 했기 때문에 함수안에서 저장된 변수를 추가 , 수정가능함
+const test = ex_closer();
+test(); // 1
+test(); // 2
