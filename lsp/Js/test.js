@@ -99,24 +99,60 @@
 
 // document.addEventListener
 
-$(document).ready(function(){
-		$('#num').html(num); //document.~.innerhtml
-		$('#plus').click(function(){ //이벤트
-			num++;
-			$('#num').html(num);
-		});
-});
+// $(document).ready(function(){
+// 		$('#num').html(num); //document.~.innerhtml
+// 		$('#plus').click(function(){ //이벤트
+// 			num++;
+// 			$('#num').html(num);
+// 		});
+// });
 
-//jQeury는 아마 이런식으로 만들어진다.
-function $(selector){
-	const click	= function(callback){
-		callback();
+// //jQeury는 아마 이런식으로 만들어진다.
+// function $(selector){
+// 	const click	= function(callback){
+// 		callback();
+// 	}
+// 	return {
+// 		click : click
+// 	}
+// }
+
+// $('#abc').click(function(){
+// 	console.log('클릭을 만들어 봤어요!')
+// })
+
+class Car{
+	constructor(a,b){//클래스 생성자
+		this.name = a; //클래스 변수
+		this.color = b;
 	}
-	return {
-		click : click
+
+	move(){
+		console.log(this.name,this.color)
 	}
 }
 
-$('#abc').click(function(){
-	console.log('클릭을 만들어 봤어요!')
-})
+const a = new Car("현대" , "빨간색");
+a.move()
+
+let b = 1;
+if(true){
+	let b = 2;
+	console.log(b); //2
+}
+console.log(b)//1
+
+const func1 = (a,b) => a + b
+console.log(fucn1(1,2));
+
+const [d,e,f] = [1,2,3];
+console.log(e)
+
+const arr1 = [1,2]
+const arr2 = [3,4,5]
+const arr3 = [...arr1 , ...arr2]
+
+function abc(a,...b){
+	console.log(b[0])
+}
+abc("nodejs","hello",1);
