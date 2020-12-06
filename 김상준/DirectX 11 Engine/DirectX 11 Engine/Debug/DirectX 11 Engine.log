@@ -1,6 +1,2 @@
-﻿  Camera.cpp
-C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\DirectX 11 Engine\Graphics\Camera.cpp(30,29): warning C4244: '초기화 중': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\DirectX 11 Engine\Graphics\Camera.cpp(30,23): warning C4244: '초기화 중': 'double'에서 'const float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\DirectX 11 Engine\Graphics\Camera.cpp(33,15): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\DirectX 11 Engine\Graphics\Camera.cpp(39,13): warning C4244: '=': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+﻿  Engine.cpp
   DirectX 11 Engine.vcxproj -> C:\Users\김상준\Desktop\online-study\김상준\DirectX 11 Engine\Debug\DirectX 11 Engine.exe

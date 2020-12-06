@@ -15,6 +15,7 @@ class Graphics
 public:
 	bool Initialize(HWND hWnd, int width, int height);
 	void RenderFrame();
+	Camera camera;
 
 private:
 	int windowWidth = 0;
@@ -47,6 +48,4 @@ private:
 
 	Microsoft::WRL::ComPtr<ID3D11SamplerState> samplerState;
 	Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> myTexture;
-
-	Camera camera;
 };

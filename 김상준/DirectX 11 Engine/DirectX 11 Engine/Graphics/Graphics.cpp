@@ -39,9 +39,6 @@ void Graphics::RenderFrame()
 	
 	// Update Constant Buffer
 	DirectX::XMMATRIX world = DirectX::XMMatrixIdentity();
-
-	camera.AdjustPosition(0.01f, 0.01f, 0.0f);
-	camera.SetLookAtPos(XMFLOAT3(0.0f, 0.0f, 0.0f));
 	constantBuffer.data.mat = world * camera.GetViewMatrix() * camera.GetProjectionMatrix();
 	constantBuffer.data.mat = DirectX::XMMatrixTranspose(constantBuffer.data.mat);
 	if (!constantBuffer.ApplyChanges())

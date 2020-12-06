@@ -232,3 +232,8 @@ Camera LookAtPos():
 	-> pitch는 x축에 대한 회전
 	-> yaw는 y축에 대한 회전
 - RenderFrame()에서 SetLookAtPos()함수 사용
+
+Movable 3D Camera:
+- camera 객체를 public으로 두어서 engine이 사용할 수 있도록 설정
+- Camera 클래스에 forward, backward, left, right vector 생성
+- Engine에서 Update() 수정
