@@ -265,3 +265,6 @@ Using ImGui:
 	-> ImGui::Button(): 버튼 생성
 	-> ImGui::SameLine(): 다음 내용을 같은 줄에 출력
 	-> ImGui::DragFloat3(): 세 변수를 수정할 수 있는 UI 생성
+
+Potential Memory Leaks:
+- Constant, Index, Vertex Buffer 들의 경우 메모리 누수가 발생하는 것을 방지하기 위해, Initialize() 함수에서 buffer가 이미 생성되었는지 확인하고, 만약 생성되었다면 Reset() 후 다시 설정해준다.
