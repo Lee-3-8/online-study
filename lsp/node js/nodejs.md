@@ -9,3 +9,5 @@
  - npm, node 설치
 ## 3강
  - vs 사용하던데 나는 sublime으로 ㄱ  
+## 4강 
+ - module 패턴 
