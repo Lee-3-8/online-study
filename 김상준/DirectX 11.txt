@@ -258,3 +258,10 @@ Setup ImGui:
 - Initialize에서 ImGui 셋업
 - RenderFrame()에서 ImGui frame 시작
 - WindowContainer에서 extern LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) 함수를 포함시켜줌
+
+Using ImGui:
+- ImGui의 여러 기능
+	-> ImGui::Text() : 문자열 출력
+	-> ImGui::Button(): 버튼 생성
+	-> ImGui::SameLine(): 다음 내용을 같은 줄에 출력
+	-> ImGui::DragFloat3(): 세 변수를 수정할 수 있는 UI 생성
