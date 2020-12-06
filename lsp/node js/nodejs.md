@@ -9,3 +9,7 @@
  - npm, node 설치
 ## 3강
  - vs 사용하던데 나는 sublime으로 ㄱ  
+## 4강 
+ - 모듈 패턴 
+ - 내보낼땐 module.export 변수
+ - 불러올땐 require 파일명 
