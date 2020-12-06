@@ -235,5 +235,16 @@ Camera LookAtPos():
 
 Movable 3D Camera:
 - camera 객체를 public으로 두어서 engine이 사용할 수 있도록 설정
-- Camera 클래스에 forward, backward, left, right vector 생성
+- Camera 클래스에 forward, backward, left, right vector 생성, UpdateViewMatrix()도 수정
 - Engine에서 Update() 수정
+
+FPS Timer:
+- v-sync를 맞추지 않고 모든 상황에서 일정하게 출력하기 위해 설정
+	-> Timer 헤더, cpp 파일 생성
+	-> Engine 클래스에 timer 객체 저장하고 Engine을 Initialize할 때 타이머 시작 시킴
+	-> Update 할 때마다 지나간 시간(dt: delta time)을 구하고 타이머를 재시작, 움직일 때 속도에 dt를 곱해줌
+	-> RenderFrame() 에서 swapchain->Present()의 v-sync값을 0으로 설정
+- 현재 FPS를 표현하고 싶을 때
+	-> Graphics 클래스에 fpsTimer 객체 저장
+	-> Initialize() 에서 타이머 시작
+	-> RenderFrame()에서 fps를 구해 출력
