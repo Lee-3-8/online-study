@@ -287,3 +287,12 @@ Blending(1):
 	-> Final Color = (Source Pixel * Source Blend Factor) + (Dest Pixel * Dest Blend Factor)
 	-> 마찬가지로 Blend Operation으로 연산 지정 가능
 	-> 이 강의에선 SBF를 Source Alpha 값으로, DBF는 (1 - Source Alpha)값으로 설정
+
+Blending(2):
+- texture 추가
+	-> Graphics 클래스에 texture 하나 더 추가
+	-> InitializeScene()에서 texture 생성
+	-> 이후 RenderFrame()에서 myTexture 그리듯이 똑같은 방식으로 한번 더 그려주면 된다.
+- 그리기 순서의 중요성
+	-> Opaque 물체를 먼저 그리지 않고, 투명한 물체를 먼저 그리면 배경색과 blending 되어 원하는 방식으로 적용되지 않을 수 있다.
+	-> 해결방법 - Opaque 물체를 모두 먼저 그리고, 투명한 물체는 카메라로부터 가장 멀리있는 것부터 그려준다.
