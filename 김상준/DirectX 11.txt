@@ -268,3 +268,22 @@ Using ImGui:
 
 Potential Memory Leaks:
 - Constant, Index, Vertex Buffer 들의 경우 메모리 누수가 발생하는 것을 방지하기 위해, Initialize() 함수에서 buffer가 이미 생성되었는지 확인하고, 만약 생성되었다면 Reset() 후 다시 설정해준다.
+
+Blending(1):
+- Blending에 앞서 우선, alpha값을 조절할 수 있도록 constant buffer를 만듦
+	-> Constant Buffer Types에 CB_PS_pixelshader 추가 / pixelshader.hlsl에 cbuffer 추가
+	-> Graphics 클래스에 기존에 사용하던 constantBuffer 변수를 cb_vs_vertexshader로 변경해주고 cb_ps_pixelshader 추가
+	-> InitializeScene()에서 cb_ps_pixelshader를 Initialize
+	-> RenderFrame()에서 업데이트
+- Blend State 생성
+	-> Graphics 클래스에 blendState 추가
+	-> InitializeDirectX에서 Blend State 설정 (rasterizer state 설정 바로 이후에)
+	-> RenderFrame()에서 세팅
+- Alpha 계산 식
+	-> Final Alpha = (Source Alpha * Source Blend Factor) + (Dest Alpha * Dest Blend Factor)
+	-> Blend Operation 으로 Source와 Dest 사이 연산을 정할 수 있음
+	-> 이 강의에선 결국 우리가 설정한 Alpha값이 최종 Alpha값
+- Color 계산 식
+	-> Final Color = (Source Pixel * Source Blend Factor) + (Dest Pixel * Dest Blend Factor)
+	-> 마찬가지로 Blend Operation으로 연산 지정 가능
+	-> 이 강의에선 SBF를 Source Alpha 값으로, DBF는 (1 - Source Alpha)값으로 설정
