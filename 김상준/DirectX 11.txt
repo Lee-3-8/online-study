@@ -294,5 +294,20 @@ Blending(2):
 	-> InitializeScene()에서 texture 생성
 	-> 이후 RenderFrame()에서 myTexture 그리듯이 똑같은 방식으로 한번 더 그려주면 된다.
 - 그리기 순서의 중요성
-	-> Opaque 물체를 먼저 그리지 않고, 투명한 물체를 먼저 그리면 배경색과 blending 되어 원하는 방식으로 적용되지 않을 수 있다.
+	-> Opaque한 물체를 먼저 그리지 않고, 투명한 물체를 먼저 그리면 배경색과 blending 되어 원하는 방식으로 적용되지 않을 수 있다.
 	-> 해결방법 - Opaque 물체를 모두 먼저 그리고, 투명한 물체는 카메라로부터 가장 멀리있는 것부터 그려준다.
+
+Blending(3):
+- 3D 물체 생성
+	-> 기존에 그린 pink와 grass는 지워주고, pavement만 남겨둔다.
+	-> 3차원 물체 표현을 위해 vertex를 추가하고, index도 추가해준다.
+- 이렇게 생성할 경우 여러 문제가 발생
+	-> 1. Cull Mode가 CULL_BACK으로 설정 되어있는 경우 물체를 투과하여 볼 수 없음 (카메라 뒤쪽을 rasterizer에서 culling 하기 때문)
+		-> Cull Mode를 NONE으로 해주면 투과되기는 하는데 역시 문제가 또 발생한다.
+	-> 2. 위처럼 설정하면 뒤에서는 앞면을 투과해 볼 수 있지만, 앞에서는 뒤쪽으로 투과하지 못한다. (Depth test 때문 - 앞면이 먼저 그려지고 depth test를 하면 뒷면은 렌더링되지 않음)
+		-> depthstencil DepthFunc를 ALWAYS로 바꿔주면 해결이 되긴 하지만, 또 다시 문제가 발생
+	-> 3. DepthFunc가 ALWAYS가 되면, 만약 물체를 두개 이상 그릴 경우 opaque한 물체도 투과되서 보이게 된다.
+- 일종의 해결 방법 (rasterizer state와 depth stencil은 다시 원래대로 돌려줌)
+	-> 앞쪽을 culling하기 위한 rasterizer state를 하나 더 생성
+	-> 그릴 때 rasterizer state를 바꾸어 가며 두번 그리기
+	-> 이 역시 문제는 발생하나, 이 강의에선 더 다루지 않음
