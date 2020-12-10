@@ -10,4 +10,19 @@
 ## 3강
  - vs 사용하던데 나는 sublime으로 ㄱ  
 ## 4강 
- - module 패턴 
+ - module 패턴
+ - export, require인듯 날라감
+
+ ## npm
+ ex)
+  - express
+  	- lodash v3에서 최적화
+  	- body-parser 등등
+  - uuid4
+  	- lodash v4
+  위와같이되려면 각각 최적화되려면 package-lock에서 충돌을 방지해줌
+
+  - package.josn에 script 속성에서 예약어를 추가하면 npm으로도실행가능
+  -	ex)"test" : "node test.js"
+
+
