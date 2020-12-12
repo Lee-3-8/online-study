@@ -1,3 +1,8 @@
-const uuid4 = require('uuid4');
-//경로 입력안함 내가만든거는 ./으로 찾아가는데 외부모듈은 그냥바로
-console.log(uuid4()); //교유한 키출력 
+const http = require('http');
+const expres
+//express없이 내부모듈로 서버 구성
+http.createServer((request,response)=>{
+	response.writeHead(200,{'Content-Type' : 'text/plain'});
+	response.write('Hello Server');
+	response.end();
+}).listen(3000);
