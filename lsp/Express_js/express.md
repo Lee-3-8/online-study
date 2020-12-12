@@ -14,3 +14,14 @@
 - node js의 자동 디버깅 툴!!
 - npm install nodemon 
 - package-json->script에 start으로 별도 코드를설정
+
+##3강
+
+-     "start" : "nodemon app.js" 스크립트 변경시 npx nodemon app.js 하면
+        모듈이 없더라도 설치하고 실행됨 
+
+##4강
+
+- 라우팅
+- 폴더구조를 구분해서 모듈화하여 사용 
+- 
