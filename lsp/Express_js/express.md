@@ -8,4 +8,9 @@
      + 4xx 요청오류
      + 5xx 서버오류 
 - node 구성할때 package 자동생성 npm init -y
-- 
+
+## 2강
+- nodemon
+- node js의 자동 디버깅 툴!!
+- npm install nodemon 
+- package-json->script에 start으로 별도 코드를설정
