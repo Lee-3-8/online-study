@@ -45,3 +45,6 @@
 	- node js에서는 uploads 폴더에 정적파일을 올린다 
 	- 미들웨어에서 
 	app.use('/uploads' , express.static('uploads'));
+
+##10강
+	- 사용하지 않는 변수는 _로 처리가능하닫

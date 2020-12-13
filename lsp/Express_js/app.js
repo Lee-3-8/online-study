@@ -25,15 +25,22 @@ app.use((req,res,next)=>{
 	next();
 });
 
+function vipMiddleware(req,res,next){
+	console.log('최우선 미들웨어')
+	next();
+}
 
 app.get('/',(req,res)=>{
 	res.send('hello express1');
 });
 
-function vipMiddleware(req,res,next){
-	console.log('최우선 미들웨어')
-	next();
-}
+app.use((req,res,_)=>{
+	res.status(400).render('common/404.html');
+});
+
+app.use((req,res,_)=>{
+	res.status(500).render('common/404.html');
+});
 
 app.use('/admin' ,vipMiddleware, admin);
 
