@@ -1,5 +1,5 @@
 {
-  "name": "Express_js",
+  "name": "express_js",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,5 +15,6 @@
     "morgan": "^1.10.0",
     "node": "^15.3.0",
     "nunjucks": "^3.2.2"
-  }
+  },
+  "devDependencies": {}
 }
