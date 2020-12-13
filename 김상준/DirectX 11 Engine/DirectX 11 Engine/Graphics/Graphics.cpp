@@ -309,7 +309,7 @@ bool Graphics::InitializeScene()
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
 		// Initialize Model(s)
-		if (!model.Initialize(this->device.Get(), this->deviceContext.Get(), this->pavementTexture.Get(), cb_vs_vertexshader))
+		if (!model.Initialize("Data/Objects/nanosuit/nanosuit.obj" ,this->device.Get(), this->deviceContext.Get(), this->grassTexture.Get(), cb_vs_vertexshader))
 		{
 			return false;
 		}
