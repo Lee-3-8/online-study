@@ -25,4 +25,3 @@
   - package.josn에 script 속성에서 예약어를 추가하면 npm으로도실행가능
   -	ex)"test" : "node test.js"
 
-

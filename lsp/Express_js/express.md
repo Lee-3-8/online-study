@@ -29,3 +29,28 @@
 
 - nunjucks
 - 탬플릿 폴더구조는 라우트 폴더 구조를 똑같이 따라가는게 편하다 
+
+## 6강
+	- 미들웨어
+	- morgan 사용 -> 로깅해주는 미들웨어
+	- 로그인이 되어있는지 확인할때 미들웨어를 활용많이한다
+	function loginRequired(req,res,next){
+	if(로그인이 x){
+		res.redirect(로그인창으로)
+	}
+}
+
+##7강
+	- 정적파일
+	- node js에서는 uploads 폴더에 정적파일을 올린다 
+	- 미들웨어에서 
+	app.use('/uploads' , express.static('uploads'));
+
+##10강
+	- 사용하지 않는 변수는 _로 처리가능하다
+
+##막강
+	- 폴더구조 
+	- controllers/index 모든 폴더
+	- controllers/admin/index.js (admin url + 미들웨어)
+	- controllers/admin/admin.ctrl.js (컨트롤러 역할)

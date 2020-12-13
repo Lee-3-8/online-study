@@ -7,6 +7,7 @@
 // console.log(a[4])
 
 // console.log(a.length)
+
 // console.log(a.indexOf("hello"))
 
 // const b = new Array("2222","nodejs") // 비추천
