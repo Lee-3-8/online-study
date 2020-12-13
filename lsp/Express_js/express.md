@@ -47,4 +47,10 @@
 	app.use('/uploads' , express.static('uploads'));
 
 ##10강
-	- 사용하지 않는 변수는 _로 처리가능하닫
+	- 사용하지 않는 변수는 _로 처리가능하다
+
+##막강
+	- 폴더구조 
+	- controllers/index 모든 폴더
+	- controllers/admin/index.js (admin url + 미들웨어)
+	- controllers/admin/admin.ctrl.js (컨트롤러 역할)
