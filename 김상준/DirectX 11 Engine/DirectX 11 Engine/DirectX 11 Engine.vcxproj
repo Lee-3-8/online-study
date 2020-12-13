@@ -197,6 +197,7 @@
     <ClInclude Include="Graphics\VertexBuffer.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="WindowContainer.h" />
+    <ClInclude Include="COMException.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="pixelshader.hlsl">
