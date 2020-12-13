@@ -330,3 +330,10 @@ Moving Model:
 - 이후 Camera의 쓸만한 변수와 함수들을 Model에 넣어줌
 - UpdateWorldMatrix() 수정
 - Model Initialize()에서 pos와 rot를 초기화
+
+Assimp Setup:
+- Assimp 다운로드 후, Assimp 폴더를 솔루션 내 Includes 폴더에 저장
+- lib 파일을 솔루션 내 Libs 폴더에 저장
+- dll 파일들 역시 솔루션 내에 저장
+- 프로젝트 속성에서 라이브러리 연결해줌 (강의 초반에 했듯이)
+- #pragma comment들을 지워주고, 프로젝트 속성-링커-입력에서 라이브러리들을 추가
