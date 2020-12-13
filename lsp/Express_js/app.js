@@ -39,7 +39,7 @@ app.use((req,res,_)=>{
 });
 
 app.use((req,res,_)=>{
-	res.status(500).render('common/404.html');
+	res.status(500).render('common/500.html');
 });
 
 app.use('/admin' ,vipMiddleware, admin);
