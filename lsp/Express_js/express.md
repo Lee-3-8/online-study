@@ -39,3 +39,9 @@
 		res.redirect(로그인창으로)
 	}
 }
+
+##7강
+	- 정적파일
+	- node js에서는 uploads 폴더에 정적파일을 올린다 
+	- 미들웨어에서 
+	app.use('/uploads' , express.static('uploads'));
