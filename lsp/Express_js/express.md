@@ -29,3 +29,13 @@
 
 - nunjucks
 - 탬플릿 폴더구조는 라우트 폴더 구조를 똑같이 따라가는게 편하다 
+
+## 6강
+	- 미들웨어
+	- morgan 사용 -> 로깅해주는 미들웨어
+	- 로그인이 되어있는지 확인할때 미들웨어를 활용많이한다
+	function loginRequired(req,res,next){
+	if(로그인이 x){
+		res.redirect(로그인창으로)
+	}
+}
