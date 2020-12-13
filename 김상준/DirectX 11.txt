@@ -312,8 +312,15 @@ Blending(3):
 	-> 그릴 때 rasterizer state를 바꾸어 가며 두번 그리기
 	-> 이 역시 문제는 발생하나, 이 강의에선 더 다루지 않음
 
-Cleanup / More Detailed Error Messages
+Cleanup / More Detailed Error Messages:
 - COMException 헤더 파일 생성
 - ErrorLogger에 COMException을 다루는 함수 생성
 - Graphics.cpp 에서 FAILED(hr)을 다루는 부분들을 try-catch를 이용해 수정해준다.
 - Construct D3D11 (CD3D11)을 활용해서 DESC 생성하는 부분들을 줄일 수 있다. (내 코드에선 하지 않음)
+
+Creating Model Class:
+- Model 헤더와 cpp 파일 생성 (Model에 Vertex, VertexBuffer, IndexBuffer, ConstantBuffer 헤더들을 include)
+- Graphics.cpp 에서 vertex와 index 생성 부분들을 Model로 옮겨옴, RenderFrame에서 그리는 부분도 Model에서 담당
+- Graphics.h 에 Model.h를 include하고 Model 객체를 저장
+- InitializeScene()에서 Model Initialize
+- RenderFrame()에서 일단 alpha blending은 삭제, blend state는 default로 설정 - model.Draw()를 통해 물체 그리기

@@ -34,7 +34,7 @@ public:
 	{
 		if (buffer.Get() != nullptr)
 		{
-			buffer.Get();
+			buffer.Reset();
 		}
 
 		this->deviceContext = deviceContext;

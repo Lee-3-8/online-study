@@ -102,6 +102,9 @@
     <ClCompile Include="Graphics\ImGui\imgui_widgets.cpp">
       <Filter>소스 파일\Graphics\ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\Model.cpp">
+      <Filter>소스 파일\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StringConverter.h">
@@ -187,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="COMException.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\Model.h">
+      <Filter>헤더 파일\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
