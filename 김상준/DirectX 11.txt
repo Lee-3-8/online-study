@@ -343,3 +343,4 @@ Loading vertex data using assimp:
 - Model 클래스에 Mesh의 벡터 저장
 - Mesh에 vertexBuffer와 indexBuffer를 저장 (Mesh 복사 생성자를 위해 vertexBuffer의 복사 생성자와 operator=를 수정해줘야 함, stride도 shared_ptr로)
 - Model에 LoadModel(), ProcessNode(), ProcessMesh() 함수 생성, Draw()함수 수정, vertexBuffer와 indexBuffer 삭제
+- InitializeScene()에서 Model Initialize를 수정해주고, 프로젝트 속성 - C/C++ - 전처리기 정의 수정
