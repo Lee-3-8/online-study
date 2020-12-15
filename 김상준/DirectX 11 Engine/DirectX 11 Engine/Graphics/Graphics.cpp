@@ -47,7 +47,7 @@ void Graphics::RenderFrame()
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
 
 	{ // Pavement Texture
-		this->model.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+		this->gameObject.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	}
 
 	// Draw Text
@@ -309,7 +309,7 @@ bool Graphics::InitializeScene()
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
 		// Initialize Model(s)
-		if (!model.Initialize("Data/Objects/nanosuit/nanosuit.obj" ,this->device.Get(), this->deviceContext.Get(), this->grassTexture.Get(), cb_vs_vertexshader))
+		if (!gameObject.Initialize("Data/Objects/nanosuit/nanosuit.obj" ,this->device.Get(), this->deviceContext.Get(), cb_vs_vertexshader))
 		{
 			return false;
 		}
