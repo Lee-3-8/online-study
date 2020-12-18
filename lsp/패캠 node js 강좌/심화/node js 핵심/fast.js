@@ -1,4 +1,4 @@
-'user strict' //엄격모드 : 컴파일시 좀더 엄격한 문법적용
+'use strict' //엄격모드 : 컴파일시 좀더 엄격한 문법적용
 
 const obj = {
 	title : 'node js 올인원 패키지'
@@ -23,3 +23,10 @@ isEmptyobj()
 
 const isEmptyobj1 = () => obj.title ? true : false;
 isEmptyobj1()
+
+
+// module.exports 
+function edit(){}
+function write(){}
+
+module.exports = {edit , write}
