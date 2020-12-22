@@ -107,3 +107,22 @@
 // console.log(ret)
 
 // 배열에서도 사용가능하다.
+
+
+/////////set//////////
+//중복되는 자료를 없애는 set
+const test = new Set()//set 자료구조로 생성
+
+test.add(1)
+test.add(1)
+test.add(2)
+test.add(2)
+test.add(3)
+
+for(const item of test){
+	console.log(item)
+}
+
+const ret = test.has(0)
+console.log(ret) // false
+//해당하는 자료구조에 데이터가 존재하는지 true or false 
