@@ -110,19 +110,28 @@
 
 
 /////////set//////////
-//중복되는 자료를 없애는 set
-const test = new Set()//set 자료구조로 생성
+// //중복되는 자료를 없애는 set
+// const test = new Set()//set 자료구조로 생성
 
-test.add(1)
-test.add(1)
-test.add(2)
-test.add(2)
-test.add(3)
+// test.add(1)
+// test.add(1)
+// test.add(2)
+// test.add(2)
+// test.add(3)
 
-for(const item of test){
-	console.log(item)
-}
+// for(const item of test){
+// 	console.log(item)
+// }
 
-const ret = test.has(0)
-console.log(ret) // false
-//해당하는 자료구조에 데이터가 존재하는지 true or false 
+// const ret = test.has(0)
+// console.log(ret) // false
+// //해당하는 자료구조에 데이터가 존재하는지 true or false 
+
+
+//////some////
+//every는 다르게 최소 한가지이상만 만족하면 된다.
+
+const arr = [1, 2, 0 , -1 , -2]
+
+const res = arr.some(key => key < 0); //true
+console.log(res)
