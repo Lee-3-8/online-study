@@ -66,11 +66,44 @@
 
 ////////map filter////////
 
-// const a = [1,2,3]
-// const b = a.map(x => x+1)
-// console.log(b)//2 3 4 
+// // const a = [1,2,3]
+// // const b = a.map(x => x+1)
+// // console.log(b)//2 3 4 
 
-const a = [1,2,3]
-const b = a.filter(x => x>1)
-console.log(b)//2,3 
-//주어진 조건을 만족하는 새로운 배열을 만든다.
+// const a = [1,2,3]
+// const b = a.filter(x => x>1)
+// console.log(b)//2,3 
+// //주어진 조건을 만족하는 새로운 배열을 만든다.
+
+
+////////object.assign , spread ////
+// const obj = {
+// 	title: 'node js 올인원 패키지'
+// }
+
+// const newObj = {
+// 	name : '패스트캠퍼스'
+// }
+
+// const ret = Object.assign({},obj,newObj);
+// console.log(ret);
+// //한개의 개체로 합쳐진다. 하지만 스프레드를 쓰자
+
+// const ret = {
+// 	...obj,
+// 	...newObj
+// }
+// console.log(ret)
+//위코드와 같은 결과이다.
+
+// const arr = [1,2,3]
+// const newArr = [4,5,6]
+
+// const ret = [
+// 	...arr,
+// 	...newArr
+// ]
+
+// console.log(ret)
+
+// 배열에서도 사용가능하다.
