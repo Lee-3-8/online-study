@@ -42,10 +42,22 @@
 
 ///////////////find , include//////////
 
-const arr = ['node.js' , '올인원']
+// const arr = ['node.js' , '올인원']
 
-const ret = arr.find(key => key == '올인원')//반환 : 올인원 
-const res = arr.includes('node.js');//반환 : true
-console.log(res);
-// 찾아서 실제로 사용할 데이터면 find , 있는지 유무 판단은 includes
-// 두가지를 구분지어 사용해야 데이터 누수를 방지할 수 있다.
+// const ret = arr.find(key => key == '올인원')//반환 : 올인원 
+// const res = arr.includes('node.js');//반환 : true
+// console.log(res);
+// // 찾아서 실제로 사용할 데이터면 find , 있는지 유무 판단은 includes
+// // 두가지를 구분지어 사용해야 데이터 누수를 방지할 수 있다.
+
+
+////////for each////
+//내부적으로 비동기적으로 실행되지않기때문에 주의해야함
+
+const arr = [1,2,3]
+const newArr = []
+// arr.forEach(item => console.log(item))
+arr.forEach(item =>{
+	newArr.push(item)
+})
+//위코드는 스프레드 연산자로 클론하는게 가장 좋다
