@@ -52,12 +52,25 @@
 
 
 ////////for each////
-//내부적으로 비동기적으로 실행되지않기때문에 주의해야함
 
-const arr = [1,2,3]
-const newArr = []
-// arr.forEach(item => console.log(item))
-arr.forEach(item =>{
-	newArr.push(item)
-})
-//위코드는 스프레드 연산자로 클론하는게 가장 좋다
+// //내부적으로 비동기적으로 실행되지않기때문에 주의해야함
+
+// const arr = [1,2,3]
+// const newArr = []
+// // arr.forEach(item => console.log(item))
+// arr.forEach(item =>{
+// 	newArr.push(item)
+// })
+// //위코드는 스프레드 연산자로 클론하는게 가장 좋다
+
+
+////////map filter////////
+
+// const a = [1,2,3]
+// const b = a.map(x => x+1)
+// console.log(b)//2 3 4 
+
+const a = [1,2,3]
+const b = a.filter(x => x>1)
+console.log(b)//2,3 
+//주어진 조건을 만족하는 새로운 배열을 만든다.
