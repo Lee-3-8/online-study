@@ -197,3 +197,20 @@
 // 	console.log(word);
 
 // }
+
+
+// IIFE //
+
+//내부 선언된 함수는 전역스코프를 오염시키지 않도록하고 , 외부에서도 함수내부로 침투할 수 없도록 한다.
+// 즉시실행함수를 생성하는 괄호를 해석해서 바로 실행함
+(function () {
+	var lang = 'js';
+})();
+
+console.log(lang); //애러발생  외부로부터의 접근 이 불가능하다.
+
+let result = (function () {
+	var lang = 'js';
+	return lang;
+})();
+console.log(result); //실행결과만 나옴 
