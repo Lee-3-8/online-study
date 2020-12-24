@@ -215,8 +215,17 @@
 // })();
 // console.log(result); //실행결과만 나옴 
 
-// setInterval //
+// // setInterval //
 
-setInterval(()=>{
-	console.log('hi');
-},1000);//계속 반복해서 실행됨 1초마다 
+// setInterval(()=>{
+// 	console.log('hi');
+// },1000);//계속 반복해서 실행됨 1초마다 
+
+
+// Error Handling //
+
+try{
+	a
+}catch(e){
+	console.log('Err' + e);
+}
