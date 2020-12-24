@@ -181,3 +181,19 @@
 // console.log(typeof num);
 
 
+// //Hoisting//
+
+// //js 가 메모리에 함수를 미리저장하는 것을 말함
+
+// function say(word) {
+// 	console.log(word);
+
+// }
+// say('hi'); // hi
+
+// ////////////////////////////
+// say('hi'); // hi 똑같이 실행된다.
+// function say(word) {
+// 	console.log(word);
+
+// }
