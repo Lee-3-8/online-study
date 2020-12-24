@@ -168,3 +168,16 @@
 // }
 
 // checkIfContain()
+
+// //Tyep Checking//
+// const strig = 'node.js';
+// const array = [];
+// const obj = {};
+// const num = 1;
+
+// console.log(typeof strig);
+// console.log(typeof array); //array도 더 상위객체인 object로 된다.
+// console.log(typeof obj);
+// console.log(typeof num);
+
+
