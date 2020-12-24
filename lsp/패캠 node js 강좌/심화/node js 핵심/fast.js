@@ -137,13 +137,34 @@
 // console.log(res)
 
 
-/////template string///
+// /////template string///
 
-const detail = 'detail';
-let str = `node.js`
-str += `올인원 패키지 ${detail}`
+// const detail = 'detail';
+// let str = `node.js`
+// str += `올인원 패키지 ${detail}`
 
-const int = 1
-str += `${str}의 값은 ${int}`;
+// const int = 1
+// str += `${str}의 값은 ${int}`;
 
-console.log`입력`
+// console.log`입력`
+
+
+// ////string ///
+// //js는 특정한 데이터 타입을 선언하지 않아도됨, typescript는 제외
+// //그래서 타입말고 데이터가 변하는지 아닌지만 따지면됨
+
+// let string = 'node.js 올인원 패키지'
+
+// let isStartWith = string.startsWith('n');
+// let isIncludes = string.includes('올인원');
+// let isEndWith = string.endsWith('지');
+
+// const checkIfContain = () =>{ 
+// 	console.log(isEndWith);
+// 	console.log('asdf');
+// 	if (isStartWith && isIncludes && isEndWith){
+// 		return true;
+// 	}
+// }
+
+// checkIfContain()
