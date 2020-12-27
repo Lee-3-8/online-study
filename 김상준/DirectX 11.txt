@@ -360,3 +360,8 @@ Color/Textrue class setup:
 	-> Mesh에 Texture의 벡터를 생성
 	-> Draw() 함수에서 for문으로 PSSetShaderResource / 하지만 여기선 하나의 텍스쳐만 할것이므로 break
 	-> 또 Model의 ProcessMesh함수에서 Mesh에 넣어줄 Texture 벡터를 만들어줌 / 마찬가지로 간단하게 하나만 만들어줌
+
+Loading 3d file material with no texture:
+- Model.h 에 LoadMaterialTextures 함수 생성, Model.cpp 에서 작성
+- 이전 강의에서 Texture vector 만든 부분을 LoadMaetrialTextures로 만들어줌
+- 우선은 texture type "diffuse"에 관해서만 설정하는 중
