@@ -35,11 +35,8 @@ public:
 private:
 	Model model;
 
-	void UpdateWorldMatrix();
-
-	ID3D11ShaderResourceView* texture = nullptr;
-
 	XMMATRIX worldMatrix = XMMatrixIdentity();
+	void UpdateWorldMatrix();
 
 	XMVECTOR posVector;
 	XMVECTOR rotVector;

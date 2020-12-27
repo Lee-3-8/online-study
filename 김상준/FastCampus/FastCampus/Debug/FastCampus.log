@@ -1,3 +1,2 @@
-﻿  quicksort.cpp
-C:\Users\김상준\Desktop\online-study\김상준\FastCampus\FastCampus\quicksort.cpp(13,43): warning C4101: 'temp' :참조되지 않은 지역 변수입니다.
+﻿  AVLTree.cpp
   FastCampus.vcxproj -> C:\Users\김상준\Desktop\online-study\김상준\FastCampus\Debug\FastCampus.exe
