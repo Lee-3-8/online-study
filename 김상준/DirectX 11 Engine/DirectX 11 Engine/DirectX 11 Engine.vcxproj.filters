@@ -42,9 +42,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="StringConverter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="ErrorLogger.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -117,11 +114,11 @@
     <ClCompile Include="Graphics\Texture.cpp">
       <Filter>소스 파일\Graphics</Filter>
     </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="StringConverter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="ErrorLogger.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -217,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="Graphics\Texture.h">
       <Filter>헤더 파일\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

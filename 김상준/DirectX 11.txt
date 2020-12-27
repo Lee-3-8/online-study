@@ -365,3 +365,10 @@ Loading 3d file material with no texture:
 - Model.h 에 LoadMaterialTextures 함수 생성, Model.cpp 에서 작성
 - 이전 강의에서 Texture vector 만든 부분을 LoadMaetrialTextures로 만들어줌
 - 우선은 texture type "diffuse"에 관해서만 설정하는 중
+
+Loading 3d file material with disk texture:
+- 우선 filepath를 받는 Texture Constructor 생성 -> filepath를 받으면 textureView를 생성
+- StringConverter를 StringHelper로 바꿔주고 GetDirectoryFromPath, GetFileExtension 함수 추가 (파일명과 확장자를 가져오는 함수)
+	-> 이 짓을 하는 이유는, .dds 파일은 다르게 불러와야하기 때문
+- Model 클래스에 DetermineTextureStorageType 함수, directory string 추가
+- LoadMaterialTextures 함수에 StorageType Disk일 때에 대한 내용 추가
