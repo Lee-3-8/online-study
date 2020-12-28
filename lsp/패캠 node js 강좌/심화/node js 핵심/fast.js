@@ -222,10 +222,15 @@
 // },1000);//계속 반복해서 실행됨 1초마다 
 
 
-// Error Handling //
+// // Error Handling //
 
-try{
-	a
-}catch(e){
-	console.log('Err' + e);
-}
+// try{
+// 	a
+// }catch(e){
+// 	console.log('Err' + e);
+// }
+
+//arrow function
+
+const add = (var1,var2) => console.log(var1+var2);
+//arrow function은 상위 객체의 this를 받아온다.
