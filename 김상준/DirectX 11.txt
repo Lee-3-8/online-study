@@ -376,3 +376,7 @@ Loading 3d file material with disk texture:
 Loading 3d file with embedded compressed texture: (이건 진짜 모르겠음)
 - Texture 클래스에 uint8_t와 size_t를 받는 Constrcutor 추가
 - Model 클래스 LoadMaterialTextures 함수에 StorageType EmbeddedCompressed일 때에 대한 내용 추가
+
+Loading 3d file with embedded indexed compressed texture: (얘도 위와 마찬가지)
+- Model 클래스에 GetTextureIndex 함수 추가 -> 뭐 embedded indexed compressed 는 path가 *(숫자)~~ 로 주어진다는데, 여기서 숫자를 가져오기 위한 함수
+- 그리고 마찬가지로 LoadMaterialTextures 함수에 StorageType EmbeddedIndexCompressed일 때에 대한 내용 추가
