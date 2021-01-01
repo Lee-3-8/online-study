@@ -185,6 +185,13 @@ std::vector<Texture> Model::LoadMaterialTextures(aiMaterial* pMaterial, aiTextur
 				materialTextures.push_back(diskTexture);
 				break;
 			}
+			case TextureStorageType::EmbeddedCompressed:
+			{
+				const aiTexture* pTexture = pScene->GetEmbeddedTexture(path.C_Str());
+				Texture embeddedTexture(this->device, reinterpret_cast<uint8_t*>(pTexture->pcData), pTexture->mWidth, textureType);
+				materialTextures.push_back(embeddedTexture);
+				break;
+			}
 			}
 		}
 	}

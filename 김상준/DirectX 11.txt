@@ -372,3 +372,7 @@ Loading 3d file material with disk texture:
 	-> 이 짓을 하는 이유는, .dds 파일은 다르게 불러와야하기 때문
 - Model 클래스에 DetermineTextureStorageType 함수, directory string 추가
 - LoadMaterialTextures 함수에 StorageType Disk일 때에 대한 내용 추가
+
+Loading 3d file with embedded compressed texture: (이건 진짜 모르겠음)
+- Texture 클래스에 uint8_t와 size_t를 받는 Constrcutor 추가
+- Model 클래스 LoadMaterialTextures 함수에 StorageType EmbeddedCompressed일 때에 대한 내용 추가
