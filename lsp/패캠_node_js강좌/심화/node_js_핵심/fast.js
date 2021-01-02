@@ -280,5 +280,19 @@ class Robot {
   }
 }
 
-const robot = new Robot('hi');
-robot.speack();
+class Ai extends Robot {
+  constructor(name){
+    super(name);
+  }
+
+  walk(){
+    console.log(`walk : ${this.name}`);
+  }
+}
+
+// const robot = new Robot('hi');
+// robot.speack();
+
+const a =new Ai('hi');
+a.speack(); // 상속받은것도 사용가능하다.
+a.walk();
