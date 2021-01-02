@@ -1,8 +1,7 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <limits>
-#define NODE_MAX 1001
-#define EDGE_MAX 200001
+#include <limits.h>
+#define NODE_MAX 20001
+#define EDGE_MAX 600001
 
 struct Edge
 {
@@ -34,7 +33,6 @@ void Push(priorityQueue* pq, Edge* edge)
 	pq->heap[pq->count] = edge;
 	int now = pq->count;
 	int parent = (pq->count - 1) / 2;
-	// 상향식 힙 구성 (최소힙 만들기)
 	while (now > 0 && pq->heap[now]->cost < pq->heap[parent]->cost)
 	{
 		Swap(pq->heap[now], pq->heap[parent]);
@@ -52,7 +50,6 @@ Edge* Pop(priorityQueue* pq)
 	pq->heap[0] = pq->heap[pq->count];
 	int now = 0, leftChild = 1, rightChild = 2;
 	int target = now;
-	// 하향식 힙 구성
 	while (leftChild < pq->count)
 	{
 		if (pq->heap[target]->cost > pq->heap[leftChild]->cost) target = leftChild;
@@ -69,7 +66,6 @@ Edge* Pop(priorityQueue* pq)
 	return res;
 }
 
-// -------------------- 그래프 -------------------- //
 struct Node
 {
 	Edge* data;
@@ -77,7 +73,7 @@ struct Node
 };
 
 Node** adj;
-int d[NODE_MAX];
+int ans[NODE_MAX]; // 특정 노드까지의 거리를 저장하는 배열 / 가중치 배열
 
 void AddNode(Node** target, int index, Edge* edge)
 {
@@ -98,23 +94,23 @@ void AddNode(Node** target, int index, Edge* edge)
 
 int main()
 {
-	// 최소 신장 트리 (Minimum Spanning Tree)
-	// 신장 트리 - 특정 그래프에서 모든 정점을 포함하는 그래프
-	// 최소 신장 트리는 간선의 가중치의 합이 가장 작은 신장 트리를 의미 - 모든 노드를 연결 할건데, 가장 적은 비용의 간선만 선택
+	// 다익스트라 최단 경로 알고리즘 - O(E*LogV) 시간 복잡도를 가짐
+	// 각 간선에 대한 정보를 우선순위 큐에 담아 처리하는 방식 
+	// 음의 간선이 없을 때 정상적으로 동작
+	// 시작 노드에서 특정 노드까지 최단 거리값을 구하는 알고리즘
 
-	// 프림 알고리즘 - O(E*LogV)의 시간 복잡도를 가짐
-	// 그래프에서 정점 하나를 선택해 트리 T에 포함
-	// T에 포함된 노드와 포함되지 않은 노드 사이의 간선 중 가중치가 가장 작은 간선을 찾음
-	// 해당 간선에 연결된 T에 포함되지 않은 노드를 트리에 포함시킴
-	// 모든 노드가 포함 될 때 까지 2, 3 반복
-	// 각 간선에 대한 정보를 우선순위 큐에 담아 처리하는 방식으로 구현
+	// 작동 원리는 프림 알고리즘과 거의 흡사
+	// 특정 노드들이 포함되지 않을 수 있음
 
-	int n, m;
-	std::cin >> n >> m;
+	// 위의 구조는 프림 알고리즘과 일치함
+
+	int n, m, k;
+	std::cin >> n >> m >> k;
 	adj = new Node * [n + 1];
 	for (int i = 1; i <= n; i++)
 	{
 		adj[i] = NULL;
+		ans[i] = INT_MAX; // 초기화 할 때 무한대로 설정 (못 간다는 뜻)
 	}
 
 	priorityQueue* pq = new priorityQueue;
@@ -123,42 +119,39 @@ int main()
 	{
 		int a, b, c;
 		std::cin >> a >> b >> c;
-		Edge* edge1 = new Edge;
-		edge1->node = b;
-		edge1->cost = c;
-		AddNode(adj, a, edge1);
-		Edge* edge2 = new Edge;
-		edge2->node = a;
-		edge2->cost = c;
-		AddNode(adj, b, edge2);
+		Edge* edge = new Edge;
+		edge->node = b;
+		edge->cost = c;
+		AddNode(adj, a, edge); // 방향 그래프
 	}
 
-	long long res = 0; // 총 가중치
+	ans[k] = 0;
 	Edge* start = new Edge;
-	start->cost = 0; start->node = 1; Push(pq, start);
-	for (int i = 1; i <= n; i++) // 총 n 번 과정을 반복해, 모든 노드를 갈 수 있도록 하기 위함 (대신 그래프가 완전히 연결되어있어야 함)
+	start->cost = 0; start->node = k; Push(pq, start);
+	while (true)
 	{
-		int nextNode = -1, nextCost = INT_MAX;
-		while (true) // 들리지 않은 노드를 찾을 때까지 우선순위 큐에서 추출
+		Edge* now = Pop(pq);
+		if (now == NULL) break;
+		int curNode = now->node;
+		int curCost = now->cost;
+		if (ans[curNode] < curCost) continue; // 이미 더 가까운 경로가 존재할 경우 무시
+		Node* cur = adj[curNode]; // 가장 가까운 경로일 경우, 해당 노드와 연결된 간선들을 모두 확인
+		while (cur != NULL)
 		{
-			Edge* now = Pop(pq); // 우선순위 큐(minimum heap)라서 pop 할 시 최소 cost가 보장
-			if (now == NULL) break;
-			nextNode = now->node;
-			if (!d[nextNode])
+			Edge* temp = cur->data;
+			temp->cost += curCost; // 다음 노드까지 가는데 거리 + 해당 노드까지 오는데 거리
+			if (temp->cost < ans[temp->node]) // 위 값이 저장된 경로보다 가까울 경우
 			{
-				nextCost = now->cost; break; // 들리지 않은 노드를 찾으면 break
+				ans[temp->node] = temp->cost; // 바꿔주고
+				Push(pq, temp); // 우선순위 큐에 삽입
 			}
-		}
-		if (nextCost == INT_MAX) std::cout << "Not Connected Graph\n";
-		res += nextCost;
-		d[nextNode] = 1; // 해당 노드를 들렸다는 것을 저장
-		Node* cur = adj[nextNode];
-		while (cur) // 해당 노드에 인접한 모든 간선들을 우선순위 큐에 삽입
-		{
-			Push(pq, cur->data);
 			cur = cur->next;
 		}
 	}
 
-	std::cout << res << "\n";
+	for (int i = 1; i <= n; i++)
+	{
+		if (ans[i] == INT_MAX) std::cout << "INF\n";
+		else std::cout << ans[i] << "\n";
+	}
 }
