@@ -268,3 +268,17 @@
 // const CacheManager = new CacheManager();
 
 // Class Extends
+// Class 추가
+
+class Robot {
+  constructor(name){
+    this.name = name;
+  }
+
+  speack(){
+    console.log(`${this.name}`);
+  }
+}
+
+const robot = new Robot('hi');
+robot.speack();
