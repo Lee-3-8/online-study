@@ -230,7 +230,29 @@
 // 	console.log('Err' + e);
 // }
 
-//arrow function
+// //arrow function
 
-const add = (var1,var2) => console.log(var1+var2);
-//arrow function은 상위 객체의 this를 받아온다.
+// const add = (var1,var2) => console.log(var1+var2);
+// //arrow function은 상위 객체의 this를 받아온다.
+
+// arrow function 연습문제
+
+const getDiscount = rate => price => rate * price
+//같은 코드
+var getDiscount1 = function getDiscount1(rate){
+  return function (price){
+    return rate*price;
+  };
+};
+
+const getTempercentoff = getDiscount(0.1);
+getTempercentoff(10000);
+getTempercentoff(123);
+getTempercentoff(123444);
+getTempercentoff(2000);
+
+getTempercentoff(price);
+
+//합성함수 개념 f(g())
+//내부적으로 클로저를 생성한다.
+getDiscount(10000, 0.1)
