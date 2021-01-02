@@ -257,13 +257,14 @@
 // //내부적으로 클로저를 생성한다.
 // getDiscount(10000, 0.1)
 
-// Class
-class cacheManager {
-  //typescript에선 private , public 도 지원가능 
-  constructor(){//constructor는 비동기문법 불가능 
-    this.config = []
-  }
+// // Class
+// class CacheManager {
+//   //typescript에선 private , public 도 지원가능 
+//   constructor(){//constructor는 비동기문법 불가능 
+//     this.config = []
+//   }
+// }
 
-}
+// const CacheManager = new CacheManager();
 
-const CacheManager = new cacheManager();
+// Class Extends
