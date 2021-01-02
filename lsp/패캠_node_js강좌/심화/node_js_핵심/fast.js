@@ -268,31 +268,50 @@
 // const CacheManager = new CacheManager();
 
 // Class Extends
-// Class 추가
+// // Class 추가
 
-class Robot {
-  constructor(name){
-    this.name = name;
+// class Robot {
+//   constructor(name){
+//     this.name = name;
+//   }
+
+//   speack(){
+//     console.log(`${this.name}`);
+//   }
+// }
+
+// class Ai extends Robot {
+//   constructor(name){
+//     super(name);
+//   }
+
+//   walk(){
+//     console.log(`walk : ${this.name}`);
+//   }
+// }
+
+// // const robot = new Robot('hi');
+// // robot.speack();
+
+// const a =new Ai('hi');
+// a.speack(); // 상속받은것도 사용가능하다.
+// a.walk();
+
+
+//static method
+class test {
+  constructor(){ //static함수만 잇으면 생략해도됨 
+
   }
 
-  speack(){
-    console.log(`${this.name}`);
+  fn () {
+
+  }
+  //일반적인 func와 달리 static은 클래스를 생성하지않고 클래스 내부에 접근가능하다.
+  //static 함수내부에서는 constructor에 있는 변수등등에 접근이 불가능하다.
+  static  call(){
+    console.log('static method');
   }
 }
 
-class Ai extends Robot {
-  constructor(name){
-    super(name);
-  }
-
-  walk(){
-    console.log(`walk : ${this.name}`);
-  }
-}
-
-// const robot = new Robot('hi');
-// robot.speack();
-
-const a =new Ai('hi');
-a.speack(); // 상속받은것도 사용가능하다.
-a.walk();
+test.call()
