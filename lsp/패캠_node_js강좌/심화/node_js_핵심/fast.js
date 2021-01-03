@@ -333,16 +333,41 @@
 // console.log(title , value);
 // console.log(a,b);
 
-// Generator 개념적 접근 
-//화살표 함수는 사용 x 명시적으로 *를 붙여서 사용
-function* log () {
-  console.log(0, yield)
-  console.log(1, yield)
-  console.log(2, yield)
-}
+// // Generator 개념적 접근 
+// //화살표 함수는 사용 x 명시적으로 *를 붙여서 사용
+// function* log () {
+//   console.log(0, yield)
+//   console.log(1, yield)
+//   console.log(2, yield)
+// }
 
-const gen = log();
+// const gen = log();
 
-gen.next('zero');
-gen.next('first');
-gen.next('second');
+// gen.next('zero');
+// gen.next('first');
+// gen.next('second');
+
+// // 제네레이터 추가 
+// const obj = {
+//   *gen() {
+//       let cnt = 0;
+//       yield ++cnt;
+//       yield ++cnt;
+//       yield ++cnt;
+//       return ++cnt;
+//   }
+// }
+
+// const g = obj.gen();
+// // console.log(g.next());
+// // //next를 호출하면 가장가까운 yiled 문을 만날때까지 실행이지속
+// // //출력 결과 : value와 done ,  value는 산출값 ,  done은 함수코드실행이 끝났는지 유무
+// // console.log(g.next());
+// // console.log(g.next());
+// // console.log(g.next());
+// // console.log(g.next()); //해당 코드는 value에서 undefined가 반환됨
+
+// for (let value of g){
+//   console.log(value);
+// }// 제네레이터는 이터러블 객체이므로 for of도 사용가능 ,
+// //단 done : 결과가 True일경우 무시되어 마지막값은 출력이안된다.
