@@ -316,19 +316,33 @@
 
 // test.call()
 
-// Destructuring 비구조화
+// // Destructuring 비구조화
 
-const obj = {
-  title: 'node.js',
-  value : '올인원 패키지'
+// const obj = {
+//   title: 'node.js',
+//   value : '올인원 패키지'
+// }
+
+// const arr = [0,3,4];
+// const {title , value} = obj; //최신문법 비구조화
+// const [,a,b] = arr //앞자리는 순서상 비워놓은거 
+// // //이전 문법 
+// // const title = obj.title;
+// // const value = obj.value;
+
+// console.log(title , value);
+// console.log(a,b);
+
+// Generator 개념적 접근 
+//화살표 함수는 사용 x 명시적으로 *를 붙여서 사용
+function* log () {
+  console.log(0, yield)
+  console.log(1, yield)
+  console.log(2, yield)
 }
 
-const arr = [0,3,4];
-const {title , value} = obj; //최신문법 비구조화
-const [,a,b] = arr //앞자리는 순서상 비워놓은거 
-// //이전 문법 
-// const title = obj.title;
-// const value = obj.value;
+const gen = log();
 
-console.log(title , value);
-console.log(a,b);
+gen.next('zero');
+gen.next('first');
+gen.next('second');
