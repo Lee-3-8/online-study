@@ -435,20 +435,37 @@
 
 const fs = require('fs');
 //콜백형식으로 되어있다. 프로미스형식으로 바꿀수있다.
-fs.readFile('test.txt','utf-8', (err,data) => {
-  if (err) {
-    console.error(err);
-    return 
-  }
 
-  console.log(data)
-});//지정하지않아도 디폴트값으로 utf-8으로됨
+const {promisify} = require('util'); //비구조화
 
-const content = 'something to write'
-fs.writeFile('fast.txt', content, err => {
-  if (err) {
+const read = promisify(fs.readFile) //콜백함수가 프로미스로 바뀜
+const write = promisify(fs.writeFile)
+
+//디폴트값 , 초기화된 데이터값 사용가능!!
+const writeAndRead = async (data = '') => {
+  try{
+    await write('test.txt',data)
+    const content = await read('test.txt');
+    return content 
+  } catch(err) {
     console.error(err);
-    return
   }
-  console.log('success');
-})
+};
+
+// fs.readFile('test.txt','utf-8', (err,data) => {
+//   if (err) {
+//     console.error(err);
+//     return 
+//   }
+
+//   console.log(data)
+// });//지정하지않아도 디폴트값으로 utf-8으로됨
+
+// const content = 'something to write'
+// fs.writeFile('fast.txt', content, err => {
+//   if (err) {
+//     console.error(err);
+//     return
+//   }
+//   console.log('success');
+// })
