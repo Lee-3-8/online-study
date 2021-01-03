@@ -408,25 +408,47 @@
 
 // chatManager.emit("join") //해당하는 이벤트가 실행했을때 
 
-//DNS
+// //DNS
 
-const dns = require('dns');
+// const dns = require('dns');
 
-dns.lookup('naver.com',(err,address, family) => {
-  console.log(`address : ${address} , ${family}`);
-  //family에 4가오면 ipv4임 
-})
+// dns.lookup('naver.com',(err,address, family) => {
+//   console.log(`address : ${address} , ${family}`);
+//   //family에 4가오면 ipv4임 
+// })
 
-dns.resolve4('archive.org' , (err,addresses) => {
-  if (err) throw err
-  const response = JSON.stringify(addresses)
-  console.log(response);
+// dns.resolve4('archive.org' , (err,addresses) => {
+//   if (err) throw err
+//   const response = JSON.stringify(addresses)
+//   console.log(response);
 
-  addresses.forEach(a => {
-    dns.reverse(a, (err,hostnames)=>{
-      if (err) throw err
+//   addresses.forEach(a => {
+//     dns.reverse(a, (err,hostnames)=>{
+//       if (err) throw err
 
-      console.log(`reverse for ${a} ${JSON.stringify(hostnames)}`)
-    });
-  })
+//       console.log(`reverse for ${a} ${JSON.stringify(hostnames)}`)
+//     });
+//   })
+// })
+
+// File System
+
+const fs = require('fs');
+//콜백형식으로 되어있다. 프로미스형식으로 바꿀수있다.
+fs.readFile('test.txt','utf-8', (err,data) => {
+  if (err) {
+    console.error(err);
+    return 
+  }
+
+  console.log(data)
+});//지정하지않아도 디폴트값으로 utf-8으로됨
+
+const content = 'something to write'
+fs.writeFile('fast.txt', content, err => {
+  if (err) {
+    console.error(err);
+    return
+  }
+  console.log('success');
 })
