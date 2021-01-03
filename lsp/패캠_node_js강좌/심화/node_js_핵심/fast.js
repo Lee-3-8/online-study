@@ -394,16 +394,39 @@
 // clearTimeout(b);
 // clearTimeout(c);
 
-// Event Emitter
+// // Event Emitter
 
-const EventEmitter = require('events');
+// const EventEmitter = require('events');
 
-class ChatManager extends EventEmitter {}
+// class ChatManager extends EventEmitter {}
 
-const chatManager = new ChatManager()
+// const chatManager = new ChatManager()
 
-chatManager.on("join", () => {
-  console.log("new user joined");
-});
+// chatManager.on("join", () => {
+//   console.log("new user joined");
+// });
 
-chatManager.emit("join") //해당하는 이벤트가 실행했을때 
+// chatManager.emit("join") //해당하는 이벤트가 실행했을때 
+
+//DNS
+
+const dns = require('dns');
+
+dns.lookup('naver.com',(err,address, family) => {
+  console.log(`address : ${address} , ${family}`);
+  //family에 4가오면 ipv4임 
+})
+
+dns.resolve4('archive.org' , (err,addresses) => {
+  if (err) throw err
+  const response = JSON.stringify(addresses)
+  console.log(response);
+
+  addresses.forEach(a => {
+    dns.reverse(a, (err,hostnames)=>{
+      if (err) throw err
+
+      console.log(`reverse for ${a} ${JSON.stringify(hostnames)}`)
+    });
+  })
+})
