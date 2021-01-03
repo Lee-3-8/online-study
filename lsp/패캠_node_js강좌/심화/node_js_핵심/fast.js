@@ -298,20 +298,37 @@
 // a.walk();
 
 
-//static method
-class test {
-  constructor(){ //static함수만 잇으면 생략해도됨 
+// //static method
+// class test {
+//   constructor(){ //static함수만 잇으면 생략해도됨 
 
-  }
+//   }
 
-  fn () {
+//   fn () {
 
-  }
-  //일반적인 func와 달리 static은 클래스를 생성하지않고 클래스 내부에 접근가능하다.
-  //static 함수내부에서는 constructor에 있는 변수등등에 접근이 불가능하다.
-  static  call(){
-    console.log('static method');
-  }
+//   }
+//   //일반적인 func와 달리 static은 클래스를 생성하지않고 클래스 내부에 접근가능하다.
+//   //static 함수내부에서는 constructor에 있는 변수등등에 접근이 불가능하다.
+//   static  call(){
+//     console.log('static method');
+//   }
+// }
+
+// test.call()
+
+// Destructuring 비구조화
+
+const obj = {
+  title: 'node.js',
+  value : '올인원 패키지'
 }
 
-test.call()
+const arr = [0,3,4];
+const {title , value} = obj; //최신문법 비구조화
+const [,a,b] = arr //앞자리는 순서상 비워놓은거 
+// //이전 문법 
+// const title = obj.title;
+// const value = obj.value;
+
+console.log(title , value);
+console.log(a,b);
