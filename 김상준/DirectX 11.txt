@@ -390,3 +390,9 @@ Loading and applying matrices from 3d file:
 	-> ProcessMesh에선 Mesh 객체를 return 할 때, 받은 transformation matrix를 넣어줌
 - Mesh의 Constructor에 transformation matrix를 추가, 또 Mesh 클래스에 transformMatrix 변수도 추가
 - 마지막으로 Model 의 Draw()에서 vertex shader의 constant buffer 설정을 mesh를 그릴 때마다 해주는 것으로 바꿔주고, mesh의 transformation matrix 를 곱해줌
+
+Cleanup - Abstracting GameObject to RanderableGameObject:
+- 여기서 하고 싶은 것은 pos, rot, set, adjust 등과 같은 기본 기능만을 GameObject에 남겨두고, 이를 상속시키겠다는 것
+- 먼저 GameObject에서 Initialize(), Draw() 같은 기능은 RenderableGameObject로 이동
+- Graphics 에 RenderableGameObject를 include
+- Camera도 마찬가지로 GameObject를 상속받고, 중복되는 기능들은 모두 지워줌

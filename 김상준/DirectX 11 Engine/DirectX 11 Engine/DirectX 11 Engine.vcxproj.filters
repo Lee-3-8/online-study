@@ -117,6 +117,9 @@
     <ClCompile Include="StringHelper.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Graphics\RenderableGameObject.cpp">
+      <Filter>소스 파일\Graphics</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ErrorLogger.h">
@@ -217,6 +220,9 @@
     </ClInclude>
     <ClInclude Include="StringHelper.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics\RenderableGameObject.h">
+      <Filter>헤더 파일\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
