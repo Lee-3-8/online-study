@@ -371,3 +371,25 @@
 //   console.log(value);
 // }// 제네레이터는 이터러블 객체이므로 for of도 사용가능 ,
 // //단 done : 결과가 True일경우 무시되어 마지막값은 출력이안된다.
+
+//Timer
+//뒤에나오는 시간초는 최소지연시간이다.단위는 ms
+//최소 1초뒤에 실행 or 훨뒤에 실행될수도있음
+const a = setTimeout(()=>{
+  console.log('first');
+},0);
+
+const b = setImmediate(()=>{
+  console.log('second');
+},0); 
+//지연시간이 없이 실행되는거처럼 보인다.
+//setTimeout도 0으로 해서 돌려보면 first와 second가 나오는 순서가 그때그때 다르다
+
+const c = setInterval(()=> {
+  console.log('third');
+},1000) //1초마다 반복실행 
+
+
+clearTimeout(a);
+clearTimeout(b);
+clearTimeout(c);
