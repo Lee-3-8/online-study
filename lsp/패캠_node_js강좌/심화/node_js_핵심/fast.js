@@ -433,6 +433,7 @@
 
 // File System
 
+const { rejects } = require('assert');
 const fs = require('fs');
 //콜백형식으로 되어있다. 프로미스형식으로 바꿀수있다.
 
@@ -469,3 +470,16 @@ const writeAndRead = async (data = '') => {
 //   }
 //   console.log('success');
 // })
+
+const promise1 = new Promise((resolve,reject) => resolve('즉시 호출'));
+const promise2 = new Promise((resolve,reject) => {
+  setTimeout(() => resolve('3초 뒤에 호출'),3000);
+});
+const promise3 = new Promise((resolve,reject) => {
+  setTimeout(() => resolve('1초 뒤에 호출'),1000);
+});
+
+Promise.all([promise1, promise2,promise3])
+.then(values => console.log(values));
+
+//Promise.race() 도 있음 
