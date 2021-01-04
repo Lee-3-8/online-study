@@ -479,7 +479,10 @@ const promise3 = new Promise((resolve,reject) => {
   setTimeout(() => resolve('1초 뒤에 호출'),1000);
 });
 
-Promise.all([promise1, promise2,promise3])
-.then(values => console.log(values));
+// Promise.all([promise1, promise2,promise3])
+// .then(values => console.log(values));
 
 //Promise.race() 도 있음 
+
+Promise.race([promise2,promise3]) //모두이행하지만 빠른값만 출력함 
+.then(values => console.log(values))
