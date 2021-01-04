@@ -471,18 +471,20 @@ const writeAndRead = async (data = '') => {
 //   console.log('success');
 // })
 
-const promise1 = new Promise((resolve,reject) => resolve('즉시 호출'));
-const promise2 = new Promise((resolve,reject) => {
-  setTimeout(() => resolve('3초 뒤에 호출'),3000);
-});
-const promise3 = new Promise((resolve,reject) => {
-  setTimeout(() => resolve('1초 뒤에 호출'),1000);
-});
+// // Promise
 
-// Promise.all([promise1, promise2,promise3])
-// .then(values => console.log(values));
+// const promise1 = new Promise((resolve,reject) => resolve('즉시 호출'));
+// const promise2 = new Promise((resolve,reject) => {
+//   setTimeout(() => resolve('3초 뒤에 호출'),3000);
+// });
+// const promise3 = new Promise((resolve,reject) => {
+//   setTimeout(() => resolve('1초 뒤에 호출'),1000);
+// });
 
-//Promise.race() 도 있음 
+// // Promise.all([promise1, promise2,promise3])
+// // .then(values => console.log(values));
 
-Promise.race([promise2,promise3]) //모두이행하지만 빠른값만 출력함 
-.then(values => console.log(values))
+// //Promise.race() 도 있음 
+
+// Promise.race([promise2,promise3]) //모두이행하지만 빠른값만 출력함 
+// .then(values => console.log(values))
