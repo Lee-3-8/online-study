@@ -24,6 +24,7 @@ void Engine::Update()
 {
 	float dt = timer.GetMillisecondsElapsed();
 	timer.Restart();
+	static bool enableRotation = true;
 
 	while (!keyboard.CharBufferIsEmpty())
 	{
@@ -34,8 +35,12 @@ void Engine::Update()
 	{
 		KeyboardEvent kbe = keyboard.ReadKey();
 		unsigned char keycode = kbe.GetKeyCode();
+		if (kbe.IsPress() && keycode == 'P')
+		{
+			enableRotation = (enableRotation == false) ? true : false;
+		}
 	}
-
+	
 	while (!mouse.EventBufferIsEmpty())
 	{
 		MouseEvent me = mouse.ReadEvent();
@@ -48,7 +53,8 @@ void Engine::Update()
 		}
 	}
 
-	//this->gfx.gameObject.AdjustRotation(0.0f, 0.001f * dt, 0.0f);
+	if (enableRotation)
+		this->gfx.gameObject.AdjustRotation(0.0f, 0.001f * dt, 0.0f);
 
 	const float cameraSpeed = 0.005f;
 
