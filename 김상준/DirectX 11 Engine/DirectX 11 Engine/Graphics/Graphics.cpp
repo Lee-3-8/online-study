@@ -46,6 +46,9 @@ void Graphics::RenderFrame()
 	this->deviceContext->VSSetShader(vertexshader.GetShader(), NULL, 0);
 	this->deviceContext->PSSetShader(pixelshader.GetShader(), NULL, 0);
 
+	this->cb_ps_light.ApplyChanges();
+	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_light.GetAddressOf());
+
 	{ // Pavement Texture
 		this->gameObject.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	}
@@ -69,7 +72,9 @@ void Graphics::RenderFrame()
 	ImGui_ImplWin32_NewFrame();
 	ImGui::NewFrame();
 	// Create ImGui Test Window
-	ImGui::Begin("Test");
+	ImGui::Begin("Light Controls");
+	ImGui::DragFloat3("Amibent Light Color", &this->cb_ps_light.data.ambientLightColor.x, 0.01f, 0.0f, 1.0f);
+	ImGui::DragFloat("Ambient Light Strength", &this->cb_ps_light.data.ambientLightStrength, 0.01f, 0.0f, 1.0f);
 	ImGui::End();
 	// Assemble Together Draw Data
 	ImGui::Render();
@@ -305,8 +310,10 @@ bool Graphics::InitializeScene()
 		hr = this->cb_vs_vertexshader.Initialize(this->device.Get(), this->deviceContext.Get());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
 
-		hr = this->cb_ps_pixelshader.Initialize(this->device.Get(), this->deviceContext.Get());
+		hr = this->cb_ps_light.Initialize(this->device.Get(), this->deviceContext.Get());
 		COM_ERROR_IF_FAILED(hr, "Failed to initialize constant buffer.");
+		this->cb_ps_light.data.ambientLightColor = XMFLOAT3(1.0f, 1.0f, 1.0f);
+		this->cb_ps_light.data.ambientLightStrength = 1.0f;
 
 		// Initialize Model(s)
 		if (!gameObject.Initialize("Data/Objects/nanosuit/nanosuit.obj" ,this->device.Get(), this->deviceContext.Get(), cb_vs_vertexshader)) // nanosuit/nanosuit.obj, AudiR8.fbx
