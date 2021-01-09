@@ -431,27 +431,27 @@
 //   })
 // })
 
-// File System
+// // File System
 
-const { rejects } = require('assert');
-const fs = require('fs');
-//콜백형식으로 되어있다. 프로미스형식으로 바꿀수있다.
+// const { rejects } = require('assert');
+// const fs = require('fs');
+// //콜백형식으로 되어있다. 프로미스형식으로 바꿀수있다.
 
-const {promisify} = require('util'); //비구조화
+// const {promisify} = require('util'); //비구조화
 
-const read = promisify(fs.readFile) //콜백함수가 프로미스로 바뀜
-const write = promisify(fs.writeFile)
+// const read = promisify(fs.readFile) //콜백함수가 프로미스로 바뀜
+// const write = promisify(fs.writeFile)
 
-//디폴트값 , 초기화된 데이터값 사용가능!!
-const writeAndRead = async (data = '') => {
-  try{
-    await write('test.txt',data)
-    const content = await read('test.txt');
-    return content 
-  } catch(err) {
-    console.error(err);
-  }
-};
+// //디폴트값 , 초기화된 데이터값 사용가능!!
+// const writeAndRead = async (data = '') => {
+//   try{
+//     await write('test.txt',data)
+//     const content = await read('test.txt');
+//     return content 
+//   } catch(err) {
+//     console.error(err);
+//   }
+// };
 
 // fs.readFile('test.txt','utf-8', (err,data) => {
 //   if (err) {
@@ -488,3 +488,26 @@ const writeAndRead = async (data = '') => {
 
 // Promise.race([promise2,promise3]) //모두이행하지만 빠른값만 출력함 
 // .then(values => console.log(values))
+
+const https = require('https')
+const options = {
+  hostname: 'google.com',
+  port: 443,
+  path: '/login', //hostname + path
+  method: 'GET'
+}
+
+const req = https.request(options, res => {
+  console.log(`statuscode: ${res.statusCode}`)
+
+  res.on('data', d => {
+    process.stdout.write(e) //표준 출력 
+  })
+
+  req.on('error', e => {
+    console.log(error)
+  })
+
+})
+
+req.end() // 종료해서 사전에 메모리누수 방지 
