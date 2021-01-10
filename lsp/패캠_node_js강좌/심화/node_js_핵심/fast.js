@@ -489,25 +489,26 @@
 // Promise.race([promise2,promise3]) //모두이행하지만 빠른값만 출력함 
 // .then(values => console.log(values))
 
-const https = require('https')
-const options = {
-  hostname: 'google.com',
-  port: 443,
-  path: '/login', //hostname + path
-  method: 'GET'
-}
+// // HTTPS 모듈 
+// const https = require('https')
+// const options = {
+//   hostname: 'google.com',
+//   port: 443,
+//   path: '/login', //hostname + path
+//   method: 'GET'
+// }
 
-const req = https.request(options, res => {
-  console.log(`statuscode: ${res.statusCode}`)
+// const req = https.request(options, res => {
+//   console.log(`statuscode: ${res.statusCode}`)
 
-  res.on('data', d => {
-    process.stdout.write(e) //표준 출력 
-  })
+//   res.on('data', d => {
+//     process.stdout.write(e) //표준 출력 
+//   })
 
-  req.on('error', e => {
-    console.log(error)
-  })
+//   req.on('error', e => {
+//     console.log(error)
+//   })
 
-})
+// })
 
-req.end() // 종료해서 사전에 메모리누수 방지 
+// req.end() // 종료해서 사전에 메모리누수 방지 
