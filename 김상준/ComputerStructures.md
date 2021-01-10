@@ -22,3 +22,11 @@
    * 특수문자: 입출력/연산용 데이터
    * 데이터 단위: 비트, 바이트, KB, MB, GB, TB
 ---
+## 2강. 컴퓨터 구조란 어떤 과목인가?
+1. 컴퓨터 구조로 본 패러다임의 변화
+   1. 컴퓨터의 태동 - 계산기 -> 차분/해석기관 -> 튜링 머신 -> ENIAC -> 스마트폰 -> AI
+   2. 사무자동화 기계 - 자료 준비/처리/전송/저장 기기
+   3. 네트워크 단말, 통신기기
+       * access net: 가장 지엽적인 인터넷 회선 지원회사
+       * 인터넷 망은 edge(주변부)와 core(중심부)로 구성
+   4. 컴퓨터의 미래 - Ubiquitous, Mobile & Wireless, IOT, Smart Computer(AI, Machine learning, Depp Learning)
