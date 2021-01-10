@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KMPMatching.cpp">
+    <ClCompile Include="Rabin-Karp.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

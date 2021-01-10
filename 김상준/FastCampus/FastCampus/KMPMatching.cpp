@@ -4,7 +4,7 @@
 #include <string>
 
 std::string parent = "acabacdabacdab"; //acabacdabacdab
-std::string pattern = "abacdab"; //abacdab
+std::string pattern = "abacdab"; //abacdab, abacabab
 
 int* MakeTable(std::string pattern)
 {
