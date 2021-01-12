@@ -55,8 +55,18 @@
     <script>
       let socket = io();
       // let socket = io('채팅서버 도메인 '); 이런방식으로하면 다른 서버에서도 가능함
+
+      // client message ,server message 는 이벤트명
       socket.on('server message', function (data) {
-        $('#chatLog').append('<li> ' + data.message + ' </li>');
+        $('#chatLog').append('<li> ' + data.username + ' : ' + data.message + ' </li>');
+      });
+
+      socket.on('join', function (data) {
+        $('#chatLog').append('<li> ' + data.username + '님이 방을 들어왔습니다 </li>');
+      });
+
+      socket.on('leave', function (data) {
+        $('#chatLog').append('<li> ' + data.username + '님이 방을 나갔습니다 </li>');
       });
 
       $(document).ready(function () {
