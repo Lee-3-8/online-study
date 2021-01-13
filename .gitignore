@@ -398,3 +398,5 @@ Temporary Items
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode,react,reactnative
+
+lsp/react_native/fokin-weather/config.js
