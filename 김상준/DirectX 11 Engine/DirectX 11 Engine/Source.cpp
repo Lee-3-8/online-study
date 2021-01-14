@@ -21,6 +21,6 @@ int APIENTRY wWinMain(_In_	   HINSTANCE hInstance,
 			engine.RenderFrame();
 		}
 	}
-	// Check gitignore
+
 	return 0;
 }
