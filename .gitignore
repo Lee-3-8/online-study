@@ -397,9 +397,11 @@ Temporary Items
 !.vscode/extensions.json
 *.code-workspace
 
-김상준/**
-!/김상준/**.cpp
-!/김상준/**.h
+/김상준/DirectX 11 Engine/*
+!김상준/DirectX 11 Engine/DirectX 11 Engine/
+/김상준/DirectX 11 Engine/DirectX 11 Engine/*
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/*.cpp
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/*.h
 
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode,react,reactnative
 
