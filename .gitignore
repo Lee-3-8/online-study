@@ -398,8 +398,8 @@ Temporary Items
 *.code-workspace
 
 김상준/**
-!/김상준/*.cpp
-!/김상준/*.h
+!/김상준/**.cpp
+!/김상준/**.h
 
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode,react,reactnative
 
