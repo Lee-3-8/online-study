@@ -401,6 +401,15 @@ Temporary Items
 !/김상준/ComputerStructures.md
 !/김상준/*.txt
 !/김상준/OS.md
+!/김상준/DirectX 11 Engine/
+/김상준/DirectX 11 Engine/*
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/
+/김상준/DirectX 11 Engine/DirectX 11 Engine/*
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/*.cpp
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/*.h
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/Graphics
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/Keyboard
+!/김상준/DirectX 11 Engine/DirectX 11 Engine/Mouse
 
 # End of https://www.toptal.com/developers/gitignore/api/node,vscode,react,reactnative
 
