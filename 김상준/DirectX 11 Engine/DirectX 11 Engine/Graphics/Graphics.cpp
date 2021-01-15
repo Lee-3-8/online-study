@@ -49,8 +49,9 @@ void Graphics::RenderFrame()
 	this->cb_ps_light.ApplyChanges();
 	this->deviceContext->PSSetConstantBuffers(0, 1, this->cb_ps_light.GetAddressOf());
 
-	{ // Pavement Texture
+	{ 
 		this->gameObject.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
+		this->light.Draw(camera.GetViewMatrix() * camera.GetProjectionMatrix());
 	}
 
 	// Draw Text
@@ -318,6 +319,11 @@ bool Graphics::InitializeScene()
 
 		// Initialize Model(s)
 		if (!gameObject.Initialize("Data/Objects/nanosuit/nanosuit.obj" ,this->device.Get(), this->deviceContext.Get(), cb_vs_vertexshader)) // nanosuit/nanosuit.obj, AudiR8.fbx
+		{
+			return false;
+		}
+
+		if (!light.Initialize(this->device.Get(), this->deviceContext.Get(), cb_vs_vertexshader)) // nanosuit/nanosuit.obj, AudiR8.fbx
 		{
 			return false;
 		}

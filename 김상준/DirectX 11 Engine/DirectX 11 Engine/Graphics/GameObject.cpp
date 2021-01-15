@@ -100,8 +100,8 @@ void GameObject::AdjustPosition(float x, float y, float z)
 
 void GameObject::SetRotation(const XMVECTOR& rot)
 {
-	this->rotVector = rot;
 	XMStoreFloat3(&this->rot, rot);
+	this->rotVector = rot;
 	this->UpdateMatrix();
 }
 
@@ -131,7 +131,7 @@ void GameObject::AdjustRotation(const XMFLOAT3& rot)
 	this->rot.x += rot.x;
 	this->rot.y += rot.y;
 	this->rot.z += rot.z;
-	this->rotVector = XMLoadFloat3(&this->pos);
+	this->rotVector = XMLoadFloat3(&this->rot);
 	this->UpdateMatrix();
 }
 
@@ -140,25 +140,52 @@ void GameObject::AdjustRotation(float x, float y, float z)
 	this->rot.x += x;
 	this->rot.y += y;
 	this->rot.z += z;
-	this->rotVector = XMLoadFloat3(&this->pos);
+	this->rotVector = XMLoadFloat3(&this->rot);
 	this->UpdateMatrix();
 }
 
-const XMVECTOR& GameObject::GetForwardVector()
+const XMVECTOR& GameObject::GetForwardVector(bool omitY)
 {
-	return this->vec_forward;
+	if (omitY)
+		return this->vec_forward_noY;
+	else;
+		return this->vec_forward;
 }
 
-const XMVECTOR& GameObject::GetBackwardVector()
+const XMVECTOR& GameObject::GetBackwardVector(bool omitY)
 {
-	return this->vec_backward;
+	if (omitY)
+		return this->vec_backward_noY;
+	else;
+		return this->vec_backward;
 }
 
-const XMVECTOR& GameObject::GetLeftVector()
+const XMVECTOR& GameObject::GetLeftVector(bool omitY)
 {
-	return this->vec_left;
+	if (omitY)
+		return this->vec_left_noY;
+	else;
+		return this->vec_left;
 }
-const XMVECTOR& GameObject::GetRightVector()
+const XMVECTOR& GameObject::GetRightVector(bool omitY)
 {
-	return this->vec_right;
+	if (omitY)
+		return this->vec_right_noY;
+	else;
+		return this->vec_right;
+}
+
+void GameObject::UpdateDirectionVectors()
+{
+	XMMATRIX vecRotationMatrix = XMMatrixRotationRollPitchYaw(this->rot.x, this->rot.y, 0.0f);
+	this->vec_forward = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, vecRotationMatrix);
+	this->vec_backward = XMVector3TransformCoord(this->DEFAULT_BACKWARD_VECTOR, vecRotationMatrix);
+	this->vec_left = XMVector3TransformCoord(this->DEFAULT_LEFT_VECTOR, vecRotationMatrix);
+	this->vec_right = XMVector3TransformCoord(this->DEFAULT_RIGHT_VECTOR, vecRotationMatrix);
+
+	XMMATRIX vecRotationMatrixNoY = XMMatrixRotationRollPitchYaw(0.0f, this->rot.y, 0.0f);
+	this->vec_forward_noY = XMVector3TransformCoord(this->DEFAULT_FORWARD_VECTOR, vecRotationMatrixNoY);
+	this->vec_backward_noY = XMVector3TransformCoord(this->DEFAULT_BACKWARD_VECTOR, vecRotationMatrixNoY);
+	this->vec_left_noY = XMVector3TransformCoord(this->DEFAULT_LEFT_VECTOR, vecRotationMatrixNoY);
+	this->vec_right_noY = XMVector3TransformCoord(this->DEFAULT_RIGHT_VECTOR, vecRotationMatrixNoY);
 }

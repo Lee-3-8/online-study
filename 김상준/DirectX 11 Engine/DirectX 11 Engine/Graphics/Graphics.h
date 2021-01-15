@@ -10,6 +10,7 @@
 #include "ImGui/imgui_impl_win32.h"
 #include "ImGui/imgui_impl_dx11.h"
 #include "RenderableGameObject.h"
+#include "Light.h"
 
 class Graphics
 {
@@ -18,6 +19,7 @@ public:
 	void RenderFrame();
 	Camera camera;
 	RenderableGameObject gameObject;
+	Light light;
 
 private:
 	int windowWidth = 0;
