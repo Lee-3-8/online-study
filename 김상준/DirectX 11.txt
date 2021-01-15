@@ -416,3 +416,6 @@ Normals:
 	-> Model Draw()에서 viewProjectionMatrix를 제외한 worldMatrix만 따로 설정
 	-> matrix를 transpose 해주던 것을 없애고, pixelshader가 row major로 계산하도록 변경
 	-> vertexshader의 normal 구하는 방식을 수정
+
+Dot product:
+- 벡터 내적을 활용해서 사물에 비치는 빛을 구현
