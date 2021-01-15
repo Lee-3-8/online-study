@@ -429,3 +429,10 @@ Dynamic Point Light Implementation:
 	-> RenderableGameObject를 Inherit하는 클래스 생성, Initailize 함수를 따로 만들고 lightColor와 lightStrength 변수 저장
 	-> Graphics 클래스에 추가, InitializeScene에서 초기화 해주고 RenderFrame에서 그리기
 	-> Engine에서 Update할 때 light가 카메라 움직임에 따라 움직이도록 설정
+- Light 구현
+	-> ConstantBufferTypes Pixel Shader 구조체에 dynamicLight의 color, strength, position 추가
+	-> pixelshader.hlsl cbuffer에도 마찬가지로 추가
+	-> RenderFrame()에서 dynamic light 정보 입력
+	-> pixelshader.hlsl에 물체의 위치를 알 수 있도록 PS_INPUT에 추가
+	-> vertexshader.hlsl에 VS_OUTPUT에 물체 위치 정보 추가 및 main 함수에서 정보 추가
+	-> pixelshader.hlsl main 함수 수정
