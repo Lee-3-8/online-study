@@ -30,3 +30,21 @@
        * access net: 가장 지엽적인 인터넷 회선 지원회사
        * 인터넷 망은 edge(주변부)와 core(중심부)로 구성
    4. 컴퓨터의 미래 - Ubiquitous, Mobile & Wireless, IOT, Smart Computer(AI, Machine learning, Depp Learning)
+---
+## 3강. 컴퓨터 구성요소의 기능 및 이해
+1. 컴퓨터의 구성요소
+   * 중앙 처리 장치 (Central Processing Unit)
+      - CPU / MPU
+      - 사물 인터넷 디바이스 H/W 플랫폼 종류
+   * 주변 장치 (Peripheral Device)
+      - 기억 장치 (Memory unit)
+      - 보조 기억 장치 (Auxiliary memory device)
+      - 입출력 장치 (I/O device)
+2. 중앙 처리 장치
+   1. CPU
+      * 마더 보드 - 데이터의 전달 통로가 디자인 되어있는 메인 보드
+      * 실행 프로그램의 명령 해석, 실행, 장치 제어 / 산술논리 연산 장치(ALU), 제어 장치(CU), 각종 레지스터로 구성
+   2. MPU
+      * CPU를 LSI(고밀도 집적회로)화 한 일종의 통합 장치
+      * CISC, RISC, Bit Slice MPU등이 존재
+   3. 사물 인터넷 디바이스 H/W 플랫폼 종류 - 아두이노, 라즈베리 파이 등
