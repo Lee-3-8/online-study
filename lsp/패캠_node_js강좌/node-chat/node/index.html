@@ -57,6 +57,7 @@
       // let socket = io('채팅서버 도메인 '); 이런방식으로하면 다른 서버에서도 가능함
 
       // client message ,server message 는 이벤트명
+      socket.on('ping', data => console.log(data));
       socket.on('server message', function (data) {
         $('#chatLog').append('<li> ' + data.username + ' : ' + data.message + ' </li>');
       });

@@ -23,9 +23,12 @@ const color = [
     "white",
     "black",
 ]
+// setInterval(() => {
+//     io.emit('ping', { data: (new Date())/1});
+//   }, 1000);
 
 io.on('connection', (socket) => { 
-
+    console.log('ddddd')
     const username = color[ Math.floor(Math.random() * 6) ]; //랜덤으로 이름 
 
     socket.broadcast.emit( 'join',  {  username  } ); //들어왔을때 다른사람들한테 보내줌 
