@@ -12,10 +12,10 @@ export default function Weather({temp}) {
 
 Weather.propTypes = {
   temp:PropTypes.number.isRequired,
-  condition: PropTypes.oneOf(["Thunderstorm" ,"Drizzle","Rain","Snow", "Atmosphere", "Clear","Clouds"]).isRequired
+  condition: PropTypes.oneOf(["Thunderstorm" ,"Drizzle","Rain","Snow", "Atmosphere", "Clear","Clouds","Haze","Mist","Dust"]).isRequired
 };
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
   container: {
     flex: 1,
     justifyContent: "center",
