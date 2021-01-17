@@ -1,6 +1,6 @@
 import React from 'react';
 import {Alert} from "react-native"
-import {API_KEY} from "./config"
+ import {API_KEY} from "./config"
 import Loading from "./Loading";
 import * as Location from 'expo-location';
 import axios from "axios";
