@@ -1,12 +1,13 @@
 import React from "react";
-import { BackHandler, StyleSheet, Text, View } from "react-native";
+import { BackHandler, StyleSheet, Text, View,StatusBar } from "react-native";
 
 
 
 
 export default function Loading() {
   return <View style= {styles.container}>
-    <Text style= { styles.text}>Getting Weather 날씨 가져오는 중... </Text>
+          <StatusBar barStyle="light-content"/>  
+          <Text style= { styles.text}>Getting Weather 날씨 가져오는 중... </Text>
   </View>
 }
 
