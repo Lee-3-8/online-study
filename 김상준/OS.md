@@ -137,3 +137,13 @@
       - 사용자 모드 (user mode by application)
       - 커널 모드 (kernal mode by OS): 특권 명령어 실행과 원하는 작업 수행을 위한 자원 접근을 가능케 함
    * 커널 모드에서만 실행 가능한 기능들이 있음 -> 응용프로그램이 커널 모드로 실행하기 위해선 시스템 콜을 사용해야 함
+   * 코드 예시
+   ```
+   #include <unistd.h>
+   ...
+   int main() {
+      ...
+      open("data.txt", O_RDONLY);
+      ...
+   }
+   ```
